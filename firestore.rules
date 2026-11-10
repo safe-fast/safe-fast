@@ -1,0 +1,12 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{col}/{id} {
+      allow read: if col in ['cases', 'config'];
+      allow write: if col in ['cases', 'config']
+                   && request.time < timestamp.date(2027, 3, 1)
+                   && request.resource.data.j is string
+                   && request.resource.data.j.size() < 200000;
+    }
+  }
+}

@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6b4d">
+<title>صيامٌ آمن · الصيدلي</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap">
+<style>
+:root{padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+/* Direction: a community pharmacy counter before Ramadan.
+   The plan is a pill organiser with three compartments (iftar, bedtime, suhoor);
+   the patient receives it as a printed dispensing label. One bold element: the organiser. */
+:root{
+  --bg:#f2f4f3; --surface:#ffffff; --sunken:#e9eeeb; --well:#f6f8f7; --line:#dbe2de; --line2:#c5cfca;
+  --ink:#13211b; --muted:#56655e; --faint:#86948d;
+  --brand:#0b6b4d; --brand-ink:#ffffff; --brand-soft:#e0efe8; --brand-deep:#074d37;
+  --suhoor:#3c4da0; --suhoor-soft:#e7eaf7; --iftar:#b0560f; --iftar-soft:#fbeadb; --bed:#526170; --bed-soft:#e8ecef;
+  --red:#b3261e; --red-soft:#fbe8e6; --amber:#935600; --amber-soft:#fbefd9; --green:#0b6b4d; --green-soft:#e0efe8;
+  --focus:#c98a00; --lift:0 1px 0 rgba(19,33,27,.04),0 10px 30px -12px rgba(19,33,27,.18);
+  --f-display:"Almarai",Tahoma,sans-serif;
+  --f-body:"Almarai","Segoe UI",Tahoma,system-ui,sans-serif;
+  --r-box:14px; --r-ctl:9px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1412; --surface:#151d1a; --sunken:#1b2521; --well:#121a17; --line:#25312c; --line2:#34423c;
+  --ink:#e3ebe7; --muted:#9aa9a2; --faint:#6f7e77;
+  --brand:#52c79c; --brand-ink:#05231a; --brand-soft:#16372b; --brand-deep:#7fdcb9;
+  --suhoor:#a3adf2; --suhoor-soft:#1e2442; --iftar:#f0a266; --iftar-soft:#3a2615; --bed:#b0bdc8; --bed-soft:#222b31;
+  --red:#ff8b80; --red-soft:#3a1b18; --amber:#f2b657; --amber-soft:#382810; --green:#52c79c; --green-soft:#16372b;
+  --focus:#f2c14e; --lift:0 1px 0 rgba(0,0,0,.3),0 12px 30px -12px rgba(0,0,0,.6); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1412; --surface:#151d1a; --sunken:#1b2521; --well:#121a17; --line:#25312c; --line2:#34423c;
+  --ink:#e3ebe7; --muted:#9aa9a2; --faint:#6f7e77;
+  --brand:#52c79c; --brand-ink:#05231a; --brand-soft:#16372b; --brand-deep:#7fdcb9;
+  --suhoor:#a3adf2; --suhoor-soft:#1e2442; --iftar:#f0a266; --iftar-soft:#3a2615; --bed:#b0bdc8; --bed-soft:#222b31;
+  --red:#ff8b80; --red-soft:#3a1b18; --amber:#f2b657; --amber-soft:#382810; --green:#52c79c; --green-soft:#16372b;
+  --focus:#f2c14e; --lift:0 1px 0 rgba(0,0,0,.3),0 12px 30px -12px rgba(0,0,0,.6); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{direction:rtl}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2.5px solid var(--focus);outline-offset:2px;border-radius:6px}
+h1,h2,h3,h4{margin:0;line-height:1.35;text-wrap:balance;font-weight:700}
+p{margin:0}
+.en{direction:ltr;unicode-bidi:isolate}
+.muted{color:var(--muted)}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);
+  padding-inline:max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-left,0px))}
+.top-in{max-width:1480px;margin:0 auto;display:flex;align-items:stretch;gap:28px;min-height:60px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand svg{width:30px;height:30px;flex:none}
+.brand b{font-family:var(--f-display);font-size:1.3rem;font-weight:700;color:var(--brand)}
+.views{display:flex;gap:4px}
+.views button{border:0;background:none;padding:0 12px;font-size:.92rem;color:var(--muted);position:relative}
+.views button[aria-pressed="true"]{color:var(--ink);font-weight:700}
+.views button[aria-pressed="true"]::after{content:"";position:absolute;inset-inline:10px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--brand)}
+.views button:hover{color:var(--ink)}
+.top .spacer{flex:1}
+.ctx{display:flex;align-items:center;font-size:.84rem;color:var(--muted)}
+.tools{display:flex;align-items:center;gap:6px}
+.iconbtn{border:0;background:none;color:var(--muted);border-radius:var(--r-ctl);width:36px;height:36px;display:grid;place-items:center}
+.iconbtn:hover{background:var(--sunken);color:var(--ink)}
+.iconbtn svg{width:18px;height:18px}
+.sync{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+.sync[data-s="live"] i,.sync[data-s="tabs"] i{background:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.sync[data-s="connecting"] i{background:var(--amber)}
+.sync[data-s="error"] i,.sync[data-s="stale"] i{background:var(--red)}
+
+/* ---------- layout ---------- */
+.shell{max-width:1480px;margin:0 auto;padding:24px max(20px,env(safe-area-inset-left,0px)) 40px max(20px,env(safe-area-inset-right,0px));
+  display:grid;grid-template-columns:230px minmax(0,1fr) 356px;gap:28px;align-items:start}
+.maincol{display:flex;flex-direction:column;gap:20px;min-width:0}
+.foot{max-width:1480px;margin:0 auto;padding:18px 20px 30px;border-top:1px solid var(--line);font-size:.78rem;color:var(--faint);display:flex;flex-direction:column;gap:2px}
+
+/* ---------- patient list ---------- */
+.queue{position:sticky;top:84px}
+.qh{display:flex;align-items:baseline;justify-content:space-between;padding:0 12px 10px}
+.qh h2{font-size:.95rem}
+.qh .qn{font-size:.85rem;color:var(--faint)}
+.qlist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.qitem{all:unset;cursor:pointer;display:flex;flex-direction:column;padding:12px 14px;border-bottom:1px solid var(--line);border-radius:0}
+.qitem.lv-red{--lv:var(--red)}.qitem.lv-amber{--lv:var(--amber)}.qitem.lv-green{--lv:var(--brand)}
+.qitem .qname{font-weight:700;font-size:.98rem}
+.qitem .qsub{font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.qitem:hover{background:var(--surface)}
+.qitem[aria-current="true"]{background:var(--surface)}
+.qitem[aria-current="true"] .qname{color:var(--brand)}
+.qitem:focus-visible{outline:2.5px solid var(--focus);outline-offset:-2px}
+.st{font-size:.78rem;font-weight:700;white-space:nowrap}
+.s-wait{color:var(--amber)}.s-doc{color:var(--suhoor)}.s-done{color:var(--brand)}.s-call{color:var(--red)}
+
+/* ---------- patient heading ---------- */
+.phead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:6px 18px}
+.phead h1{font-family:var(--f-display);font-size:1.9rem;font-weight:800;line-height:1.2}
+.phead .meta{flex-basis:100%;color:var(--muted);font-size:.9rem}
+.tri{border:0;background:none;padding:0;display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:700;color:var(--lv)}
+.tri.lv-red{--lv:var(--red)}.tri.lv-amber{--lv:var(--amber)}.tri.lv-green{--lv:var(--brand)}
+.tri i{width:10px;height:10px;border-radius:3px;background:var(--lv)}
+.tri .chev{width:15px;height:15px;transition:transform .2s}
+.tri[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.tri:hover span{text-decoration:underline;text-underline-offset:4px}
+.why{list-style:none;margin:6px 0 0;padding:12px 16px;flex-basis:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-ctl);display:flex;flex-direction:column;gap:6px;font-size:.86rem}
+.why li{display:flex;gap:10px;align-items:baseline}
+.why .k{width:8px;height:8px;border-radius:2px;flex:none;transform:translateY(-1px)}
+.clr{font-size:.84rem;font-weight:700;padding:3px 10px;border-radius:6px}
+.clr.yes{background:var(--brand-soft);color:var(--brand)}.clr.no{background:var(--red-soft);color:var(--red)}
+.alert{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:var(--r-ctl);background:var(--red-soft);color:var(--red);font-weight:700;font-size:.92rem}
+.alert svg{width:20px;height:20px;flex:none}
+
+/* ---------- the organiser (the one loud element) ---------- */
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-box);box-shadow:var(--lift)}
+.organiser{padding:14px}
+.comps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 64px;gap:10px}
+.comp{border-radius:11px;background:var(--well);border:1px solid var(--line);display:flex;flex-direction:column;min-height:170px;overflow:hidden;transition:border-color .15s,background .15s}
+.comp .lid{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--zs);color:var(--z);border-bottom:2px solid var(--z)}
+.comp .lid svg{width:18px;height:18px}
+.comp .lid b{font-family:var(--f-display);font-size:1.02rem;font-weight:800}
+.comp .lid .tm{margin-inline-start:auto;font-size:.8rem;font-weight:700}
+.c-iftar{--z:var(--iftar);--zs:var(--iftar-soft)}.c-bed{--z:var(--bed);--zs:var(--bed-soft)}.c-suhoor{--z:var(--suhoor);--zs:var(--suhoor-soft)}
+.comp .well{flex:1;padding:10px;display:flex;flex-direction:column;gap:7px}
+.comp .empty{margin:auto;font-size:.8rem;color:var(--faint)}
+.fastcol{border-radius:11px;display:grid;place-items:center;text-align:center;font-size:.76rem;color:var(--faint);background:var(--sunken)}
+.fastcol b{display:block;font-size:.88rem;color:var(--muted)}
+.comp.over,.tray.over{border-color:var(--z,var(--red));background:var(--zs,var(--red-soft))}
+.organiser.picking .comp,.organiser.picking .tray{border-style:dashed;border-color:var(--line2);cursor:pointer}
+.organiser.picking .comp:hover{border-color:var(--z)}
+
+.tok{display:flex;align-items:center;gap:9px;padding:6px 12px 6px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:.9rem;font-weight:700;
+  cursor:grab;user-select:none;touch-action:none;transition:transform .12s,box-shadow .12s,opacity .12s}
+.tok:hover{box-shadow:0 3px 10px -4px rgba(19,33,27,.25);transform:translateY(-1px)}
+.tok .cap{width:22px;height:10px;border-radius:6px;flex:none;background:linear-gradient(90deg,var(--c1) 50%,var(--c2) 50%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.tok .tn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tok .n2{font-size:.72rem;color:var(--faint);font-weight:400}
+.tok .ok{margin-inline-start:auto;width:16px;height:16px;color:var(--brand);display:none}
+.tok.ap .ok{display:block}
+.tok.crit{border-color:var(--red);border-inline-start-width:3px}
+.tok.picked{outline:2.5px solid var(--focus);outline-offset:2px}
+.tok.dragging{opacity:.3}
+.dragghost{position:fixed;z-index:100;pointer-events:none;transform:translate(50%,-50%) rotate(-3deg);box-shadow:0 14px 30px rgba(0,0,0,.22)!important;opacity:.96}
+.tray{margin-top:10px;border:1px dashed var(--line2);border-radius:11px;padding:9px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:50px;--z:var(--red);--zs:var(--red-soft)}
+.tray>b{font-size:.84rem;color:var(--red);margin-inline-end:4px}
+.tray.empty>b{color:var(--faint);font-weight:400}
+.hint{margin-top:8px;font-size:.84rem;color:var(--focus);font-weight:700}
+.orgfoot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:.8rem;color:var(--faint)}
+
+/* ---------- ledger ---------- */
+.ledger{padding:6px 0 0}
+.lhead{display:flex;align-items:baseline;justify-content:space-between;padding:12px 20px 8px}
+.lhead h2{font-size:1rem}
+.lhead span{font-size:.82rem;color:var(--faint)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) 190px 40px;gap:14px;align-items:center;padding:11px 20px;border-top:1px solid var(--line)}
+.mrow .nm b{font-size:.97rem;display:inline}
+.mrow .nm .fq{display:block;font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;margin-inline-start:8px;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:5px;vertical-align:2px}
+.tag.crit{background:var(--red-soft);color:var(--red)}
+.tag.dr{background:var(--suhoor-soft);color:var(--suhoor)}
+.tag.wait{background:var(--amber-soft);color:var(--amber)}
+.warn{display:block;margin-top:4px;font-size:.8rem;color:var(--amber);font-weight:700}
+.stopped{font-size:.84rem;color:var(--red);font-weight:700}
+.apv{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line2);background:var(--surface);color:var(--line2);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.apv svg{width:16px;height:16px}
+.apv:hover{border-color:var(--brand);color:var(--brand)}
+.apv[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.signbar{display:flex;align-items:center;gap:14px;padding:14px 20px;border-top:1px solid var(--line);background:var(--well);border-radius:0 0 var(--r-box) var(--r-box)}
+.signbar .cnt{font-size:.86rem;color:var(--muted);margin-inline-end:auto}
+.signbar .cnt b{color:var(--ink)}
+.btn{border:0;border-radius:var(--r-ctl);background:var(--brand);color:var(--brand-ink);padding:10px 18px;font-weight:700;font-size:.92rem;display:inline-flex;align-items:center;gap:8px}
+.btn svg{width:17px;height:17px}
+.btn:hover{background:var(--brand-deep)}
+.btn:disabled{background:var(--sunken);color:var(--faint);cursor:not-allowed}
+.btn.quiet{background:none;color:var(--brand);padding:10px 8px}
+.btn.quiet:hover{text-decoration:underline;text-underline-offset:4px;background:none}
+.btn.quiet:disabled{color:var(--faint);text-decoration:none}
+.signed{display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-weight:700;font-size:.92rem}
+.signed svg{width:18px;height:18px}
+
+/* ---------- dropdown ---------- */
+.dd{position:relative;min-width:150px}
+.dd.wide{min-width:240px;display:inline-block}
+.dd.mini{min-width:110px}
+.dd.off{opacity:.4;pointer-events:none}
+.ddb{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line2);background:var(--surface);border-radius:var(--r-ctl);padding:7px 12px;font-size:.88rem;text-align:start}
+.ddb svg{width:15px;height:15px;color:var(--faint);flex:none;transition:transform .15s}
+.ddb[aria-expanded="true"]{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.ddb[aria-expanded="true"] svg{transform:rotate(180deg)}
+.ddb:hover{border-color:var(--faint)}
+.ddb.doc{color:var(--red);font-weight:700}
+.ddb.ok{color:var(--brand);font-weight:700}
+.ddm{position:absolute;top:calc(100% + 4px);inset-inline:0;min-width:100%;width:max-content;z-index:40;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:5px;box-shadow:0 16px 36px -10px rgba(19,33,27,.3);display:flex;flex-direction:column}
+.ddm button{border:0;background:transparent;text-align:start;padding:8px 12px;border-radius:7px;font-size:.88rem;color:var(--ink)}
+.ddm button:hover,.ddm button:focus-visible{background:var(--sunken);outline:none}
+.ddm button[aria-selected="true"]{background:var(--brand-soft);color:var(--brand);font-weight:700}
+.ddm button.doc{color:var(--red)}
+.ddm button.ok{color:var(--brand)}
+
+/* ---------- doctor ---------- */
+.ask{padding:20px}
+.ask h2{font-family:var(--f-display);font-size:1.25rem;font-weight:800;margin-bottom:4px}
+.ask .meta{color:var(--muted);font-size:.88rem;margin-bottom:14px}
+.ask .because{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.ask .because span{font-size:.8rem;background:var(--red-soft);color:var(--red);padding:2px 9px;border-radius:5px;font-weight:700}
+.drrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 20px;align-items:center;padding:14px 20px;border-top:1px solid var(--line)}
+.drrow .nm b{font-size:1rem}
+.drrow .nm .en{font-size:.8rem;color:var(--faint);margin-inline-start:8px}
+.drrow .nm p{font-size:.84rem;color:var(--muted);margin-top:2px}
+.drc{display:flex;gap:8px}
+.drc .dd{min-width:150px}
+.none{padding:16px 20px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* ---------- phone ---------- */
+.phonecol{position:sticky;top:84px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.phonecap{font-size:.8rem;color:var(--faint);text-align:center}
+.phone{width:350px;max-width:100%;height:700px;border-radius:46px;background:#101513;padding:10px;box-shadow:0 30px 60px -30px rgba(19,33,27,.55),0 0 0 1px #2a332f}
+.screen{position:relative;height:100%;border-radius:37px;overflow:hidden;background:var(--bg);display:flex;flex-direction:column}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:13px 26px 4px;font-size:.74rem;font-weight:700;direction:ltr}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:92px;height:26px;background:#101513;border-radius:20px}
+.app{flex:1;overflow-y:auto;padding:8px 16px 18px;scrollbar-width:none}
+.app::-webkit-scrollbar{display:none}
+.hello{margin:6px 0 14px}
+.hello small{display:block;font-size:.78rem;color:var(--muted)}
+.hello h3{font-family:var(--f-display);font-size:1.5rem;font-weight:800}
+.lead{font-size:.88rem;color:var(--muted);margin-bottom:12px}
+.ptabs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);background:var(--surface);padding:7px 6px 16px}
+.ptabs button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;color:var(--faint);padding:4px 0;position:relative}
+.ptabs button svg{width:21px;height:21px}
+.ptabs button[aria-selected="true"]{color:var(--brand);font-weight:700}
+.ptabs button:focus-visible{outline:2.5px solid var(--focus)}
+.ptabs .badge{position:absolute;top:2px;inset-inline-start:calc(50% + 7px);width:8px;height:8px;border-radius:50%;background:var(--red)}
+.toast{visibility:hidden;opacity:0;position:absolute;top:44px;inset-inline:10px;background:var(--surface);border-radius:18px;padding:10px 12px;box-shadow:0 14px 34px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center;font-size:.8rem;transform:translateY(-140%);transition:transform .35s cubic-bezier(.2,.9,.3,1.15),opacity .2s,visibility .35s;z-index:5}
+.toast.show{transform:none;visibility:visible;opacity:1}
+.toast .ico{width:32px;height:32px;border-radius:9px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;flex:none}
+.toast .ico svg{width:18px;height:18px}
+
+.qcard{background:var(--surface);border-radius:14px;border:1px solid var(--line)}
+.qrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;font-size:.88rem}
+.qrow+.qrow{border-top:1px solid var(--line)}
+.sw{all:unset;cursor:pointer;flex:none;width:44px;height:26px;border-radius:13px;background:var(--line2);position:relative;transition:background .15s}
+.sw::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:right .15s}
+.sw[aria-checked="true"]{background:var(--brand)}
+.sw[aria-checked="true"]::after{right:21px}
+.sw:focus-visible{outline:2.5px solid var(--focus);outline-offset:2px}
+.sec{font-size:.86rem;font-weight:700;margin:18px 0 6px}
+.mylist div{display:flex;justify-content:space-between;padding:9px 2px;border-bottom:1px solid var(--line);font-size:.88rem}
+.mylist .muted{font-size:.8rem}
+
+/* waiting */
+.wait{padding:8px 4px}
+.wait h4{font-family:var(--f-display);font-size:1.2rem;font-weight:800;margin:4px 0 6px}
+.wait>p{font-size:.86rem;color:var(--muted)}
+.steps{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column}
+.steps li{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:.88rem;position:relative;padding-bottom:16px}
+.steps li:not(:last-child)::before{content:"";position:absolute;right:12px;top:26px;bottom:2px;width:2px;background:var(--line)}
+.steps i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.76rem;font-weight:700;border:2px solid var(--line2);color:var(--faint);background:var(--bg)}
+.steps .d i{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.steps .d:not(:last-child)::before{background:var(--brand)}
+.steps .c i{border-color:var(--brand);color:var(--brand)}
+.steps .c{font-weight:700}
+.steps .t{color:var(--faint)}
+.simbtn{width:100%;border:1px dashed var(--line2);background:none;border-radius:11px;padding:10px;font-size:.82rem;color:var(--muted)}
+.simbtn:hover{border-color:var(--brand);color:var(--brand)}
+
+/* the dispensing label */
+.label{background:var(--surface);border-radius:6px;border:1px solid var(--line2);position:relative;overflow:hidden}
+.label::before{content:"";position:absolute;inset:0 0 auto;height:6px;background:var(--brand)}
+.lbtop{padding:16px 16px 10px;border-bottom:1.5px dashed var(--line2)}
+.lbtop .ph{font-size:.74rem;color:var(--brand);font-weight:800}
+.lbtop h3{font-family:var(--f-display);font-size:1.3rem;font-weight:800;margin-top:2px}
+.lbtop .sub{font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px;margin-top:2px}
+.slot{padding:12px 16px 8px;border-bottom:1px solid var(--line)}
+.slot h4{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--z);margin-bottom:6px}
+.slot h4 svg{width:18px;height:18px}
+.slot h4 .tm{margin-inline-start:auto;font-size:.8rem}
+.slot.suhoor{--z:var(--suhoor)}.slot.iftar{--z:var(--iftar)}.slot.bed{--z:var(--bed)}
+.pm{display:grid;grid-template-columns:24px minmax(0,1fr) 30px;gap:10px;align-items:center;padding:6px 0}
+.pm .pill{width:22px;height:10px;border-radius:6px;background:linear-gradient(90deg,var(--c1) 50%,var(--c2) 50%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.pm b{font-size:.92rem;display:block;line-height:1.3}
+.pm .en{font-size:.74rem;color:var(--faint);display:block}
+.pm .adj{font-size:.74rem;color:var(--suhoor);font-weight:700;display:block}
+.chk{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line2);display:grid;place-items:center;color:transparent}
+.chk svg{width:15px;height:15px}
+.chk[aria-checked="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.chk:focus-visible{outline:2.5px solid var(--focus);outline-offset:2px}
+.note{padding:12px 16px;border-bottom:1px solid var(--line);font-size:.84rem}
+.note h5{font-size:.86rem;margin:0 0 3px;display:flex;align-items:center;gap:7px}
+.note h5 svg{width:16px;height:16px;flex:none}
+.note ul{margin:0;padding-inline-start:18px}
+.note.red h5{color:var(--red)}.note.doc h5{color:var(--suhoor)}.note.sos{background:var(--red-soft)}.note.sos h5{color:var(--red)}
+.lbfoot{padding:10px 16px 14px;font-size:.74rem;color:var(--faint)}
+.today{display:flex;justify-content:space-between;align-items:baseline;margin:2px 0 12px}
+.today b{font-family:var(--f-display);font-weight:800;font-size:1.15rem}
+.today span{font-size:.78rem;color:var(--faint)}
+
+/* follow-up chat */
+.chat{display:flex;flex-direction:column;gap:8px}
+.daytag{align-self:center;font-size:.72rem;color:var(--faint);margin:4px 0}
+.bub{max-width:84%;padding:9px 13px;border-radius:16px;font-size:.88rem;line-height:1.5}
+.bub.in{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-start-start-radius:5px}
+.bub.out{align-self:flex-end;background:var(--brand);color:var(--brand-ink);border-start-end-radius:5px}
+.qr{display:flex;gap:8px;align-self:flex-end}
+.qr button{border:1.5px solid var(--brand);background:var(--surface);color:var(--brand);border-radius:999px;padding:6px 22px;font-weight:700}
+.qr button:hover{background:var(--brand);color:var(--brand-ink)}
+.locked{font-size:.86rem;color:var(--muted);padding:14px;border:1px dashed var(--line2);border-radius:12px}
+
+/* ---------- dashboard ---------- */
+.dash{grid-column:1/-1;display:flex;flex-direction:column;gap:24px}
+.dash h1{font-family:var(--f-display);font-size:1.8rem;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));background:var(--surface);border:1px solid var(--line);border-radius:var(--r-box)}
+.stat{padding:18px 22px}
+.stat+.stat{border-inline-start:1px solid var(--line)}
+.stat .v{font-family:var(--f-display);font-size:2.4rem;font-weight:800;line-height:1.1}
+.stat .l{font-size:.86rem;color:var(--muted)}
+.dgrid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.dash h2{font-size:1rem;margin-bottom:10px}
+.dist .bar{display:flex;height:16px;border-radius:5px;overflow:hidden;gap:3px;margin:12px 0 14px}
+.dist .bar span{transition:flex-grow .3s}
+.legend div{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.legend b{margin-inline-start:auto}
+.dnote{font-size:.82rem;color:var(--faint)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{text-align:start;font-size:.8rem;color:var(--muted);font-weight:700;padding:10px 16px;border-bottom:1px solid var(--line2)}
+td{padding:12px 16px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto}
+.lvl{display:inline-flex;align-items:center;gap:7px;font-weight:700}
+.lvl i{width:9px;height:9px;border-radius:3px}
+.measure ol{margin:0;padding-inline-start:20px;font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+
+/* desk toast */
+.dtoast{position:fixed;bottom:max(20px,env(safe-area-inset-bottom,0px));left:max(20px,env(safe-area-inset-left,0px));z-index:60;background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;display:flex;gap:10px;align-items:center;font-size:.88rem;max-width:min(380px,calc(100vw - 40px));box-shadow:0 14px 34px rgba(0,0,0,.25);transform:translateY(160%);transition:transform .3s;visibility:hidden;opacity:0}
+.dtoast.show{transform:none;visibility:visible;opacity:1}
+.dtoast svg{width:18px;height:18px;flex:none}
+
+/* pane switch (narrow screens) */
+.paneswitch{display:none;gap:4px;background:var(--sunken);border-radius:var(--r-ctl);padding:3px;align-self:flex-start}
+.paneswitch button{border:0;background:none;border-radius:7px;padding:6px 14px;font-size:.86rem;color:var(--muted)}
+.paneswitch button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:700}
+
+/* ---------- responsive ---------- */
+@media (max-width:1240px){.shell{grid-template-columns:210px minmax(0,1fr) 330px;gap:20px}.phone{width:330px}}
+@media (max-width:1060px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .queue{position:static}.qlist{flex-direction:row;overflow-x:auto;border-top:0;gap:6px}
+  .qitem{border:1px solid var(--line);border-radius:10px;min-width:170px;background:var(--surface)}
+  .qitem[aria-current="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
+  .paneswitch{display:flex}
+  body[data-pane="patient"] .maincol>:not(.paneswitch){display:none}
+  body[data-pane="pharm"] .phonecol{display:none}
+  .phonecol{position:static}
+  .dgrid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .top-in{gap:12px;padding-block:8px}.ctx,.top .sync span{display:none}
+  .views{order:5;flex-basis:100%;min-height:42px}
+  .comps{grid-template-columns:minmax(0,1fr)}.fastcol{min-height:44px}.comp{min-height:0}
+  .mrow{grid-template-columns:minmax(0,1fr) 40px}.mrow .dd,.mrow .stopped{grid-column:1/-1;order:3}
+  .drrow{grid-template-columns:minmax(0,1fr)}.drc{flex-wrap:wrap}
+  .stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(3){border-inline-start:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .phead h1{font-size:1.6rem}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- single-role files ---------- */
+body.m-patient .top,body.m-patient .foot,body.m-patient .phonecap,body.m-patient .notch,body.m-patient .sbar{display:none}
+body.m-patient .shell{display:block;max-width:560px;padding:0}
+body.m-patient .phonecol{position:static;display:block}
+body.m-patient .phone{width:100%;height:100vh;height:100dvh;border-radius:0;padding:0;background:var(--bg);box-shadow:none}
+body.m-patient .screen{border-radius:0;height:100%}
+body.m-patient .app{padding-top:max(12px,env(safe-area-inset-top,0px))}
+body.m-patient .ptabs{padding-bottom:max(14px,env(safe-area-inset-bottom,0px))}
+body.m-patient .toast{top:max(10px,env(safe-area-inset-top,0px))}
+.demo{display:none}
+body.m-patient .demo{display:flex;gap:8px;align-items:center;margin:0 -16px 12px;padding:8px 16px;background:var(--sunken);font-size:.76rem;color:var(--muted)}
+body.m-patient .demo .sync span{display:none}
+.demo .dd .ddb{padding:3px 10px;font-size:.78rem}
+body.m-pharm .shell{grid-template-columns:230px minmax(0,1fr)}
+body.m-pharm .phonecol,body.m-pharm .paneswitch{display:none!important}
+body.m-pharm .maincol>*{display:revert}
+@media (max-width:1060px){body.m-pharm .shell{grid-template-columns:minmax(0,1fr)}}
+/* ---------- decision support additions ---------- */
+[hidden]{display:none!important}
+.pathc{font-size:.8rem;font-weight:700;padding:2px 9px;border-radius:6px;background:var(--sunken);color:var(--muted)}
+.pathc.p-remote{background:var(--brand-soft);color:var(--brand)}.pathc.p-phone{background:var(--suhoor-soft);color:var(--suhoor)}.pathc.p-visit{background:var(--amber-soft);color:var(--amber)}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:var(--r-ctl);background:var(--amber-soft);color:var(--ink);font-size:.88rem}
+.banner svg{width:20px;height:20px;flex:none;color:var(--amber);margin-top:2px}
+.tag.man{background:var(--sunken);color:var(--muted)}
+.addrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 20px;border-top:1px solid var(--line);background:var(--amber-soft)}
+.addrow>span{font-size:.86rem;font-weight:700;margin-inline-end:auto}
+.addrow .dd{min-width:170px}
+.src{display:inline-block;font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:5px;background:var(--brand-soft);color:var(--brand);margin-inline-start:4px;cursor:help;white-space:nowrap}
+.src.none{background:var(--sunken);color:var(--faint)}
+.linkbtn{border:0;background:none;padding:0;color:var(--brand);font-size:.82rem;font-weight:700;margin-inline-start:8px}
+.linkbtn:hover{text-decoration:underline;text-underline-offset:3px}
+.risk .rrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:11px 20px;border-top:1px solid var(--line);font-size:.9rem}
+.risk .rrow>b{min-width:70px}
+.rc{font-weight:800;font-size:.84rem}
+.rk-low{color:var(--brand)}.rk-moderate{color:var(--amber)}.rk-high{color:var(--red)}
+.rt{color:var(--muted);font-size:.86rem}
+.idf{margin:0 20px 12px;padding:10px 14px;background:var(--well);border:1px solid var(--line);border-radius:var(--r-ctl);font-size:.84rem}
+.idf div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed var(--line)}
+.idf .tot{border-bottom:0;font-weight:700;padding-top:8px}
+.idf p{font-size:.76rem;color:var(--faint);margin-top:6px}
+.pathrow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid var(--line);background:var(--well);border-radius:0 0 var(--r-box) var(--r-box);font-size:.88rem}
+.pathrow .dd{min-width:220px}
+.sug{margin-top:6px;font-size:.82rem;color:var(--brand);display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.sug>span:first-child{font-weight:700}
+/* hospital system (simulated) */
+.ehr{grid-column:2/-1}
+.ehrbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:10px 16px;background:#2f3a44;color:#e9eef2;border-radius:var(--r-ctl);font-size:.82rem}
+.ehrbar b{font-size:.95rem}.ehrbar span{opacity:.75}
+.ehrpt{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px}
+.ehrpt h1{font-size:1.6rem;font-weight:800}
+.ehrpt span{color:var(--muted);font-size:.88rem}
+.ehrtag{font-size:.8rem!important;background:var(--sunken);padding:3px 10px;border-radius:6px}
+.cds{border:1px solid var(--line);border-inline-start:5px solid var(--suhoor);border-radius:var(--r-ctl);background:var(--surface);padding:14px 18px;box-shadow:var(--lift)}
+.cds.ind-warning{border-inline-start-color:var(--amber)}
+.cds.done{border-inline-start-color:var(--brand)}.cds.mute,.cds.off{border-inline-start-color:var(--faint);box-shadow:none}
+.cds b svg{width:16px;height:16px;vertical-align:-3px}
+.cds p{font-size:.86rem;color:var(--muted);margin-top:4px}
+.cdsh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cdsh .by{font-size:.78rem;font-weight:800;color:var(--brand)}
+.cds .sum{font-size:1rem;color:var(--ink);font-weight:700;margin:6px 0 8px}
+.cds ul{margin:0 0 12px;padding-inline-start:18px;font-size:.88rem;display:flex;flex-direction:column;gap:6px}
+.cdsa{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.cdsa .dd{min-width:190px}
+.ehrgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ehrgrid .wide{grid-column:1/-1}
+.plain{list-style:none;margin:0;padding:0 20px 12px;font-size:.9rem}
+.plain li{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line)}
+.jsonbox{padding:14px 18px}.jsonbox .linkbtn{margin:0}
+.jgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+.jgrid b{font-size:.82rem}
+pre{margin:6px 0 0;padding:12px;background:var(--well);border:1px solid var(--line);border-radius:8px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;overflow:auto;max-height:340px;text-align:left}
+/* settings */
+.settings{grid-column:1/-1;display:flex;flex-direction:column;gap:20px}
+.settings h1{font-size:1.8rem;font-weight:800}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px;border-top:1px solid var(--line)}
+.srow b{font-size:.92rem}.srow p{font-size:.8rem;color:var(--muted)}
+.srow .dd{min-width:200px;flex:none}
+.times{padding:10px 20px 16px;font-size:.84rem;color:var(--brand);font-weight:700}
+.safe{margin:0;padding:12px 20px 16px 20px;padding-inline-start:38px;border-top:1px solid var(--line);font-size:.84rem;display:flex;flex-direction:column;gap:4px}
+.lib td{vertical-align:middle}
+.lib .rid{display:block;font-size:.72rem;color:var(--faint)}
+.lib .dd{min-width:150px;display:inline-block}
+.dnote.pad{padding:0 20px 14px}
+.log{list-style:none;margin:0;padding:0}
+.log li{display:grid;grid-template-columns:150px 200px 1fr;gap:12px;padding:9px 20px;border-top:1px solid var(--line);font-size:.84rem}
+.log li span:first-child{color:var(--faint)}
+.pathnote{margin-top:10px;font-size:.86rem;font-weight:700;color:var(--brand)}
+.stat .v small{font-size:1rem;color:var(--faint);font-weight:700}
+@media (max-width:1060px){.ehr{grid-column:1/-1}.sgrid,.ehrgrid,.jgrid{grid-template-columns:minmax(0,1fr)}.log li{grid-template-columns:1fr}}
+@media (max-width:720px){.srow{flex-direction:column;align-items:stretch}.srow .dd{min-width:0}.stats{grid-template-columns:repeat(2,1fr)}}
+body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
+@media (max-width:1060px){body[data-view="ehr"] .shell{grid-template-columns:minmax(0,1fr)}}
+
+.alerts .arow{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:12px;align-items:start;padding:11px 20px;border-top:1px solid var(--line);font-size:.88rem}
+.arow .ak{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.82rem}
+.arow .ak svg{width:15px;height:15px;flex:none}
+.a-red .ak{color:var(--red)}.a-amber .ak{color:var(--amber)}.a-ok .ak{color:var(--brand)}
+.arow .fix{color:var(--brand);font-weight:700;font-size:.84rem;margin-top:2px}
+.a-ok p{color:var(--muted)}
+.plan .prow{display:grid;grid-template-columns:130px 130px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:10px 20px;border-top:1px solid var(--line);font-size:.86rem}
+.prow .pw{font-weight:700;color:var(--brand)}.prow .pw.wait{color:var(--amber)}
+.prow .py{color:var(--muted)}
+.cdsal{display:flex;flex-direction:column;gap:6px;margin:0 0 10px}
+.cdsal p{display:flex;gap:8px;align-items:flex-start;margin:0;padding:8px 10px;border-radius:8px;font-size:.86rem;color:var(--ink)}
+.cdsal p svg{width:16px;height:16px;flex:none;margin-top:3px}
+.cdsal .a-red{background:var(--red-soft)}.cdsal .a-red svg{color:var(--red)}
+.cdsal .a-amber{background:var(--amber-soft)}.cdsal .a-amber svg{color:var(--amber)}
+.cds.ind-critical{border-inline-start-color:var(--red)}
+@media (max-width:720px){.alerts .arow,.plan .prow{grid-template-columns:minmax(0,1fr)}}
+
+.appt .aprow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 20px;border-top:1px solid var(--line);font-size:.9rem}
+.appt .aprow p{flex:1;min-width:220px}
+.apst svg{width:18px;height:18px;color:var(--brand)}
+.appt.late .apst svg{color:var(--amber)}
+.appt .dd,.cdsap .dd{min-width:210px}
+.cdsap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0 0 10px;padding:8px 10px;border-radius:8px;background:var(--brand-soft);font-size:.86rem}
+.cdsap svg{width:16px;height:16px;flex:none;color:var(--brand)}
+.cdsap span{flex:1;min-width:200px}
+.cdsap.late{background:var(--amber-soft)}.cdsap.late svg{color:var(--amber)}
+
+.drsign{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;background:var(--well)}
+.drsign .cnt{margin-inline-end:auto;font-size:.88rem;color:var(--muted)}
+.wdr{color:var(--suhoor)!important}
+</style>
+<link rel="manifest" href="manifest-pharm.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="صيام آمن · الصيدلي">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true" style="color:var(--brand)"><circle cx="13" cy="18" r="11" fill="currentColor"/><circle cx="19" cy="13" r="9.5" style="fill:var(--surface)"/><g transform="rotate(-40 23.5 12)"><rect x="18" y="9.2" width="11" height="5.6" rx="2.8" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M23.5 9.2v5.6" stroke="currentColor" stroke-width="1.8"/></g></svg>
+      <b>صيامٌ آمن</b>
+    </div>
+    <nav class="views" aria-label="العرض">
+      <button type="button" id="vClinic" aria-pressed="true">الصيدلي</button>
+      <button type="button" id="vDoctor" aria-pressed="false">الطبيب</button>
+      <button type="button" id="vEhr" aria-pressed="false">نظام المستشفى</button>
+      <button type="button" id="vDash" aria-pressed="false">لوحة المنشأة</button>
+      <button type="button" id="vSet" aria-pressed="false">الإعدادات</button>
+    </nav>
+    <div class="spacer"></div>
+    <div class="ctx">قبل رمضان 1448</div>
+    <div class="tools">
+      <div class="sync" data-sync data-s="local" role="status"><i></i><span>غير مربوط</span></div>
+      <button class="iconbtn" id="reset" type="button" aria-label="إعادة التجربة من البداية" title="إعادة التجربة من البداية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"/></svg></button>
+      <button class="iconbtn" id="theme" type="button" aria-label="تبديل المظهر" title="فاتح / داكن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="shell" id="shell"></main>
+<footer class="foot">
+  <span>نموذج أولي لتحدي الابتكار الصحي المفتوح، ملتقى الابتكار والتحول في العلوم الصحية 2027.</span>
+  <span>المرضى افتراضيون، والقواعد الدوائية أمثلة توضيحية بانتظار مراجعة صيدلي سريري. لا يُستخدم لتعديل دواء حقيقي.</span>
+</footer>
+
+<div class="dtoast" id="dtoast" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19a2 2 0 0 0 4 0"/></svg><span></span></div>
+
+<script>window.SF_MODE='pharm';</script>
+<script>
+'use strict';
+/* ===== Evidence sources (each rule cites one or more) ===== */
+const SRC={
+  IDFDAR:{s:'IDF-DAR 2021',t:'IDF-DAR Practical Guidelines 2021 (Hassanein M, et al. Diabetes Res Clin Pract 2022)',ev:'إرشاد دولي'},
+  HEART:{s:'Heart 2022',t:'Akhtar AM, et al. Ramadan fasting: recommendations for patients with cardiovascular disease. Heart 2022;108:258-265',ev:'توصيات خبراء'},
+  RAK:{s:'RaK 2024',t:'Boobes Y, et al. Consensus recommendations on fasting during Ramadan for patients with kidney disease (RaK Initiative). BMC Nephrol 2024;25:84',ev:'إجماع خبراء'},
+  EPI:{s:'Epilepsy Behav 2020',t:'Mahmood A, et al. Managing epilepsy in Ramadan: guidance for healthcare providers and patients. Epilepsy Behav 2020;111:107117',ev:'إرشاد خبراء'},
+  KSA:{s:'دراسة سعودية 2020',t:'دراسة سعودية على 808 مرضى على مميعات الدم: 53.1% عدّلوا أدويتهم ذاتياً في رمضان (doi:10.1007/s11239-020-02218-0)',ev:'دراسة رصدية'},
+  LABEL:{s:'نشرة الدواء',t:'تداخلات معروفة في نشرات الأدوية المعتمدة، بانتظار مراجعة صيدلي سريري',ev:'نشرة الدواء'},
+  NONE:{s:'بانتظار مصدر',t:'لم نجد إرشاداً رمضانياً منشوراً لهذه الفئة. القاعدة رأي مبدئي بانتظار مراجعة صيدلي سريري.',ev:'بانتظار المراجعة'}
+};
+const RULESET='1448.0.4';
+/* ===== Drug library & rules (illustrative; every rule needs clinical pharmacist sign-off) ===== */
+const DRUGS={
+  apixaban:{ar:'أبيكسابان',en:'Apixaban 5 mg',cls:'doac',c:['#e9b949','#e9b949']},
+  warfarin:{ar:'وارفارين',en:'Warfarin 5 mg',cls:'warfarin',c:['#e48ab0','#e48ab0']},
+  metformin:{ar:'ميتفورمين',en:'Metformin 1 g',cls:'metformin',c:['#ffffff','#d6dae6']},
+  gliclazide:{ar:'جليكلازايد',en:'Gliclazide MR 60 mg',cls:'su',c:['#ffffff','#ffffff']},
+  empagliflozin:{ar:'إمباغليفلوزين',en:'Empagliflozin 10 mg',cls:'sglt2',c:['#f2d16b','#f2d16b']},
+  glargine:{ar:'إنسولين قاعدي',en:'Insulin glargine',cls:'basal',c:['#7c8fd6','#7c8fd6']},
+  aspart:{ar:'إنسولين الوجبات',en:'Insulin aspart',cls:'prandial',c:['#e07a5f','#e07a5f']},
+  amlodipine:{ar:'أملوديبين',en:'Amlodipine 5 mg',cls:'oncecv',c:['#ffffff','#ffffff']},
+  losartan:{ar:'لوسارتان',en:'Losartan 50 mg',cls:'oncecv',c:['#cfe6ff','#cfe6ff']},
+  bisoprolol:{ar:'بيسوبرولول',en:'Bisoprolol 5 mg',cls:'oncecv',c:['#f4e3b5','#f4e3b5']},
+  furosemide:{ar:'فوروسيمايد',en:'Furosemide 40 mg',cls:'diuretic',c:['#ffffff','#ffffff']},
+  atorvastatin:{ar:'أتورفاستاتين',en:'Atorvastatin 40 mg',cls:'statin',c:['#ffffff','#ffffff']},
+  levothyroxine:{ar:'ليفوثيروكسين',en:'Levothyroxine 100 mcg',cls:'thyroid',c:['#f6c9d6','#f6c9d6']},
+  omeprazole:{ar:'أوميبرازول',en:'Omeprazole 20 mg',cls:'ppi',c:['#9a6fb0','#e9d9f2']},
+  levetiracetam:{ar:'ليفيتيراسيتام',en:'Levetiracetam 500 mg',cls:'aed',c:['#8fb7e8','#8fb7e8']},
+  amoxicillin:{ar:'أموكسيسيلين',en:'Amoxicillin 500 mg',cls:'abx',c:['#d24b4b','#f2d16b']},
+  calcium:{ar:'كالسيوم وفيتامين د',en:'Calcium carbonate 600 mg + D3',cls:'calcium',c:['#f4f1ea','#f4f1ea']},
+  other:{ar:'دواء غير موجود في المكتبة',en:'Unlisted medicine',cls:'unknown',c:['#bfc6c2','#bfc6c2']}
+};
+const RULES={
+  doac:{id:'R-ANTICOAG-01',name:'مضادات التخثر المباشرة',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:f=>f===2?['suhoor','iftar']:['iftar'],
+    why:'جرعتان: مع السحور ومع الإفطار. لا تُغيَّر الأدوية المستقرة إلا للضرورة.',warn:'دواء حرج: لا تُترك جرعة ولا تُضاعف.'},
+  warfarin:{id:'R-ANTICOAG-02',name:'وارفارين',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم']],why:'جرعة واحدة ثابتة في الوقت نفسه يومياً.',warn:'دواء حرج: متابعة INR حسب خطة الطبيب.'},
+  metformin:{id:'R-DM-01',name:'ميتفورمين',dom:'dm',lvl:'amber',src:['IDFDAR'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'مع الوجبة: الإفطار، والسحور إن كانت جرعتين.',
+    esc:f=>f>=3?'ثلاث جرعات لا تناسب نافذة الصيام.':'',sug:{v:'suhoor+iftar',ds:'same',n:'جرعة الصباح مع السحور، وجرعتا الظهر والمساء معاً مع الإفطار.'}},
+  su:{id:'R-DM-02',name:'السلفونيل يوريا',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>['iftar'],why:'تُنقل الجرعة إلى الإفطار.',warn:'خطر هبوط السكر أثناء الصيام.',esc:()=>'السلفونيل يوريا ترفع خطر الهبوط أثناء الصيام.',
+    sug:{v:'iftar',ds:'same',n:'جرعة واحدة مع الإفطار. إن كانت جرعتين: تقليل جرعة السحور 25 إلى 50%.'}},
+  sglt2:{id:'R-DM-03',name:'مثبطات SGLT2',dom:'dm',lvl:'amber',src:['IDFDAR','HEART'],plan:()=>['iftar'],why:'مع الإفطار إذا بدأ قبل رمضان بأربعة أسابيع على الأقل، مع سوائل كافية.',warn:'خطر الجفاف، خاصة مع مدرات البول وكبار السن.'},
+  basal:{id:'R-DM-04',name:'الإنسولين القاعدي',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>['iftar'],why:'الإنسولين القاعدي يُنقل إلى الإفطار.',esc:()=>'جرعة الإنسولين يحددها الطبيب قبل الصيام.',
+    sug:{v:'iftar',ds:'reduce',n:'مع الإفطار، وتقليل الجرعة 15 إلى 30%.'}},
+  prandial:{id:'R-DM-05',name:'إنسولين الوجبات',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>null,why:'',esc:()=>'إنسولين مع الوجبات عدة مرات: الخطة للطبيب.',
+    sug:{v:'suhoor+iftar',ds:'reduce',n:'الجرعة المعتادة مع الإفطار، حذف جرعة الغداء، وتقليل جرعة السحور 25 إلى 50%.'}},
+  oncecv:{id:'R-CV-01',name:'أدوية الضغط مرة يومياً',dom:'cv',lvl:'green',src:['HEART'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'تُنقل إلى الإفطار، مع مراجعة الضغط ووظائف الكلى قبل رمضان.'},
+  diuretic:{id:'R-CV-02',name:'مدرات البول',dom:'cv',lvl:'amber',src:['HEART'],plan:()=>['iftar'],why:'بعد الإفطار حتى لا يزيد العطش نهاراً.',warn:'خطر الجفاف وإصابة الكلى واضطراب الأملاح.'},
+  statin:{id:'R-LIP-01',name:'الستاتينات',dom:'cv',lvl:'green',src:['NONE'],plan:()=>['bed'],alt:[['bed','قبل النوم'],['iftar','الإفطار']],why:'مساءً قبل النوم.'},
+  thyroid:{id:'R-END-01',name:'هرمون الغدة الدرقية',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','قبل السحور'],['bed','قبل النوم']],why:'على معدة فارغة قبل السحور بنصف ساعة.'},
+  calcium:{id:'R-SUP-01',name:'الكالسيوم',dom:'other',lvl:'green',src:['LABEL'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'مع الإفطار، بعيداً عن هرمون الغدة 4 ساعات على الأقل.'},
+  ppi:{id:'R-GI-01',name:'مثبطات مضخة البروتون',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','السحور'],['iftar','الإفطار']],why:'قبل السحور.'},
+  aed:{id:'R-NEURO-01',name:'أدوية الصرع',dom:'epi',lvl:'amber',crit:true,src:['EPI'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'جرعتان: مع السحور ومع الإفطار.',warn:'دواء حرج: ترك الجرعات قد يسبب نوبات.',
+    esc:f=>f>=3?'ثلاث جرعات من مضاد صرع.':'',sug:{v:'suhoor+iftar',ds:'same',n:'نفس الجرعة اليومية مقسومة على جرعتين: السحور والإفطار، بقرار طبيب الأعصاب.'}},
+  abx:{id:'R-ID-01',name:'المضادات الحيوية',dom:'acute',lvl:'red',src:['NONE'],plan:()=>null,why:'',esc:()=>'مضاد حيوي بجرعات متعددة أثناء مرض حاد.',
+    sug:{v:'keep',n:'يبقى على مواعيده المعتادة، ويؤجل الصيام حتى انتهاء العلاج.'}},
+  unknown:{id:'R-SAFE-00',name:'دواء غير موجود في المكتبة',dom:'any',lvl:'red',src:['NONE'],plan:()=>null,why:'',esc:()=>'غير موجود في مكتبة القواعد، فيُحال للطبيب تلقائياً.'}
+};
+const SLOT={suhoor:'السحور',iftar:'الإفطار',bed:'قبل النوم'};
+const OPTS=[['iftar','الإفطار'],['suhoor','السحور'],['bed','قبل النوم'],['suhoor+iftar','السحور والإفطار'],['iftar+iftar','جرعتان مع الإفطار'],['doctor','إحالة للطبيب']];
+const QUESTIONS=[
+  {k:'hypo',t:'أصابني هبوط سكر شديد خلال آخر 3 أشهر',red:true},
+  {k:'preg',t:'حامل أو مرضع',red:true},
+  {k:'ckd',t:'عندي فشل كلوي متقدم أو غسيل كلى',red:true},
+  {k:'night',t:'أعمل بنظام المناوبات الليلية',red:false},
+  {k:'alone',t:'أعيش وحدي ولا أحد يساعدني في الأدوية',red:false}
+];
+/* synthetic patients, with the data a hospital system would send (FHIR prefetch) */
+const PATIENTS=[
+  {id:'P1',name:'أبو خالد',age:67,sex:'ذكر',dx:['رجفان أذيني','سكري النوع 2','ارتفاع الضغط','قصور القلب'],
+   meds:[['apixaban',2],['metformin',2],['gliclazide',1],['empagliflozin',1],['furosemide',1],['bisoprolol',1],['atorvastatin',1]],ans:{},
+   cl:{mrn:'100245',appt:'2027-01-20',dm:{type:2,dur:12,a1c:8.1,smbg:'ok',hypo:0,acute:0},egfr:52,cv:'af-hf',lvef:40,labs:[['HbA1c','8.1%'],['eGFR','52'],['LVEF','40%']]}},
+  {id:'P2',name:'أم سارة',age:54,sex:'أنثى',dx:['قصور الغدة الدرقية','ارتفاع الضغط','هشاشة عظام خفيفة'],meds:[['levothyroxine',1],['losartan',1],['atorvastatin',1],['calcium',1]],ans:{},
+   cl:{mrn:'100318',appt:'2027-03-10',egfr:88,cv:'htn',labs:[['TSH','2.1'],['eGFR','88'],['الضغط','132/80']]}},
+  {id:'P3',name:'عبدالله',age:29,sex:'ذكر',dx:['صرع','ارتجاع المريء'],meds:[['levetiracetam',2],['omeprazole',1]],ans:{night:true},
+   cl:{mrn:'100402',appt:null,egfr:112,epi:'controlled',labs:[['آخر نوبة','قبل سنتين'],['eGFR','112']]}},
+  {id:'P4',name:'أم فهد',age:61,sex:'أنثى',dx:['سكري على الإنسولين','ارتفاع الضغط'],meds:[['glargine',1],['aspart',3],['metformin',2],['amlodipine',1]],ans:{hypo:true},
+   cl:{mrn:'100577',appt:'2026-12-02',dm:{type:2,dur:15,a1c:9.4,smbg:'sub',hypo:1,acute:0},egfr:64,cv:'htn',labs:[['HbA1c','9.4%'],['eGFR','64'],['الضغط','138/84']]}},
+  {id:'P5',name:'سلمان',age:45,sex:'ذكر',dx:['رجفان أذيني','التهاب حلق بكتيري حالي'],meds:[['warfarin',1],['amoxicillin',3],['bisoprolol',1]],ans:{},
+   cl:{mrn:'100611',appt:'2026-11-18',egfr:95,cv:'af',acute:'التهاب حلق بكتيري',labs:[['INR','2.6'],['eGFR','95']]}}
+];
+const FUQ=[{k:'miss',t:'هل تركت أي جرعة من أدويتك منذ بداية رمضان؟'},{k:'dbl',t:'هل أخذت جرعتين معاً في وقت واحد؟'},{k:'sym',t:'هل شعرت بدوخة أو رجفة أو تعرق شديد أثناء الصيام؟'}];
+
+/* ===== Configuration (shared across devices): mode, clinic, city, resilience, local protocol ===== */
+const CITIES={riyadh:['الرياض',24.71,46.68],kharj:['الخرج',24.15,47.31],jeddah:['جدة',21.49,39.19],makkah:['مكة المكرمة',21.42,39.83],madinah:['المدينة المنورة',24.47,39.61],dammam:['الدمام',26.43,50.10],abha:['أبها',18.22,42.50],tabuk:['تبوك',28.38,36.57]};
+const CLINICS={fm:{n:'طب الأسرة: كل الأدوات',k:['dm','cv','renal','epi','preg','acute','other']},endo:{n:'الغدد والسكري',k:['dm','preg']},cardio:{n:'القلب',k:['cv']},nephro:{n:'الكلى',k:['renal']},neuro:{n:'الأعصاب',k:['epi']}};
+const MODES={team:'الطبيب يعتمد والصيدلي يراجع',doctor:'طبيب وحده',pharmacy:'صيدلية مجتمع: توقيت فقط'};
+const CFG0=()=>({v:1,mode:'team',clinic:'fm',city:'riyadh',his:'up',sms:'on',ovr:{},log:[]});
+let CFG=CFG0();
+const RAMADAN_START=Date.UTC(2027,1,8); // expected 1 Ramadan 1448, subject to moon sighting
+function sunTimes(lat,lon,t){
+  const d=new Date(t),doy=Math.round((t-Date.UTC(d.getUTCFullYear(),0,0))/864e5),g=2*Math.PI/365*(doy-1),R=Math.PI/180;
+  const eq=229.18*(0.000075+0.001868*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+  const de=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+  const ha=z=>Math.acos(Math.cos(z*R)/(Math.cos(lat*R)*Math.cos(de))-Math.tan(lat*R)*Math.tan(de))/R;
+  return {maghrib:720-4*(lon-ha(90.833))-eq+180+1, fajr:720-4*(lon+ha(108.5))-eq+180}; // Umm al-Qura: Fajr at 18.5 degrees, Saudi time UTC+3
+}
+const hm=m=>{m=Math.round(m);let h=Math.floor(m/60)%24;const mi=m%60,ap=h<12?'ص':'م';h=h%12||12;return h+':'+String(mi).padStart(2,'0')+' '+ap;};
+const TIME={};let FAST=0;
+function computeTimes(){const c=CITIES[CFG.city]||CITIES.riyadh,t=sunTimes(c[1],c[2],RAMADAN_START);
+  TIME.iftar=hm(t.maghrib);TIME.suhoor=hm(t.fajr-15);TIME.fajr=hm(t.fajr);TIME.bed=hm(t.maghrib+270);FAST=(t.maghrib-t.fajr)/60;}
+computeTimes();
+const planFor=(r,f)=>{const o=CFG.ovr[r.id];return (o&&f===1&&r.alt)?[o]:r.plan(f);};
+
+/* ===== State ===== */
+const LV={red:2,amber:1,green:0};
+const per={};
+function makeItem(key,f){const d=DRUGS[key]||DRUGS.other,r=RULES[d.cls];const s=planFor(r,f);const e=r.esc?r.esc(f):'';
+  return {key,f,d,r,esc:e,crit:!!r.crit,doses:s?[...s]:[],doctor:!s,lvl:(e||!s)?'red':r.lvl,approved:false};}
+function draftFor(p,answers,extra=[]){return p.meds.concat(extra).map(([k,f])=>makeItem(k,f));}
+function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false};}
+PATIENTS.forEach(initPatient);
+const signer=()=>CFG.mode==='doctor'?'د. سعد، طبيب أسرة (حساب تجريبي)':CFG.mode==='team'?'د. سعد (طبيب)، وراجعتها د. ريم (صيدلانية)':'د. ريم، صيدلانية (حساب تجريبي)';
+function seedDemo(){
+  const sign=(id,fu)=>{const s=per[id];s.items.forEach(i=>i.approved=true);s.drOk=true;s.signed={by:'د. سعد (طبيب)، وراجعتها د. ريم (صيدلانية)',at:'14 شعبان 1448'};s.tab='plan';if(fu){s.fu=fu;s.tab='follow';}};
+  sign('P2',{miss:'لا',dbl:'لا',sym:'لا'});
+  sign('P5',{miss:'نعم',dbl:'لا',sym:'لا'});
+}
+seedDemo();
+const modeFromHash=()=>location.hash==='#patient'?'patient':(location.hash==='#pharmacist'||location.hash==='#doctor')?'pharm':'all';
+let MODE=window.SF_MODE||modeFromHash();
+window.addEventListener('hashchange',()=>{if(!window.SF_MODE){MODE=modeFromHash();if(location.hash==='#doctor')S.view='doctor';else if(location.hash==='#pharmacist')S.view='clinic';render();}});
+const S={dd:null,why:false,open:-1,pid:'P1',view:'clinic',pane:'pharm',pick:null,sync:'local',idf:false,json:false,addK:null,addF:null};let DRAG=false;if(location.hash==='#doctor'||window.SF_VIEW==='doctor')S.view='doctor';
+const P=()=>PATIENTS.find(p=>p.id===S.pid);
+const PP=id=>PATIENTS.find(p=>p.id===id);
+const st=(id=S.pid)=>per[id];
+const medsOf=id=>PP(id).meds.concat(per[id].extra||[]);
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const freq=f=>f===1?'مرة يومياً':f===2?'مرتان يومياً':f+' مرات يومياً';
+const srcChips=r=>r.src.map(k=>`<span class="src ${k==='NONE'?'none':''}" title="${esc(SRC[k].t)}">${SRC[k].s}</span>`).join('');
+
+const pendingDr=id=>per[id].items.filter(i=>(i.doctor||i.esc)&&!i.dd);
+const redQ=id=>QUESTIONS.some(q=>q.red&&per[id].answers[q.k]);
+const drReady=id=>pendingDr(id).length===0&&!(redQ(id)&&!per[id].clearance);
+const needsDoctor=id=>CFG.mode!=='pharmacy'&&(!drReady(id)||(CFG.mode==='team'&&!per[id].drOk));
+const doctorCase=id=>CFG.mode==='team'||per[id].items.some(i=>i.esc||i.doctor||i.dd)||redQ(id)||!!per[id].clearance||overall(id).cat!=='low';
+
+/* ===== Fasting-risk assessment (decision support) ===== */
+const RK={low:0,moderate:1,high:2};
+const RKT={low:'منخفضة',moderate:'متوسطة',high:'عالية'};
+const PATH={remote:'خطة عن بعد بلا زيارة',phone:'استشارة هاتفية',visit:'زيارة عيادة قبل رمضان'};
+function idfdar(id){const p=PP(id),c=p.cl.dm;if(!c)return null;const a=per[id].answers,cls=medsOf(id).map(([k])=>(DRUGS[k]||DRUGS.other).cls),it=[];
+  const add=(t,v)=>{if(v)it.push([t,v]);};
+  add('سكري النوع الأول',c.type===1?1:0);
+  add('مدة السكري '+c.dur+' سنة',c.dur>=10?1:0);
+  add(a.hypo?'هبوط شديد خلال آخر 3 أشهر':'نوبات هبوط أقل من مرة أسبوعياً',a.hypo?5.5:c.hypo);
+  add('HbA1c '+c.a1c+'%',c.a1c>9?2:c.a1c>=7.5?1:0);
+  const tr=cls.includes('prandial')?[2.5,'إنسولين قاعدي ووجبات']:cls.includes('basal')?[1.5,'إنسولين قاعدي']:cls.includes('su')?[0.5,'سلفونيل يوريا من الجيل الثاني']:[0,''];
+  add('العلاج: '+tr[1],tr[0]);
+  add('قياس السكر المنزلي '+(c.smbg==='no'?'غير مُجرى':'غير منتظم'),c.smbg==='no'?2:c.smbg==='sub'?1:0);
+  add('مضاعفات حادة حديثة',c.acute);
+  add('مرض قلب وأوعية مستقر',['af-hf','af','ihd'].includes(p.cl.cv)?2:0);
+  const e=a.ckd?20:p.cl.egfr;add(a.ckd?'فشل كلوي متقدم (إجابة المريض)':'eGFR '+p.cl.egfr,e<30?6.5:e<45?4:e<60?2:0);
+  add('حمل أو رضاعة',a.preg?6.5:0);
+  add('فوق 70 بلا مساعدة في المنزل',p.age>70&&a.alone?3.5:0);
+  add('ساعات الصيام '+FAST.toFixed(1),FAST>=16?1:0);
+  const tot=it.reduce((s,x)=>s+x[1],0);return {tot,it,cat:tot<=3?'low':tot<=6?'moderate':'high'};}
+function risks(id){const p=PP(id),a=per[id].answers,out=[];
+  const d=idfdar(id);if(d) out.push({k:'dm',n:'السكري',cat:d.cat,t:'درجة IDF-DAR '+d.tot,src:'IDFDAR',d});
+  if(p.cl.cv){const c=p.cl.cv;out.push({k:'cv',n:'القلب',cat:(p.cl.lvef&&p.cl.lvef<=35)?'high':c==='htn'?'low':'moderate',
+    t:c==='af-hf'?'رجفان أذيني وقصور قلب غير شديد (LVEF '+p.cl.lvef+'%)':c==='af'?'رجفان أذيني مستقر على مميع':'ضغط مستقر',src:'HEART'});}
+  if(a.ckd||p.cl.egfr<60) out.push({k:'renal',n:'الكلى',cat:a.ckd||p.cl.egfr<30?'high':'moderate',t:a.ckd?'فشل متقدم أو غسيل (إجابة المريض)':'المرحلة الثالثة، eGFR '+p.cl.egfr,src:'RAK'});
+  if(p.cl.epi) out.push({k:'epi',n:'الصرع',cat:p.cl.epi==='controlled'?'low':'high',t:p.cl.epi==='controlled'?'مستقر، بلا نوبات منذ سنتين':'غير مستقر',src:'EPI'});
+  if(a.preg) out.push({k:'preg',n:'الحمل',cat:'high',t:'حامل أو مرضع',src:'IDFDAR'});
+  if(p.cl.acute) out.push({k:'acute',n:'مرض حاد',cat:'high',t:p.cl.acute+'، مؤقت حتى الشفاء',src:'NONE'});
+  return out;}
+function overall(id){const R=risks(id);let cat='low';R.forEach(r=>{if(RK[r.cat]>RK[cat])cat=r.cat;});
+  const acuteOnly=R.filter(r=>r.cat==='high').every(r=>r.k==='acute')&&R.some(r=>r.k==='acute');
+  const auto=cat==='high'&&!acuteOnly?'visit':cat==='low'?'remote':'phone';
+  return {cat,R,auto,path:per[id].path||auto};}
+
+function triage(id){
+  const p=PP(id), s=per[id], reasons=[];
+  s.items.filter(i=>i.esc&&!i.dd).forEach(i=>reasons.push({lvl:'red',t:i.d.ar+': '+i.esc}));
+  s.items.filter(i=>i.doctor&&!i.esc&&!i.dd).forEach(i=>reasons.push({lvl:'red',t:i.d.ar+': أحاله الصيدلي للطبيب.'}));
+  QUESTIONS.forEach(q=>{if(s.answers[q.k]&&!(q.red&&s.clearance)) reasons.push({lvl:q.red?'red':'amber',t:q.t+(q.red?'. يستوجب تقييم الطبيب قبل قرار الصيام.':'. يحتاج مواعيد مخصصة.')});});
+  if(s.clearance==='no') reasons.push({lvl:'red',t:'قرار الطبيب: لا يُنصح بالصيام هذا العام.'});
+  if(s.items.some(i=>i.dd)) reasons.push({lvl:'amber',t:'قرّر الطبيب في '+s.items.filter(i=>i.dd).length+' من الأدوية.'});
+  if(s.items.some(i=>i.crit)) reasons.push({lvl:'amber',t:'يتناول دواءً حرجاً: مراجعة الصيدلي إلزامية.'});
+  if(medsOf(id).length>=5) reasons.push({lvl:'amber',t:'تعدد الأدوية: '+medsOf(id).length+' أدوية.'});
+  let lvl='green';
+  s.items.forEach(i=>{const l=i.dd?'amber':i.doctor?'red':i.lvl;if(LV[l]>LV[lvl]) lvl=l;});
+  reasons.forEach(r=>{if(LV[r.lvl]>LV[lvl]) lvl=r.lvl;});
+  reasons.sort((a,b)=>LV[b.lvl]-LV[a.lvl]);
+  return {lvl,reasons};
+}
+const TRI={red:{t:'أحمر',d:'مراجعة الطبيب قبل الصيام'},amber:{t:'برتقالي',d:'يحتاج مراجعة الصيدلي'},green:{t:'أخضر',d:'تغيير توقيت بسيط'}};
+function flagged(id){const f=per[id].fu;return FUQ.some(q=>f[q.k]==='نعم');}
+function status(id){const s=per[id];
+  if(s.signed&&flagged(id)) return {c:'s-call',t:'اتصل اليوم'};
+  if(s.signed) return {c:'s-done',t:'أُرسلت الخطة'};
+  if(needsDoctor(id)) return {c:'s-doc',t:'عند الطبيب'};
+  return {c:'s-wait',t:'بانتظار مراجعتك'};}
+function drStatus(id){if(per[id].signed)return {c:'s-done',t:'وصلت للمريض'};return needsDoctor(id)?{c:'s-wait',t:'بانتظار اعتمادك'}:{c:'s-done',t:'اعتمدتها'};}
+
+/* clinical checks on the pharmacist's edits */
+function checks(i,id=S.pid){
+  const w=[];const d=i.doses,p=PP(id);
+  if(i.doctor) return w;
+  if(d.length===2&&d[0]===d[1]&&i.crit) w.push('جرعتان في وقت واحد لدواء حرج: هذا تضاعف للجرعة.');
+  else if(d.length===2&&d[0]===d[1]) w.push('الجرعتان في الوقت نفسه: تأكد أن هذا مقصود.');
+  if(i.d.cls==='thyroid'&&!d.includes('suhoor')) w.push('يُفضّل على معدة فارغة قبل السحور.');
+  if(i.d.cls==='diuretic'&&d.includes('suhoor')) w.push('مدر البول مع السحور قد يزيد العطش والجفاف نهاراً.');
+  if(i.d.cls==='sglt2'&&(p.age>=65||medsOf(id).some(([k])=>(DRUGS[k]||{}).cls==='diuretic')||p.cl.egfr<60)) w.push('مع كبر السن أو مدر البول أو ضعف الكلى: نصحت توصيات Heart 2022 بتجنبه، فناقش الإيقاف المؤقت مع الطبيب.');
+  if(i.f===2&&d.length===1&&(i.crit||i.d.cls==='metformin')) w.push('كان يُؤخذ مرتين: تأكد من تعديل الجرعة اليومية.');
+  return w;
+}
+/* medicine alerts for the doctor: interactions and timing conflicts created by the fasting window */
+function alertsFor(id){const s=per[id],p=PP(id),A=[];
+  const live=s.items.filter(i=>!i.stop);
+  const it=c=>live.find(i=>i.d.cls===c), has=c=>!!it(c);
+  if(has('warfarin')&&has('abx')) A.push({lvl:'red',k:'تداخل دوائي',t:'وارفارين مع '+it('abx').d.ar+': المضاد الحيوي قد يرفع INR ويزيد خطر النزيف.',fix:'افحص INR خلال 3 إلى 5 أيام من بدء المضاد.',src:'LABEL'});
+  if(has('sglt2')&&has('diuretic')) A.push({lvl:'amber',k:'تداخل دوائي',t:it('sglt2').d.ar+' مع '+it('diuretic').d.ar+': يزيدان الجفاف وهبوط الضغط، والصيام يضاعف الخطر.',fix:'راجع جرعة المدر، أو أوقف مثبط SGLT2 مؤقتاً في رمضان.',src:'HEART'});
+  const bb=live.find(i=>i.key==='bisoprolol'), hyp=live.filter(i=>['su','basal','prandial'].includes(i.d.cls));
+  if(bb&&hyp.length) A.push({lvl:'amber',k:'تداخل دوائي',t:'بيسوبرولول يخفي أعراض هبوط السكر مثل الرجفة والخفقان، والمريض على '+hyp.map(i=>i.d.ar).join(' و')+'.',fix:'علّم المريض أن التعرق والجوع قد يكونان العلامة الوحيدة، وأن يقيس السكر عند أي شك.',src:'LABEL'});
+  const lev=it('thyroid');
+  ['calcium','ppi'].forEach(c=>{const o=it(c);if(!lev||!o)return;
+    if(lev.doses.some(d=>o.doses.includes(d))) A.push({lvl:'red',k:'تعارض توقيت',t:'ليفوثيروكسين و'+o.d.ar+' في الوقت نفسه: يقل امتصاص هرمون الغدة.',fix:'افصل بينهما 4 ساعات على الأقل: الهرمون قبل السحور، و'+o.d.ar+' مع الإفطار.',src:'LABEL'});
+    else A.push({lvl:'ok',k:'تعارض توقيت',t:'فصلت الخطة بين ليفوثيروكسين و'+o.d.ar+' بأكثر من 4 ساعات.',src:'LABEL'});});
+  if(has('metformin')&&p.cl.egfr<45) A.push({lvl:'red',k:'جرعة الكلى',t:'ميتفورمين مع eGFR '+p.cl.egfr+': الجرعة تحتاج مراجعة.',src:'LABEL'});
+  ['iftar','suhoor','bed'].forEach(z=>{const n=live.filter(i=>i.doses.includes(z)).length;
+    if(n>=6) A.push({lvl:'amber',k:'عبء الجرعات',t:n+' أدوية مع '+SLOT[z]+' وحده، وهذا يرفع احتمال النسيان.',fix:'انظر هل يمكن نقل أحدها إلى قبل النوم أو إيقافه مؤقتاً.',src:'NONE'});});
+  return A;}
+/* appointments: when the patient must be seen, and the nearest free clinic slot */
+const FREE=['2026-11-17','2026-11-24','2026-11-26','2026-12-01','2026-12-08','2026-12-15','2026-12-22','2027-01-05'];
+const isoAdd=(t,d)=>new Date(t+d*864e5).toISOString().slice(0,10);
+const DUE={visit:isoAdd(RAMADAN_START,-42),phone:isoAdd(RAMADAN_START,-28),remote:isoAdd(RAMADAN_START,-14)};
+const fd=iso=>new Date(iso+'T12:00:00Z').toLocaleDateString('ar-SA-u-ca-gregory-nu-latn',{day:'numeric',month:'long'});
+const todayIso=()=>new Date().toISOString().slice(0,10);
+function apptInfo(id){const o=overall(id),p=PP(id),a=per[id].appt||p.cl.appt,due=DUE[o.path];
+  const free=FREE.filter(d=>d>=todayIso()&&d<=due);
+  if(o.path==='remote') return {path:o.path,a,due,ok:true,need:false,free,t:'لا يحتاج موعداً. تُرسل الخطة عن بعد قبل '+fd(due)+'.'};
+  const ok=!!a&&a<=due&&a>=todayIso();
+  const kind=o.path==='visit'?'زيارة':'استشارة هاتفية';
+  return {path:o.path,a,due,ok,need:true,free,booked:!!per[id].appt,
+    t:ok?kind+' في '+fd(a)+'، قبل الحد المطلوب ('+fd(due)+'). تُبنى الخطة في هذا الموعد.':(a?'موعده القادم '+fd(a)+'، بعد الحد المطلوب ('+fd(due)+') '+(o.path==='visit'?'للزيارة':'للاستشارة الهاتفية')+' قبل رمضان.':'لا يوجد له موعد، ويحتاج '+kind+' قبل '+fd(due)+'.')};}
+function apptCtl(id){const x=apptInfo(id);if(!x.need||x.ok&&!x.booked)return '';
+  return x.free.length?dd('book',x.free.map(d=>[d,fd(d)]),per[id].appt,'data-book',x.ok?'غيّر الموعد':'قدّم إلى أقرب موعد متاح','mini'):'<span class="muted">لا توجد مواعيد متاحة قبل الحد، أضف موعداً إضافياً.</span>';}
+function daysToRamadan(){return Math.ceil((RAMADAN_START-Date.now())/864e5);}
+function slotVal(i){return i.doctor?'doctor':i.doses.join('+');}
+function applySug(i){const g=i.r.sug;if(!g)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
+  if(g.v==='keep'){i.keep=true;i.doses=[];}else{i.doses=g.v.split('+');i.ds=g.ds||'same';}i.approved=false;return true;}
+function stamp(){const d=new Date();return d.toLocaleDateString('ar-SA-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'long'})+'، '+d.toLocaleTimeString('ar-SA-u-nu-latn',{hour:'numeric',minute:'2-digit'});}
+function logCfg(who,what){CFG.log.unshift({t:stamp(),who,what});CFG.log=CFG.log.slice(0,30);}
+
+/* ===== icons ===== */
+const I={
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.01"/></svg>',
+  phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+  list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg>',
+  plan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+  suhoor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 15a7 7 0 1 1-8-9 5.5 5.5 0 0 0 8 9z"/><path d="M19 4v3M17.5 5.5h3"/></svg>',
+  iftar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 6.5v2.5M5.8 9.8l1.6 1.6M18.2 9.8l-1.6 1.6"/></svg>',
+  bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19v-9M3 15h18v4M7 12.5h6a3 3 0 0 1 3 3"/></svg>',
+  send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4L3 11l7 2.5L12.5 21z"/><path d="M20 4l-10 9.5"/></svg>',
+  plug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg>'
+};
+const capStyle=d=>`--c1:${d.c[0]};--c2:${d.c[1]}`;
+
+/* ===== Patient list ===== */
+function clinicMatch(id){if(CFG.clinic==='fm')return true;const k=CLINICS[CFG.clinic].k;
+  return risks(id).some(r=>k.includes(r.k)&&r.cat!=='low')||per[id].items.some(i=>(i.esc||i.doctor||i.dd)&&(k.includes(i.r.dom)||i.r.dom==='any'));}
+function docList(){return PATIENTS.filter(p=>doctorCase(p.id)&&clinicMatch(p.id));}
+function vQueue(){
+  const doc=S.view==='doctor', list=doc?docList():PATIENTS;
+  return `<aside class="queue" aria-label="قائمة المرضى"><div class="qh"><h2>${doc?'محالون إليك':S.view==='ehr'?'مواعيد العيادة':'مرضى هذا الأسبوع'}</h2><span class="qn">${list.length}</span></div><div class="qlist">${list.map(p=>{
+    const s=doc?drStatus(p.id):status(p.id), o=overall(p.id);
+    const sub=S.view==='ehr'?`<span>رقم الملف ${p.cl.mrn}</span>`:`<span>${p.age} سنة، ${medsOf(p.id).length} أدوية</span><span class="st ${s.c}">${s.t}</span>`;
+    return `<button class="qitem" data-pid="${p.id}" aria-current="${p.id===S.pid}"><span class="qname">${p.name}</span><span class="qsub">${sub}</span></button>`;}).join('')||'<p class="none">لا يوجد مرضى لهذه العيادة.</p>'}</div>
+    </aside>`;
+}
+const SHORT={red:'يراجع الطبيب قبل الصيام',amber:'يحتاج مراجعتك',green:'تغيير توقيت فقط'};
+function headBlock(p,s,t,withWhy){
+  const o=overall(p.id);
+  return `<div class="phead"><h1>${p.name}</h1>
+     ${withWhy?`<button class="tri lv-${t.lvl}" type="button" id="whyBtn" aria-expanded="${!!S.why}"><i></i><span>${SHORT[t.lvl]}</span>${t.reasons.length?`<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>`:''}</button>`:''}
+     <span class="pathc p-${o.path}">${PATH[o.path]}</span>
+     ${s.clearance?`<span class="clr ${s.clearance}">${s.clearance==='yes'?'الطبيب: يصوم بالخطة':'الطبيب: لا يصوم'}</span>`:''}
+     <p class="meta">${p.sex}، ${p.age} سنة. ${p.dx.join('، ')}</p>
+     ${withWhy&&S.why&&t.reasons.length?`<ul class="why">${t.reasons.map(r=>`<li><span class="k" style="background:var(--${r.lvl})"></span><span>${esc(r.t)}</span></li>`).join('')}</ul>`:''}
+   </div>`;
+}
+function hisBanner(){
+  return CFG.his==='down'?`<div class="banner">${I.plug}<div><b>الربط مع نظام المستشفى منقطع.</b> الأدوية من آخر نسخة محفوظة، وتقدر تضيف دواء يدوياً. كل شيء آخر يعمل كالمعتاد.</div></div>`:'';
+}
+/* ===== Pharmacist ===== */
+function vWork(){
+  const p=P(), s=st(), t=triage(p.id), done=s.items.filter(i=>i.approved).length, n=s.items.length, solo=CFG.mode==='pharmacy';
+  const tok=(i,ix,di,two)=>`<div class="tok ${i.crit?'crit':''} ${i.approved?'ap':''} ${S.pick&&S.pick.ix===ix&&S.pick.di===di?'picked':''}" tabindex="0" role="button" data-ix="${ix}" data-di="${di}" aria-label="${i.d.ar}. اسحب لتغيير الوقت" title="${esc(i.esc||i.r.why||'')}" style="${capStyle(i.d)}">
+      <span class="cap"></span><span class="tn">${i.d.ar}</span>${two?`<span class="n2">${di+1} من 2</span>`:''}<span class="ok">${I.check}</span></div>`;
+  const tokens=z=>s.items.map((i,ix)=>i.doctor?'':i.doses.map((d,di)=>d!==z?'':tok(i,ix,di,i.doses.length>1)).join('')).join('');
+  const docs=s.items.map((i,ix)=>i.doctor?tok(i,ix,0,false):'').join('');
+  const comp=z=>{const inner=tokens(z);return `<div class="comp c-${z}" data-zone="${z}"><div class="lid">${I[z]}<b>${SLOT[z]}</b><span class="tm">${TIME[z]}</span></div><div class="well">${inner||'<span class="empty">لا شيء هنا</span>'}</div></div>`;};
+  const slotOpts=i=>OPTS.filter(([v])=>v!=='iftar+iftar'&&!(v==='suhoor+iftar'&&i.f<2)).map(([v,l])=>[v,v==='doctor'&&solo?'يراجع طبيبه':l,v==='doctor'?'doc':''])
+     .concat(['suhoor','iftar','bed','suhoor+iftar','doctor'].includes(slotVal(i))?[]:[[slotVal(i),i.doses.map(x=>SLOT[x]).join(' و')]]);
+  const addable=Object.keys(DRUGS).map(k=>[k,DRUGS[k].ar,k==='other'?'doc':'']);
+  return `<section class="work maincol" aria-label="خطة المريض">
+   ${MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الصيدلي</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>'}
+   ${hisBanner()}
+   ${headBlock(p,s,t,true)}
+   ${s.signed&&flagged(p.id)?`<div class="alert">${I.phone}<span>اتصل بالمريض اليوم: ${FUQ.filter(q=>s.fu[q.k]==='نعم').map(q=>({miss:'ترك جرعة',dbl:'أخذ جرعتين معاً',sym:'أعراض أثناء الصيام'})[q.k]).join('، ')}</span></div>`:''}
+   <div class="box organiser ${S.pick?'picking':''}">
+     <div class="comps">${comp('iftar')}${comp('bed')}${comp('suhoor')}<div class="fastcol" aria-hidden="true"><div><b>صيام</b>${FAST.toFixed(1)} ساعة</div></div></div>
+     <div class="tray ${docs?'':'empty'}" data-zone="doctor"><b>${docs?(solo?'يراجع طبيبه':'للطبيب'):(solo?'اسحب دواءً هنا ليراجعه طبيب المريض':'اسحب دواءً هنا لإحالته للطبيب')}</b>${docs}</div>
+     ${S.pick?'<p class="hint">اختر الخانة الجديدة للدواء</p>':''}
+   </div>
+   ${alertsBox(p.id,true)}
+   <div class="box ledger">
+     <div class="lhead"><h2>الأدوية</h2><span>${CFG.mode==='team'?(s.drOk?'اعتمدها الطبيب. تحقق منها ثم أرسلها، وأي تعديل يرجع للطبيب':'الطبيب يعتمد الخطة، وأي تعديل منك يصله كاقتراح'):'راجع كل دواء ثم اعتمده'}</span></div>
+     ${s.items.map((i,ix)=>{const w=checks(i);const man=ix>=p.meds.length;return `<div class="mrow">
+       <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}${man?'<span class="tag man">أضيف يدوياً</span>':''}${i.dd?`<span class="tag dr">الطبيب: ${i.stop?'إيقاف':i.keep?'مواعيده المعتادة':i.ds==='reduce'?'تقليل الجرعة':'نفس الجرعة'}</span>`:''}${i.doctor&&!i.dd?`<span class="tag wait">${solo?'يراجع طبيبه':'عند الطبيب'}</span>`:''}
+         <span class="fq">${freq(i.f)}</span>${w.length?`<span class="warn">${esc(w[0])}</span>`:''}</div>
+       ${i.stop?'<span class="stopped">أوقفه الطبيب في رمضان</span>':i.keep?'<span class="stopped">على مواعيده المعتادة، لا يصوم أثناء العلاج</span>':dd('s'+ix,slotOpts(i),slotVal(i),`data-set="${ix}"`,'اختر الوقت')}
+       <button class="apv" type="button" data-ap="${ix}" aria-pressed="${i.approved}" aria-label="اعتماد ${i.d.ar}" title="اعتماد">${I.check}</button>
+     </div>`;}).join('')}
+     ${CFG.his==='down'&&!s.signed?`<div class="addrow"><span>إضافة دواء يدوياً</span>${dd('addk',addable,S.addK,'data-addk','اختر الدواء')}${dd('addf',[['1','مرة يومياً'],['2','مرتان يومياً'],['3','3 مرات يومياً']],S.addF,'data-addf','عدد الجرعات','mini')}<button class="btn quiet" type="button" id="addMed" ${S.addK&&S.addF?'':'disabled'}>أضف</button></div>`:''}
+     <div class="signbar">
+       ${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض${CFG.sms==='on'?'، مع رسالة نصية احتياطية':''}</span>`:`<span class="cnt">${CFG.mode==='team'&&!s.drOk?'<b class="wdr">بانتظار اعتماد الطبيب</b>، ':''}راجعت <b>${done}</b> من ${n}</span><button class="btn quiet" type="button" id="apAll" ${done===n?'disabled':''}>تحقق من الكل</button><button class="btn" type="button" id="sign" ${done===n&&(CFG.mode!=='team'||s.drOk)?'':'disabled'}>${I.send}أرسل للمريض</button>`}
+     </div>
+   </div>
+  </section>`;
+}
+
+/* dropdown (custom: stays open reliably inside the viewer frame) */
+function dd(id,opts,cur,attr,ph,cls=''){
+  const sel=opts.find(o=>o[0]===cur), open=S.dd===id;
+  return `<div class="dd ${cls}"><button type="button" class="ddb ${sel&&sel[2]?sel[2]:''}" data-ddt="${id}" aria-haspopup="listbox" aria-expanded="${open}"><span>${sel?sel[1]:ph}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>
+   ${open?`<div class="ddm" role="listbox">${opts.map(([v,l,c])=>`<button type="button" role="option" class="${c||''}" aria-selected="${v===cur}" ${attr} data-v="${v}">${l}</button>`).join('')}</div>`:''}</div>`;
+}
+/* ===== Doctor ===== */
+function alertsBox(id,compact){
+  const A=alertsFor(id).filter(a=>!compact||a.lvl!=='ok');
+  if(!A.length) return compact?'':`<div class="box alerts"><div class="lhead"><h2>تنبيهات الأدوية</h2><span>تداخلات وتعارض مواعيد</span></div><p class="none">لا توجد تداخلات أو تعارضات معروفة في هذه الخطة.</p></div>`;
+  return `<div class="box alerts"><div class="lhead"><h2>تنبيهات الأدوية</h2><span>${A.filter(a=>a.lvl!=='ok').length} تحتاج انتباهك</span></div>
+   ${A.map(a=>`<div class="arow a-${a.lvl}"><span class="ak">${a.lvl==='ok'?I.check:I.warn}${a.k}</span><div><p>${esc(a.t)}</p>${a.fix?`<p class="fix">${esc(a.fix)}</p>`:''}</div><span class="src ${a.src==='NONE'?'none':''}" title="${esc(SRC[a.src].t)}">${SRC[a.src].s}</span></div>`).join('')}</div>`;
+}
+function planBox(id){
+  const s=per[id];
+  const where=i=>i.stop?'إيقاف في رمضان':i.keep?'مواعيده المعتادة':i.doctor?'ينتظر قرارك':i.doses.map(x=>SLOT[x]).join(' و');
+  return `<div class="box plan"><div class="lhead"><h2>الخطة كاملة ولماذا</h2><span>لكل دواء توقيته وسببه</span></div>
+   ${s.items.map(i=>`<div class="prow"><b>${i.d.ar}</b><span class="pw ${i.doctor&&!i.dd?'wait':''}">${where(i)}</span><span class="py">${esc(i.dd&&i.r.sug?i.r.sug.n:(i.r.why||i.esc||''))}</span>${srcChips(i.r)}</div>`).join('')}</div>`;
+}
+function apptBox(id){const x=apptInfo(id);
+  return `<div class="box appt ${x.ok?'':'late'}"><div class="lhead"><h2>المواعيد</h2><span>التقييم قبل رمضان بـ 6 إلى 8 أسابيع حسب IDF-DAR</span></div>
+    <div class="aprow"><span class="apst">${x.ok?I.check:I.warn}</span><p>${esc(x.t)}${x.booked?' <b>حُجز من صيامٌ آمن.</b>':''}</p>${apptCtl(id)}</div></div>`;}
+function riskBox(id){
+  const o=overall(id), k=CLINICS[CFG.clinic].k, R=o.R.filter(r=>k.includes(r.k));
+  const d=o.R.find(r=>r.k==='dm');
+  return `<div class="box risk">
+    <div class="lhead"><h2>خطورة الصيام</h2><span>حسب الإرشادات</span></div>
+    ${R.length?R.map(r=>`<div class="rrow"><b>${r.n}</b><span class="rc rk-${r.cat}">${RKT[r.cat]}</span><span class="rt">${esc(r.t)}</span><span class="src ${r.src==='NONE'?'none':''}" title="${esc(SRC[r.src].t)}">${SRC[r.src].s}</span>
+      ${r.k==='dm'?`<button type="button" class="linkbtn" id="idfBtn" aria-expanded="${S.idf}">${S.idf?'إخفاء التفاصيل':'كيف حُسبت؟'}</button>`:''}</div>
+      ${r.k==='dm'&&S.idf?`<div class="idf">${r.d.it.map(([t,v])=>`<div><span>${esc(t)}</span><b class="ltr">+${v}</b></div>`).join('')}<div class="tot"><span>المجموع: منخفضة حتى 3، متوسطة حتى 6، عالية فوق 6</span><b>${r.d.tot}</b></div><p>النقاط حسب جدول IDF-DAR 2021 كما تنشره أداة التقييم قبل رمضان، وتُراجع مع الجدول الأصلي قبل الاستخدام السريري.</p></div>`:''}`).join(''):'<p class="none">لا توجد أدوات خطورة لهذا المريض في عيادتك.</p>'}
+    <div class="pathrow"><span>المسار المقترح: <b>${PATH[o.auto]}</b></span>${dd('path',Object.entries(PATH).map(([v,l])=>[v,l]),o.path,'data-path','المسار')}</div>
+  </div>`;
+}
+function vDoctor(){
+  const list=docList();
+  if(!list.some(p=>p.id===S.pid)&&list.length) S.pid=list[0].id;
+  const p=P(), s=st(), t=triage(p.id);
+  const ref=s.items.map((i,ix)=>({i,ix})).filter(o=>o.i.esc||o.i.doctor||o.i.dd);
+  const qs=QUESTIONS.filter(q=>q.red&&s.answers[q.k]);
+  const slotOpts=i=>[['iftar','الإفطار'],['suhoor','السحور'],...(i.f>=2?[['suhoor+iftar','السحور والإفطار']]:[]),['bed','قبل النوم'],['keep','مواعيده المعتادة (لا يصوم)'],['stop','إيقاف في رمضان']];
+  const cur=i=>i.stop?'stop':i.keep?'keep':i.dd?i.doses.join('+'):'';
+  const sugTxt=i=>{const g=i.r.sug;return g?`<div class="sug"><span>مقترح الإرشاد: ${esc(g.n)}</span>${srcChips(i.r)}${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`:'';};
+  return `<section class="work maincol" aria-label="قرار الطبيب">
+   ${MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الطبيب</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>'}
+   ${list.length?`${headBlock(p,s,t,false)}
+   ${riskBox(p.id)}
+   ${apptBox(p.id)}
+   ${alertsBox(p.id)}
+   <div class="box ask">
+     <h2>هل يصوم ${p.name} هذا العام؟</h2>
+     <p class="meta">${qs.length?'أجاب المريض قبل رمضان:':'لا توجد إجابات عالية الخطورة من المريض.'}</p>
+     ${qs.length?`<div class="because">${qs.map(q=>`<span>${q.t}</span>`).join('')}</div>`:''}
+     ${dd('clr',[['yes','نعم، يصوم بالخطة','ok'],['no','لا يُنصح بالصيام','doc']],s.clearance,'data-clr','اختر القرار','wide')}
+   </div>
+   ${ref.length?`<div class="box">
+     <div class="lhead"><h2>أدوية تنتظر قرارك</h2><span>${ref.length}</span></div>
+     ${ref.length?ref.map(({i,ix})=>`<div class="drrow">
+       <div class="nm"><b>${i.d.ar}</b><span class="en">${i.d.en}</span><p>${freq(i.f)}. ${esc(i.esc||'أحاله الصيدلي للمراجعة.')}</p>${sugTxt(i)}</div>
+       <div class="drc">${dd('dr'+ix,slotOpts(i).map(([v,l])=>[v,l,v==='stop'||v==='keep'?'doc':'']),cur(i),`data-dr="${ix}"`,'الوقت')}${dd('ds'+ix,[['same','نفس الجرعة'],['reduce','تقليل الجرعة']],i.dd&&!i.stop&&!i.keep?(i.ds||'same'):'',`data-ds="${ix}"`,'الجرعة',i.dd&&!i.stop&&!i.keep?'':'off')}</div>
+     </div>`).join(''):''}
+   </div>`:''}
+   ${planBox(p.id)}
+   ${CFG.mode==='team'?`<div class="box drsign">${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض</span>`:s.drOk?`<span class="signed">${I.check}اعتمدت الخطة، وانتقلت للصيدلي ليراجعها ويشرحها للمريض</span>`:`<span class="cnt">${drReady(p.id)?'الخطة جاهزة لاعتمادك.':'قرّر في الأدوية المحالة'+(redQ(p.id)&&!s.clearance?' وفي الصيام':'')+' أولاً.'}</span><button class="btn" type="button" id="drSign" ${drReady(p.id)?'':'disabled'}>${I.check}اعتمد الخطة كاملة</button>`}</div>`:''}`:'<div class="box ask"><h2>لا يوجد مرضى محالون لعيادتك</h2><p class="meta">غيّر نوع العيادة من الإعدادات لترى بقية المرضى.</p></div>'}
+  </section>`;
+}
+
+/* ===== Hospital information system (simulated) with the embedded CDS card ===== */
+function cdsCard(id){
+  const p=PP(id),s=per[id],o=overall(id),ref=s.items.filter(i=>(i.esc||i.doctor)&&!i.dd);
+  const moved=s.items.filter(i=>!i.doctor&&!i.dd).length;
+  const ind=o.path==='visit'?'warning':ref.length?'warning':'info';
+  const al=alertsFor(id).filter(a=>a.lvl!=='ok');
+  const summary=`خطة أدوية رمضان جاهزة: ${moved} أدوية بتوقيت جديد، و${ref.length} تنتظر قرارك${al.length?'، و'+al.length+' تنبيهات':''}.`;
+  return {ind:al.some(a=>a.lvl==='red')?'critical':ind,summary,o,ref,moved,al};
+}
+function cdsJSON(id){
+  const p=PP(id),c=cdsCard(id);
+  const req={hook:'patient-view',hookInstance:'d1577c69-dfbe-44ad-ba6d-3e05e953b2ea',context:{userId:'Practitioner/dr-saad',patientId:'Patient/'+p.cl.mrn},
+    prefetch:{patient:'Patient/'+p.cl.mrn,medications:'MedicationRequest?patient='+p.cl.mrn+'&status=active',labs:'Observation?patient='+p.cl.mrn+'&code=http://loinc.org|4548-4,http://loinc.org|62238-1'}};
+  const res={cards:[{summary:c.summary,indicator:c.ind,source:{label:'صيامٌ آمن، قواعد '+RULESET,topic:{code:'ramadan-med-plan'}},
+    suggestions:c.ref.filter(i=>i.r.sug).map(i=>({label:i.d.en+': '+i.r.sug.n,actions:[{type:'update',description:'Ramadan schedule',resource:{resourceType:'MedicationRequest',medication:i.d.en}}]})),
+    detail:c.al.map(a=>'- '+a.t+(a.fix?' '+a.fix:'')).join('\n'),
+    links:[{label:'فتح صيامٌ آمن',url:'https://safefast.example/launch',type:'smart'}],
+    overrideReasons:[{code:'not-fasting',display:'المريض لن يصوم'},{code:'later',display:'سأراجع لاحقاً'},{code:'disagree',display:'لا أوافق على الاقتراح'}]}]};
+  return {req,res};
+}
+function vEhr(){
+  const p=P(), s=st(), c=cdsCard(p.id), j=cdsJSON(p.id);
+  const med=medsOf(p.id).map(([k,f],ix)=>`<tr><td><b>${(DRUGS[k]||DRUGS.other).en}</b></td><td>${freq(f)}</td><td>${ix>=p.meds.length?'أضيف يدوياً':'نشط'}</td></tr>`).join('');
+  let card='';
+  if(CFG.his==='down') card=`<div class="cds off"><b>بطاقة صيامٌ آمن غير متاحة الآن</b><p>انقطع الربط بين النظام وصيامٌ آمن. يستمر الفريق في المنصة مباشرة، وتعود البطاقة تلقائياً بعد عودة الربط.</p></div>`;
+  else if(CFG.mode==='pharmacy') card=`<div class="cds off"><b>البطاقة متوقفة</b><p>المنصة تعمل الآن بطريقة صيدلية المجتمع وحدها، فلا تظهر داخل نظام المستشفى.</p></div>`;
+  else if(s.cds==='accepted') card=`<div class="cds done"><b>${I.check} اعتمدت مقترحات صيامٌ آمن</b><p>${s.drOk?'اعتمدت الخطة، وانتقلت للصيدلي ليراجعها ويشرحها للمريض.':'بقي قرار في الصيام أو بعض الأدوية، افتح صيامٌ آمن لإكماله.'}</p></div>`;
+  else if(s.cds&&s.cds.startsWith('dismissed')) card=`<div class="cds done mute"><b>أُخفيت البطاقة</b><p>السبب: ${esc(s.cds.split(':')[1]||'')}. سُجّل في سجل التدقيق.</p><button type="button" class="linkbtn" data-cds="undo">إظهارها مجدداً</button></div>`;
+  else card=`<div class="cds ind-${c.ind}">
+     <div class="cdsh"><span class="by">صيامٌ آمن${daysToRamadan()>0?'، رمضان بعد '+daysToRamadan()+' يوماً':''}</span><span class="pathc p-${c.o.path}">${PATH[c.o.path]}</span></div>
+     <p class="sum">${esc(c.summary)}</p>
+     ${(()=>{const x=apptInfo(p.id);return `<div class="cdsap ${x.ok?'':'late'}">${x.ok?I.check:I.warn}<span>${esc(x.t)}</span>${apptCtl(p.id)}</div>`;})()}
+     ${c.al.length?`<div class="cdsal">${c.al.map(a=>`<p class="a-${a.lvl}">${I.warn}<span><b>${a.k}:</b> ${esc(a.t)} ${a.fix?esc(a.fix):''}</span></p>`).join('')}</div>`:''}
+     ${c.ref.length?`<ul>${c.ref.map(i=>`<li><b>${i.d.ar}</b>: ${esc(i.r.sug?i.r.sug.n:'يحتاج قرارك.')} ${srcChips(i.r)}</li>`).join('')}</ul>`:''}
+     <div class="cdsa"><button class="btn" type="button" data-cds="accept">اعتماد المقترحات</button><button class="btn quiet" type="button" data-cds="open">فتح صيامٌ آمن</button>
+       ${dd('dismiss',[['المريض لن يصوم','المريض لن يصوم'],['سأراجع لاحقاً','سأراجع لاحقاً'],['لا أوافق على الاقتراح','لا أوافق على الاقتراح']],null,'data-dis','إخفاء مع ذكر السبب','mini')}</div>
+   </div>`;
+  return `<section class="ehr maincol" aria-label="نظام المستشفى">
+   <div class="ehrbar"><b>نظام المعلومات الصحية</b><span>محاكاة لنظام مستشفى. تظهر بطاقة صيامٌ آمن تلقائياً في أي زيارة خلال 90 يوماً قبل رمضان، عبر معيار HL7 CDS Hooks</span></div>
+   <div class="ehrpt"><div><h1>${p.name}</h1><span>${p.sex}، ${p.age} سنة. رقم الملف ${p.cl.mrn}</span></div><span class="ehrtag">العيادة: ${CLINICS[CFG.clinic].n.split(':')[0]}</span></div>
+   ${card}
+   <div class="ehrgrid">
+     <div class="box"><div class="lhead"><h2>التشخيصات</h2></div><ul class="plain">${p.dx.map(d=>`<li>${d}</li>`).join('')}</ul></div>
+     <div class="box"><div class="lhead"><h2>آخر التحاليل</h2></div><ul class="plain">${p.cl.labs.map(([a,b])=>`<li><span>${a}</span><b class="ltr">${b}</b></li>`).join('')}</ul></div>
+     <div class="box wide"><div class="lhead"><h2>الأدوية النشطة</h2><span>MedicationRequest</span></div><div class="tw"><table><thead><tr><th>الدواء</th><th>الجرعات</th><th>الحالة</th></tr></thead><tbody>${med}</tbody></table></div></div>
+   </div>
+   <div class="box jsonbox"><button type="button" class="linkbtn" id="jsonBtn" aria-expanded="${S.json}">${S.json?'إخفاء':'عرض'} الرسالة التقنية بين النظام وصيامٌ آمن</button>
+     ${S.json?`<div class="jgrid"><div><b>يرسلها النظام عند فتح الملف</b><pre dir="ltr">${esc(JSON.stringify(j.req,null,2))}</pre></div><div><b>يرد بها صيامٌ آمن</b><pre dir="ltr">${esc(JSON.stringify(j.res,null,2))}</pre></div></div>`:''}</div>
+  </section>`;
+}
+
+/* ===== Settings: shapes the platform to each clinic ===== */
+function vSettings(){
+  const c=CITIES[CFG.city];
+  const row=(lbl,help,ctl)=>`<div class="srow"><div><b>${lbl}</b><p>${help}</p></div>${ctl}</div>`;
+  const lib=Object.values(RULES).map(r=>{const ov=CFG.ovr[r.id];const def=r.plan(1);
+    const timing=r.alt?dd('ov'+r.id,r.alt,ov||def[0],`data-ovr="${r.id}"`,''):`<span class="muted">${def?def.map(x=>SLOT[x]).join(' و'):'للطبيب'}</span>`;
+    return `<tr><td><b>${r.name}</b><span class="rid">${r.id}</span>${ov?'<span class="tag man">بروتوكول محلي</span>':''}</td><td>${timing}${ov?`<button type="button" class="linkbtn" data-rst="${r.id}">إرجاع للإرشاد</button>`:''}</td><td>${srcChips(r)}</td><td>${SRC[r.src[0]].ev}</td></tr>`;}).join('');
+  return `<section class="settings" aria-label="الإعدادات">
+   <h1>الإعدادات</h1>
+   <div class="sgrid">
+    <div class="box sbox"><div class="lhead"><h2>شكل المنصة</h2><span>تتغير لكل عيادة</span></div>
+      ${row('طريقة التشغيل','الطبيب يعتمد الخطة دائماً في نمط الفريق، والصيدلي يراجعها ويشرحها للمريض.',dd('mode',Object.entries(MODES),CFG.mode,'data-cfg="mode"',''))}
+      ${row('نوع العيادة','يحدد أدوات الخطورة التي يراها الطبيب والمرضى المحالين له.',dd('clinic',Object.entries(CLINICS).map(([k,v])=>[k,v.n]),CFG.clinic,'data-cfg="clinic"',''))}
+      ${row('المدينة','مواعيد الإفطار والسحور وساعات الصيام تُحسب حسب المدينة وتقويم أم القرى.',dd('city',Object.entries(CITIES).map(([k,v])=>[k,v[0]]),CFG.city,'data-cfg="city"',''))}
+      <p class="times">أول رمضان 1448 المتوقع في ${c[0]}: الفجر ${TIME.fajr}، المغرب ${TIME.iftar}، الصيام ${FAST.toFixed(1)} ساعة.</p>
+    </div>
+    <div class="box sbox"><div class="lhead"><h2>الاستمرارية</h2><span>تعمل المنصة حتى لو تعطل جزء منها</span></div>
+      ${row('الربط مع نظام المستشفى','للتجربة: اقطع الربط وشاهد كيف يستمر العمل يدوياً.',dd('his',[['up','يعمل','ok'],['down','منقطع (تجربة)','doc']],CFG.his,'data-cfg="his"',''))}
+      ${row('رسالة نصية احتياطية','تصل الخطة برسالة نصية إذا لم يكن عند المريض التطبيق.',dd('sms',[['on','مفعّلة'],['off','موقفة']],CFG.sms,'data-cfg="sms"',''))}
+      <ul class="safe"><li>أي دواء غير موجود في المكتبة يُحال للطبيب تلقائياً.</li><li>لا تصل أي خطة للمريض قبل اعتماد بشري.</li><li>كل تعديل على القواعد يُسجَّل باسم من عدّله ووقته.</li></ul>
+    </div>
+   </div>
+   <div class="box"><div class="lhead"><h2>مكتبة القواعد</h2><span>نسخة ${RULESET}، قواعد منفصلة عن البرنامج تُحدَّث عند تغير الإرشادات</span></div>
+     <div class="tw"><table class="lib"><thead><tr><th>الفئة</th><th>التوقيت الافتراضي</th><th>المصدر</th><th>قوة الدليل</th></tr></thead><tbody>${lib}</tbody></table></div>
+     <p class="dnote pad">تغيير التوقيت هنا يصير بروتوكولاً محلياً لعيادتك، ويُطبّق على المسودات غير المعتمدة فوراً.</p></div>
+   <div class="box"><div class="lhead"><h2>سجل التعديلات</h2><span>${CFG.log.length}</span></div>
+     ${CFG.log.length?`<ul class="log">${CFG.log.map(l=>`<li><span>${esc(l.t)}</span><b>${esc(l.who)}</b><span>${esc(l.what)}</span></li>`).join('')}</ul>`:'<p class="none">لا توجد تعديلات بعد.</p>'}</div>
+  </section>`;
+}
+
+/* ===== Phone (patient side) ===== */
+function vPhone(){
+  const p=P(), s=st(), tab=s.tab;
+  const body=tab==='intake'?phIntake(p,s):tab==='plan'?phPlan(p,s):phFollow(p,s);
+  const badge=s.signed&&!FUQ.every(q=>s.fu[q.k]);
+  return `<div class="phonecol"><div class="phone"><div class="screen">
+    <div class="notch" aria-hidden="true"></div>
+    <div class="sbar" aria-hidden="true"><span>9:41</span><span>5G</span></div>
+    <div class="toast" id="toast" role="status"><span class="ico">${I.plan}</span><div><b>صيامٌ آمن</b><div>وصلت خطة أدويتك لرمضان، اعتمدها ${CFG.mode==='doctor'?'طبيبك':'الصيدلي'}.</div></div></div>
+    <div class="app" id="app">${MODE==='patient'?`<div class="demo"><div class="sync" data-sync data-s="${S.sync}"><i></i><span></span></div><span>حساب تجريبي</span>${dd('pt',PATIENTS.map(x=>[x.id,x.name]),S.pid,'data-pid','','mini')}</div>`:''}${body}</div>
+    <nav class="ptabs" role="tablist" aria-label="تطبيق المريض">
+      ${[['intake','أسئلتي',I.list],['plan','خطتي',I.plan],['follow','المتابعة',I.chat]].map(([k,l,ic])=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${ic}<span>${l}</span>${k==='follow'&&badge?'<span class="badge"></span>':''}</button>`).join('')}
+    </nav></div></div>
+    <p class="phonecap">جوال ${p.name}، يتحدّث مع كل تعديل</p></div>`;
+}
+function phIntake(p,s){
+  return `<div class="hello"><small>مساء الخير</small><h3>${p.name}</h3></div>
+   <p class="lead">أجب عن هذه الأسئلة قبل رمضان، وسيجهّز ${CFG.mode==='pharmacy'?'الصيدلي':CFG.mode==='doctor'?'طبيبك':'طبيبك والصيدلي'} خطة أدويتك.</p>
+   <div class="qcard">${QUESTIONS.map(q=>`<div class="qrow"><span id="lq${q.k}">${q.t}</span><button class="sw" role="switch" data-q="${q.k}" aria-checked="${!!s.answers[q.k]}" aria-labelledby="lq${q.k}"></button></div>`).join('')}</div>
+   <div class="sec">أدويتي في الملف</div>
+   <div class="mylist">${medsOf(p.id).map(([k,f])=>`<div><span>${(DRUGS[k]||DRUGS.other).ar}</span><span class="muted">${freq(f)}</span></div>`).join('')}</div>`;
+}
+function phPlan(p,s){
+  const who=CFG.mode==='doctor'?'الطبيب':'الصيدلي';
+  if(!s.signed){
+    const dr=needsDoctor(p.id), path=overall(p.id).path;
+    const steps=CFG.mode==='team'?[['d','أرسلت إجاباتك وأدويتك'],[s.drOk?'d':'c','الطبيب يعتمد خطتك'],[s.drOk?'c':'t','الصيدلي يراجعها ويشرحها لك'],['t','تصلك الخطة هنا']]
+      :[['d','أرسلت إجاباتك وأدويتك']].concat(dr?[['c','الطبيب يراجع بعض أدويتك'],['t',who+' يعتمد الخطة']]:[['c',who+' يراجع الخطة']]).concat([['t','تصلك الخطة هنا']]);
+    return `<div class="hello"><small>خطتي لرمضان</small><h3>${p.name}</h3></div>
+     <div class="wait"><h4>خطتك قيد المراجعة</h4><p>لن تصلك أي تعليمات قبل أن يعتمدها ${CFG.mode==='team'?'طبيبك':who}.</p>
+      <p class="pathnote">${path==='remote'?'لا تحتاج زيارة، تصلك الخطة هنا.':path==='phone'?'سيتصل بك فريقنا قبل رمضان'+(apptInfo(p.id).ok&&apptInfo(p.id).a?' في '+fd(apptInfo(p.id).a):'')+'.':'نحتاج نشوفك في العيادة قبل رمضان'+(apptInfo(p.id).ok&&apptInfo(p.id).a?'، موعدك '+fd(apptInfo(p.id).a):'، وسيصلك موعد')+'.'}</p>
+      <ol class="steps">${steps.map(([c,t],k)=>`<li class="${c}"><i>${c==='d'?'✓':k+1}</i><span>${t}</span></li>`).join('')}</ol>
+      ${MODE==='patient'?'<button type="button" class="simbtn" id="simSign">للتجربة: اعتمد الخطة الآن</button>':''}</div>`;
+  }
+  const by=z=>s.items.map((i,ix)=>({i,ix})).filter(o=>!o.i.doctor&&o.i.doses.includes(z));
+  const crit=s.items.filter(i=>i.crit&&!i.doctor&&!i.keep), doc=s.items.filter(i=>(i.doctor||i.esc)&&!i.dd), stopped=s.items.filter(i=>i.stop), keep=s.items.filter(i=>i.keep);
+  const dm=s.items.some(i=>['su','basal','prandial','metformin','sglt2'].includes(i.d.cls));
+  const ac=s.items.some(i=>['doac','warfarin'].includes(i.d.cls));
+  const aed=s.items.some(i=>i.d.cls==='aed');
+  return `<div class="today"><b>اليوم 1 من رمضان</b><span>${CITIES[CFG.city][0]}</span></div>
+   <div class="label">
+    <div class="lbtop"><div class="ph">صيدلية صيامٌ آمن</div><h3>${p.name}</h3><div class="sub"><span>خطة الأدوية لشهر رمضان 1448</span><span>${p.age} سنة</span></div></div>
+    ${['suhoor','iftar','bed'].map(z=>{const L=by(z);if(!L.length) return '';return `<div class="slot ${z}"><h4>${I[z]}${z==='bed'?'قبل النوم':'مع '+SLOT[z]}<span class="tm">${TIME[z]}</span></h4>
+     ${L.map(({i,ix})=>{const k=ix+z;return `<div class="pm" style="${capStyle(i.d)}"><span class="pill"></span><div><b>${i.d.ar}</b><span class="en">${i.d.en}</span>${i.ds==='reduce'?'<span class="adj">جرعة عدّلها طبيبك</span>':''}</div>
+       <button class="chk" role="checkbox" data-take="${k}" aria-checked="${!!s.taken[k]}" aria-label="أخذت ${i.d.ar}">${I.check}</button></div>`}).join('')}</div>`;}).join('')}
+    ${s.clearance==='no'?`<div class="note red"><h5>${I.warn}طبيبك لا ينصح بالصيام ${keep.length?'حتى تنتهي من العلاج':'هذا العام'}</h5><p>استمر على مواعيد أدويتك المعتادة${keep.length?'، ويمكنك الصيام بعد انتهاء العلاج.':'، وناقش البدائل مع طبيبك.'}</p></div>`:''}
+    ${keep.length?`<div class="note doc"><h5>على مواعيدها المعتادة</h5><p>${keep.map(i=>i.d.ar).join('، ')}</p></div>`:''}
+    ${stopped.length?`<div class="note doc"><h5>أوقفها طبيبك خلال رمضان</h5><p>${stopped.map(i=>i.d.ar).join('، ')}</p></div>`:''}
+    ${doc.length?`<div class="note doc"><h5>راجع طبيبك قبل أن تصوم</h5><p>${doc.map(i=>i.d.ar).join('، ')}</p></div>`:''}
+    ${crit.length?`<div class="note red"><h5>${I.warn}لا تترك هذه ولا تضاعفها</h5><p>${crit.map(i=>i.d.ar).join('، ')}. إن نسيت جرعة فلا تأخذ جرعتين معاً، واتصل بالصيدلي.</p></div>`:''}
+    <div class="note sos"><h5>أفطر واتصل فوراً إذا شعرت بـ</h5><ul>${dm?'<li>رجفة أو تعرق أو تشوش، أو سكر أقل من 70</li>':''}<li>دوخة شديدة أو إغماء أو قلة البول</li>${ac?'<li>نزيف غير معتاد أو براز أسود</li>':''}${aed?'<li>نوبة تشنج</li>':''}</ul></div>
+    <div class="lbfoot">اعتمدها ${esc(s.signed.by)}، ${esc(s.signed.at)}. قواعد ${RULESET}</div>
+   </div>`;
+}
+function phFollow(p,s){
+  if(!s.signed) return `<div class="hello"><small>المتابعة</small><h3>${p.name}</h3></div><div class="locked">تبدأ المتابعة بعد وصول خطتك. أول رسالة تصلك في اليوم الثامن من رمضان.</div>`;
+  let html=`<div class="hello"><small>صيدلية صيامٌ آمن</small><h3>المتابعة</h3></div><div class="chat"><span class="daytag">8 رمضان</span>
+   <div class="bub in">السلام عليكم ${p.name}، معك فريق صيامٌ آمن. ثلاثة أسئلة سريعة عن أدويتك في الأسبوع الأول.</div>`;
+  for(const q of FUQ){
+    html+=`<div class="bub in">${q.t}</div>`;
+    if(s.fu[q.k]) html+=`<div class="bub out">${s.fu[q.k]}</div>`;
+    else {html+=`<div class="qr">${['لا','نعم'].map(v=>`<button type="button" data-fu="${q.k}" data-v="${v}">${v}</button>`).join('')}</div>`;break;}
+  }
+  if(FUQ.every(q=>s.fu[q.k])){
+    html+=flagged(p.id)?`<div class="bub in">شكراً لك. سنتصل بك اليوم لمراجعة الخطة معك. إن شعرت بأعراض شديدة فاذهب للطوارئ.</div>`
+      :`<div class="bub in">ممتاز، شكراً لك. استمر على الخطة، وتقبّل الله صيامك.</div>`;
+  }
+  return html+'</div>';
+}
+
+/* ===== Dashboard ===== */
+function vDash(){
+  const rows=PATIENTS.map(p=>({p,t:triage(p.id),s:status(p.id),o:overall(p.id)}));
+  const c={red:0,amber:0,green:0};rows.forEach(r=>c[r.t.lvl]++);
+  const n=rows.length, sent=PATIENTS.filter(p=>per[p.id].signed).length, call=PATIENTS.filter(p=>per[p.id].signed&&flagged(p.id)).length;
+  const saved=rows.filter(r=>r.o.path!=='visit').length;
+  const next={red:'موعد طبيب قبل رمضان',amber:'مراجعة صيدلي',green:'اعتماد سريع وإرسال'};
+  const LVN={red:'أحمر',amber:'برتقالي',green:'أخضر'};
+  return `<section class="dash" aria-label="لوحة المنشأة">
+   <h1>لوحة المنشأة</h1>
+   <div class="stats">
+     <div class="stat"><div class="v" style="color:var(--brand)">${saved} <small>من ${n}</small></div><div class="l">لا يحتاجون زيارة عيادة</div></div>
+     <div class="stat"><div class="v" style="color:var(--amber)">${PATIENTS.filter(x=>!apptInfo(x.id).ok).length}</div><div class="l">يحتاجون تقديم موعد</div></div>
+     <div class="stat"><div class="v">${sent}</div><div class="l">خطط وصلت للمرضى</div></div>
+     <div class="stat"><div class="v" style="color:var(--red)">${call}</div><div class="l">يحتاجون اتصالاً اليوم</div></div>
+     <div class="stat"><div class="v" style="color:var(--suhoor)">${PATIENTS.filter(p=>needsDoctor(p.id)).length}</div><div class="l">بانتظار قرار الطبيب</div></div>
+   </div>
+   <div class="dgrid">
+    <div><h2>قائمة العمل حسب الأولوية</h2><div class="box tw"><table><thead><tr><th>المريض</th><th>التصنيف</th><th>المسار</th><th>الموعد</th><th>الحالة</th><th>الخطوة التالية</th></tr></thead><tbody>
+     ${rows.sort((a,b)=>(b.s.c==='s-call')-(a.s.c==='s-call')||LV[b.t.lvl]-LV[a.t.lvl]).map(r=>`<tr><td><b>${r.p.name}</b></td><td><span class="lvl" style="color:var(--${r.t.lvl==='green'?'brand':r.t.lvl})"><i style="background:currentColor"></i>${LVN[r.t.lvl]}</span></td><td>${PATH[r.o.path]}</td><td>${(()=>{const x=apptInfo(r.p.id);return x.need?(x.ok?fd(x.a):'<span class="st s-wait">'+(x.a?'متأخر: '+fd(x.a):'لا يوجد')+'</span>'):'لا يحتاج';})()}</td><td><span class="st ${r.s.c}">${r.s.t}</span></td><td>${r.s.c==='s-call'?'اتصال اليوم':per[r.p.id].signed?'متابعة اليوم الثامن':next[r.t.lvl]}</td></tr>`).join('')}
+     </tbody></table></div></div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+     <div class="dist"><h2>توزيع الخطورة</h2><p class="dnote">يحدد عدد مواعيد الأطباء وساعات الصيادلة قبل رمضان.</p>
+       <div class="bar" role="img" aria-label="أحمر ${c.red}، برتقالي ${c.amber}، أخضر ${c.green}">${['red','amber','green'].map(k=>c[k]?`<span style="flex-grow:${c[k]};background:var(--${k==='green'?'brand':k})"></span>`:'').join('')}</div>
+       <div class="legend">${['red','amber','green'].map(k=>`<div><i style="background:var(--${k==='green'?'brand':k})"></i>${TRI[k].d}<b>${c[k]}</b></div>`).join('')}</div></div>
+     <div class="measure"><h2>ما سنقيسه في التجربة</h2><ol>
+       <li>عدد زيارات ما قبل رمضان التي تم تجنبها.</li>
+       <li>نسبة من عدّلوا أدويتهم بأنفسهم في رمضان.</li>
+       <li>الجرعات المتروكة أو المضاعفة في متابعة اليوم الثامن.</li>
+       <li>زيارات الطوارئ والتنويم المرتبطة بالأدوية.</li>
+       <li>نسبة مقترحات الإرشاد التي اعتمدها الأطباء دون تعديل.</li></ol>
+       <p class="dnote" style="margin-top:8px">الأرقام أعلاه لخمسة مرضى افتراضيين، وليست نتائج.</p></div>
+    </div>
+   </div>
+  </section>`;
+}
+
+/* ===== Shared store: links every screen and device ===== */
+let DB=null;const queue={};
+function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk};}
+function applyDoc(id,data){
+  const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id);
+  const tab=x.tab;
+  initPatient(p); const y=per[id]; y.tab=tab;
+  if(data){
+    y.answers={...(data.answers||{})};
+    y.extra=Array.isArray(data.extra)?data.extra.filter(e=>Array.isArray(e)&&DRUGS[e[0]]).map(e=>[e[0],+e[1]||1]):[];
+    const items=draftFor(p,y.answers,y.extra);
+    (data.items||[]).forEach((o,ix)=>{const i=items[ix];if(!i||o.k!==i.key)return;i.doses=Array.isArray(o.d)?o.d.slice(0,2):i.doses;i.doctor=!!o.x;i.approved=!!o.a;i.dd=!!o.dd;i.ds=o.ds||null;i.stop=!!o.st;i.keep=!!o.kp;});
+    y.clearance=data.clearance||null;y.items=items;y.signed=data.signed||null;y.fu={...(data.fu||{})};y.taken={...(data.taken||{})};
+    y.path=PATH[data.path]?data.path:null;y.appt=FREE.includes(data.appt)?data.appt:null;y.drOk=!!data.drOk;y.cds=typeof data.cds==='string'?data.cds:null;
+  }
+  if(!prevSigned&&y.signed&&id===S.pid&&MODE!=='pharm'){y.tab='plan';setTimeout(showToast,60);}
+  if(!prevFlag&&y.signed&&flagged(id)&&MODE!=='patient') setTimeout(()=>deskToast(p.name+' أجاب في المتابعة ويحتاج اتصالاً اليوم.'),60);
+}
+function applyCfg(c){
+  const d=CFG0();
+  if(c&&typeof c==='object'){
+    if(MODES[c.mode])d.mode=c.mode; if(CLINICS[c.clinic])d.clinic=c.clinic; if(CITIES[c.city])d.city=c.city;
+    if(c.his==='down')d.his='down'; if(c.sms==='off')d.sms='off';
+    if(c.ovr&&typeof c.ovr==='object')Object.keys(c.ovr).forEach(k=>{const r=Object.values(RULES).find(x=>x.id===k);if(r&&r.alt&&r.alt.some(a=>a[0]===c.ovr[k]))d.ovr[k]=c.ovr[k];});
+    if(Array.isArray(c.log))d.log=c.log.filter(l=>l&&typeof l.t==='string').slice(0,30).map(l=>({t:String(l.t),who:String(l.who||''),what:String(l.what||'')}));
+  }
+  CFG=d;computeTimes();
+}
+function save(id=S.pid){
+  if(!DB){localSave();return;}
+  const body=ser(id);
+  queue[id]=(queue[id]||Promise.resolve()).then(()=>DB.doc('cases/'+id).set(body)).catch(e=>{S.sync=e&&e.code==='invalid_argument'?'readonly':'error';paintSync();});
+}
+function saveCfg(){
+  if(!DB){localSave();return;}
+  const body=JSON.parse(JSON.stringify(CFG));
+  queue.cfg=(queue.cfg||Promise.resolve()).then(()=>DB.doc('config/main').set(body)).catch(e=>{S.sync='error';paintSync();});
+}
+/* same-computer link for downloaded files: tabs share browser storage */
+const LKEY='safefast-demo-v2';
+function localSave(){try{const all={};PATIENTS.forEach(p=>all[p.id]=ser(p.id));localStorage.setItem(LKEY,JSON.stringify({t:Date.now(),cases:all,cfg:CFG}));}catch(_){}}
+function localLoad(raw){try{const o=JSON.parse(raw||localStorage.getItem(LKEY)||'null');if(!o||!o.cases)return false;applyCfg(o.cfg);PATIENTS.forEach(p=>applyDoc(p.id,o.cases[p.id]||null));return true;}catch(_){return false;}}
+try{
+  if(!(window.claude&&claude.use)){
+    if(localLoad()) S.sync='tabs'; else {localSave();S.sync='tabs';}
+    window.addEventListener('storage',e=>{if(e.key!==LKEY||DB)return;localLoad(e.newValue);if(DRAG)render.pending=true;else rerenderKeep();});
+  }
+}catch(_){}
+function paintSync(){
+  const els=document.querySelectorAll('[data-sync]');
+  const t={tabs:'مربوط بنوافذ هذا الكمبيوتر',local:'غير مربوط',connecting:'جارٍ الربط',live:'مربوط مباشرة',stale:'الربط بطيء',readonly:'عرض فقط',error:'تعذّر الحفظ'}[S.sync];
+  els.forEach(el=>{el.dataset.s=S.sync;el.querySelector('span').textContent=t;});
+}
+function showToast(){const t=$('#toast');if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3400);}}
+function deskToast(msg){const t=$('#dtoast');if(!t)return;t.querySelector('span').textContent=msg;t.classList.add('show');clearTimeout(deskToast.h);deskToast.h=setTimeout(()=>t.classList.remove('show'),5000);}
+function resetDemo(){CFG=CFG0();computeTimes();PATIENTS.forEach(initPatient);seedDemo();PATIENTS.forEach(p=>save(p.id));saveCfg();S.pick=null;render();}
+/* independent hosting: Firebase Firestore, docs stored as JSON text */
+function fbAdapter(fs){
+  const enc=o=>({j:JSON.stringify(o),t:Date.now()});
+  const dec=d=>{const x=d.data();try{return x&&typeof x.j==='string'?JSON.parse(x.j):(x||null);}catch(_){return null;}};
+  return {doc:p=>({set:b=>fs.doc(p).set(enc(b))}),
+    collection:c=>({onSnapshot:(ok,err)=>fs.collection(c).onSnapshot({includeMetadataChanges:true},s=>ok({metadata:s.metadata,docs:s.docs.map(d=>({id:d.id,data:()=>dec(d)}))}),err)})};
+}
+(async()=>{
+  try{ let db=null;
+    if(window.SF_FIREBASE&&window.firebase&&firebase.firestore){
+      if(!firebase.apps.length) firebase.initializeApp(window.SF_FIREBASE);
+      db=fbAdapter(firebase.firestore());
+    } else if(window.claude&&claude.use){ db=await claude.use('db'); }
+    if(!db) return;
+    DB=db;S.sync='connecting';paintSync();
+    const timer=setTimeout(()=>{if(S.sync==='connecting'){S.sync='stale';paintSync();}},10000);
+    const redraw=()=>{if(DRAG){render.pending=true;} else rerenderKeep();paintSync();};
+    db.collection('config').onSnapshot(snap=>{const d=snap.docs.find(x=>x.id==='main');applyCfg(d?d.data():null);
+      PATIENTS.forEach(p=>{const x=per[p.id];x.items.forEach(i=>{if(!i.approved&&!i.dd&&!i.doctor&&i.r.alt&&i.f===1&&!x.signed)i.doses=planFor(i.r,i.f);});});redraw();},()=>{});
+    db.collection('cases').onSnapshot(snap=>{
+      if(!snap.metadata.fromCache){clearTimeout(timer);if(S.sync!=='readonly'&&S.sync!=='error')S.sync='live';}
+      const have={};snap.docs.forEach(d=>{have[d.id]=d.data();});
+      PATIENTS.forEach(p=>applyDoc(p.id,have[p.id]||null));
+      redraw();
+    },e=>{clearTimeout(timer);S.sync='error';paintSync();});
+  }catch(_){}
+})();
+
+/* ===== Render & events ===== */
+function render(){
+  document.body.dataset.pane=S.pane;document.body.classList.toggle('m-patient',MODE==='patient');document.body.classList.toggle('m-pharm',MODE==='pharm');
+  if(MODE==='patient'){$('#shell').innerHTML=vPhone();bind();paintSync();return;}
+  if(CFG.mode==='pharmacy'&&(S.view==='doctor'||S.view==='ehr')) S.view='clinic';
+  $('#vDoctor').hidden=CFG.mode==='pharmacy';$('#vEhr').hidden=CFG.mode==='pharmacy';
+  $('#vClinic').textContent=CFG.mode==='doctor'?'الخطة':'الصيدلي';
+  [['vClinic','clinic'],['vDoctor','doctor'],['vEhr','ehr'],['vDash','dash'],['vSet','set']].forEach(([b,v])=>$('#'+b).setAttribute('aria-pressed',S.view===v));
+  document.body.dataset.view=S.view;
+  let html;
+  if(S.view==='dash') html=vDash();
+  else if(S.view==='set') html=vSettings();
+  else if(S.view==='ehr') html=vQueue()+vEhr();
+  else {const main=S.view==='doctor'?vDoctor():vWork();html=vQueue()+main+(MODE==='pharm'?'':vPhone());}
+  $('#shell').innerHTML=html;
+  bind();paintSync();
+}
+function rerenderKeep(){const a=$('#app');const y=a?a.scrollTop:0;const w=window.scrollY;render();const b=$('#app');if(b)b.scrollTop=y;window.scrollTo(0,w);}
+function invalidate(ix){const s=st();if(ix!=null) s.items[ix].approved=false;s.signed=null;s.drOk=false;s.fu={};s.taken={};}
+function setSlot(ix,v){const i=st().items[ix];
+  if(v==='doctor'){i.doctor=true;i.doses=[];i.dd=false;i.stop=false;i.keep=false;} else {i.doctor=false;i.doses=v.split('+');}
+  invalidate(ix);}
+function bind(){
+  document.querySelectorAll('[data-pid]').forEach(b=>b.onclick=()=>{S.dd=null;S.pid=b.dataset.pid||b.dataset.v;S.pick=null;S.why=false;S.open=-1;S.idf=false;render();});
+  document.querySelectorAll('[data-clr]').forEach(b=>b.onclick=()=>{const s=st();S.dd=null;s.clearance=b.dataset.v||b.dataset.clr;s.signed=null;save();render();});
+  document.querySelectorAll('[data-dr]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.dr],v=b.dataset.v;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
+    if(v==='stop'){i.stop=true;i.doses=[];}else if(v==='keep'){i.keep=true;i.doses=[];}else{i.doses=v.split('+');i.ds=i.ds||'same';}i.approved=false;invalidate();save();render();});
+  document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.ds];i.ds=b.dataset.v;i.approved=false;invalidate();save();render();});
+  document.querySelectorAll('[data-sug]').forEach(b=>b.onclick=()=>{applySug(st().items[+b.dataset.sug]);invalidate();save();render();});
+  document.querySelectorAll('[data-path]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st(),o=overall(S.pid);s.path=b.dataset.v===o.auto?null:b.dataset.v;save();render();});
+  const wb=$('#whyBtn');if(wb) wb.onclick=()=>{S.why=!S.why;render();};
+  const ib=$('#idfBtn');if(ib) ib.onclick=()=>{S.idf=!S.idf;render();};
+  const jb=$('#jsonBtn');if(jb) jb.onclick=()=>{S.json=!S.json;render();};
+  document.querySelectorAll('[data-ddt]').forEach(b=>b.onclick=e=>{e.stopPropagation();S.dd=S.dd===b.dataset.ddt?null:b.dataset.ddt;render();const m=document.querySelector('.ddm [aria-selected="true"]')||document.querySelector('.ddm button');m&&m.focus();});
+  document.querySelectorAll('[data-pane]').forEach(b=>b.onclick=()=>{S.pane=b.dataset.pane;render();});
+  document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{S.dd=null;setSlot(+b.dataset.set,b.dataset.v);S.pick=null;save();render();});
+  document.querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>{const i=st().items[+b.dataset.ap];i.approved=!i.approved;if(!i.approved)invalidate();save();render();});
+  const ap=$('#apAll');if(ap) ap.onclick=()=>{st().items.forEach(i=>i.approved=true);save();render();};
+  const sim=$('#simSign');if(sim) sim.onclick=()=>{st().items.forEach(i=>i.approved=true);const s=st();s.drOk=true;s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();showToast();};
+  const ds=$('#drSign');if(ds) ds.onclick=()=>{const s=st();s.drOk=true;save();deskToast('اعتمدت خطة '+P().name+'، وانتقلت للصيدلي.');render();};
+  const sg=$('#sign');if(sg) sg.onclick=()=>{const s=st();s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();if(MODE!=='pharm')showToast();};
+  // manual medicine entry while the hospital link is down
+  document.querySelectorAll('[data-addk]').forEach(b=>b.onclick=()=>{S.dd=null;S.addK=b.dataset.v;render();});
+  document.querySelectorAll('[data-addf]').forEach(b=>b.onclick=()=>{S.dd=null;S.addF=b.dataset.v;render();});
+  const am=$('#addMed');if(am) am.onclick=()=>{const s=st();s.extra.push([S.addK,+S.addF]);s.items.push(makeItem(S.addK,+S.addF));
+    deskToast(S.addK==='other'?'أضيف الدواء وأُحيل للطبيب تلقائياً لأنه غير موجود في المكتبة.':'أضيف '+DRUGS[S.addK].ar+' بتوقيت حسب القواعد.');S.addK=null;S.addF=null;invalidate();save();render();};
+  // CDS card inside the hospital system
+  document.querySelectorAll('[data-cds]').forEach(b=>b.onclick=()=>{const s=st(),a=b.dataset.cds;
+    if(a==='open'){S.view='doctor';render();window.scrollTo(0,0);return;}
+    if(a==='undo'){s.cds=null;save();render();return;}
+    if(a==='accept'){let n=0;s.items.forEach(i=>{if((i.esc||i.doctor)&&!i.dd&&applySug(i))n++;});
+      const o=overall(S.pid);if(!s.clearance){if(s.items.some(i=>i.keep))s.clearance='no';else if(o.path!=='visit')s.clearance='yes';}
+      s.cds='accepted';invalidate();if(drReady(S.pid))s.drOk=true;save();logCfg('د. سعد (من نظام المستشفى)','اعتمد '+n+' من مقترحات الإرشاد لـ '+P().name);saveCfg();render();}});
+  document.querySelectorAll('[data-book]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st();s.appt=b.dataset.v;save();logCfg('د. سعد','حجز موعداً لـ '+P().name+' في '+fd(b.dataset.v)+' (appointment-book)');saveCfg();deskToast('حُجز موعد '+P().name+' في '+fd(b.dataset.v)+'، ووصل إشعار للمريض.');render();});
+  document.querySelectorAll('[data-dis]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st();s.cds='dismissed:'+b.dataset.v;save();logCfg('د. سعد (من نظام المستشفى)','أخفى بطاقة '+P().name+': '+b.dataset.v);saveCfg();render();});
+  // settings
+  document.querySelectorAll('[data-cfg]').forEach(b=>b.onclick=()=>{S.dd=null;const k=b.dataset.cfg,v=b.dataset.v;if(CFG[k]===v){render();return;}
+    const names={mode:['طريقة التشغيل',MODES],clinic:['نوع العيادة',Object.fromEntries(Object.entries(CLINICS).map(([a,c])=>[a,c.n]))],city:['المدينة',Object.fromEntries(Object.entries(CITIES).map(([a,c])=>[a,c[0]]))],his:['الربط مع النظام',{up:'يعمل',down:'منقطع'}],sms:['الرسالة النصية',{on:'مفعّلة',off:'موقفة'}]}[k];
+    CFG[k]=v;if(k==='city')computeTimes();logCfg('مدير النظام (تجريبي)',names[0]+': '+names[1][v]);saveCfg();render();});
+  const reapply=id=>{PATIENTS.forEach(p=>{const x=per[p.id];if(x.signed)return;let ch=false;x.items.forEach(i=>{if(i.r.id===id&&!i.approved&&!i.dd&&!i.doctor&&i.f===1){i.doses=planFor(i.r,i.f);ch=true;}});if(ch)save(p.id);});};
+  document.querySelectorAll('[data-ovr]').forEach(b=>b.onclick=()=>{S.dd=null;const id=b.dataset.ovr,r=Object.values(RULES).find(x=>x.id===id),v=b.dataset.v;
+    if(r.plan(1)[0]===v)delete CFG.ovr[id];else CFG.ovr[id]=v;logCfg('د. سعد (بروتوكول العيادة)',r.name+': '+(r.alt.find(a=>a[0]===v)||[,''])[1]);reapply(id);saveCfg();render();});
+  document.querySelectorAll('[data-rst]').forEach(b=>b.onclick=()=>{const id=b.dataset.rst,r=Object.values(RULES).find(x=>x.id===id);delete CFG.ovr[id];logCfg('د. سعد (بروتوكول العيادة)',r.name+': إرجاع للإرشاد');reapply(id);saveCfg();render();});
+  document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{st().tab=b.dataset.tab;render();});
+  document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const s=st();s.answers[b.dataset.q]=!s.answers[b.dataset.q];
+    s.items.forEach(i=>i.approved=false);invalidate();save();rerenderKeep();});
+  document.querySelectorAll('[data-fu]').forEach(b=>b.onclick=()=>{st().fu[b.dataset.fu]=b.dataset.v;save();rerenderKeep();});
+  document.querySelectorAll('[data-take]').forEach(b=>b.onclick=()=>{const s=st();s.taken[b.dataset.take]=!s.taken[b.dataset.take];save();rerenderKeep();});
+  // move medicines: pointer drag (mouse + touch) or tap-then-tap
+  const moveTo=(ix,di,zone)=>{const i=st().items[ix];
+    if(zone==='doctor'){if(i.doctor)return;i.doctor=true;i.doses=[];i.dd=false;i.stop=false;i.keep=false;}
+    else if(i.doctor){i.doctor=false;i.doses=[zone];}
+    else {if(i.doses[di]===zone)return;i.doses[di]=zone;}
+    invalidate(ix);save();};
+  const zoneAt=(x,y)=>{const el=document.elementFromPoint(x,y);return el&&el.closest('[data-zone]');};
+  document.querySelectorAll('.tok').forEach(t=>{
+    const ix=+t.dataset.ix, di=+t.dataset.di;
+    t.addEventListener('pointerdown',e=>{
+      if(e.button!==0)return; e.preventDefault();
+      const sx=e.clientX, sy=e.clientY; let ghost=null, over=null;
+      try{t.setPointerCapture(e.pointerId);}catch(_){}
+      const mv=ev=>{
+        if(!ghost&&Math.hypot(ev.clientX-sx,ev.clientY-sy)>6){ghost=t.cloneNode(true);ghost.classList.add('dragghost');ghost.style.width=t.offsetWidth+'px';document.body.appendChild(ghost);t.classList.add('dragging');DRAG=true;}
+        if(ghost){ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';
+          const z=zoneAt(ev.clientX,ev.clientY);if(z!==over){over&&over.classList.remove('over');over=z;over&&over.classList.add('over');}}
+      };
+      const up=ev=>{t.removeEventListener('pointermove',mv);t.removeEventListener('pointerup',up);t.removeEventListener('pointercancel',up);
+        DRAG=false;if(ghost){ghost.remove();const z=zoneAt(ev.clientX,ev.clientY);if(z&&ev.type==='pointerup')moveTo(ix,di,z.dataset.zone);S.pick=null;render();}
+        else if(ev.type==='pointerup'){S.pick=(S.pick&&S.pick.ix===ix&&S.pick.di===di)?null:{ix,di};render();}
+      };
+      t.addEventListener('pointermove',mv);t.addEventListener('pointerup',up);t.addEventListener('pointercancel',up);
+    });
+    t.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();S.pick=(S.pick&&S.pick.ix===ix&&S.pick.di===di)?null:{ix,di};render();
+      const n=document.querySelector('.comp[data-zone]');n&&n.focus();}});
+  });
+  document.querySelectorAll('[data-zone]').forEach(z=>{
+    z.tabIndex=S.pick?0:-1;
+    const go=()=>{if(!S.pick)return;moveTo(S.pick.ix,S.pick.di,z.dataset.zone);S.pick=null;render();};
+    z.addEventListener('click',e=>{if(e.target.closest('.tok'))return;go();});
+    z.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+  });
+}
+$('#reset').onclick=()=>{const b=$('#reset');if(b.dataset.c){delete b.dataset.c;resetDemo();deskToast('أُعيدت التجربة إلى البداية على كل الأجهزة.');}else{b.dataset.c=1;deskToast('اضغط زر الإعادة مرة ثانية للتأكيد. سيُعاد كل المرضى والإعدادات إلى البداية.');setTimeout(()=>delete b.dataset.c,4000);}};
+document.addEventListener('click',e=>{if(S.dd&&!e.target.closest('.dd')){S.dd=null;render();}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.dd){const id=S.dd;S.dd=null;render();const b=document.querySelector(`[data-ddt="${id}"]`);b&&b.focus();}});
+$('#vClinic').onclick=()=>{S.view='clinic';render();};
+$('#vDoctor').onclick=()=>{S.view='doctor';render();};
+$('#vEhr').onclick=()=>{S.view='ehr';render();};
+$('#vDash').onclick=()=>{S.view='dash';render();};
+$('#vSet').onclick=()=>{S.view='set';render();};
+(function(){const r=document.documentElement,b=$('#theme');
+  const dark=()=>r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  b.onclick=()=>{r.dataset.theme=dark()?'light':'dark';};})();
+render();
+</script>
+
+</body>
+</html>
