@@ -229,7 +229,7 @@ p{margin:0}
 .hello small{display:block;font-size:.78rem;color:var(--muted)}
 .hello h3{font-family:var(--f-display);font-size:1.5rem;font-weight:800}
 .lead{font-size:.88rem;color:var(--muted);margin-bottom:12px}
-.ptabs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);background:var(--surface);padding:7px 6px 16px}
+.ptabs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);background:var(--surface);padding:7px 6px 16px}
 .ptabs button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;color:var(--faint);padding:4px 0;position:relative}
 .ptabs button svg{width:21px;height:21px}
 .ptabs button[aria-selected="true"]{color:var(--brand);font-weight:700}
@@ -306,6 +306,24 @@ p{margin:0}
 .bub.in{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-start-start-radius:5px}
 .bub.out{align-self:flex-end;background:var(--brand);color:var(--brand-ink);border-start-end-radius:5px}
 .qr{display:flex;gap:8px;align-self:flex-end}
+.bub time{display:block;font-size:.68rem;opacity:.7;margin-top:2px}
+.bub.sys{align-self:stretch;max-width:none;background:var(--well);border:1px dashed var(--line2);color:var(--muted);font-size:.8rem}
+.drcard{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.drcard .av{flex:none;width:46px;height:46px;border-radius:50%;background:var(--brand-soft);color:var(--brand-deep);display:grid;place-items:center;font-weight:800;font-size:1.15rem}
+.drcard b{display:block;font-size:.98rem}.drcard span{display:block;font-size:.8rem;color:var(--muted);line-height:1.5}
+.drinfo{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+.drinfo div{display:flex;justify-content:space-between;gap:10px;padding:9px 14px;font-size:.84rem}
+.drinfo div+div{border-top:1px solid var(--line)}.drinfo span{color:var(--muted)}
+.callbtn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border:1px solid var(--line2);border-radius:12px;color:var(--brand);font-weight:700;font-size:.88rem;text-decoration:none;margin-bottom:6px}
+.callbtn svg{width:18px;height:18px}
+.msgbox{display:flex;gap:8px;align-items:center;margin-top:10px}
+.msgbox input{flex:1;min-width:0;font:inherit;font-size:.9rem;padding:10px 14px;border:1px solid var(--line2);border-radius:22px;background:var(--surface);color:var(--ink)}
+.msgbox input:focus{outline:2px solid var(--focus);outline-offset:1px}
+.msgbox button{all:unset;cursor:pointer;flex:none;width:40px;height:40px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center}
+.msgbox button svg{width:19px;height:19px}.msgbox button:disabled{opacity:.4;cursor:default}
+.box.msgs .thread{max-height:340px;overflow:auto;padding:4px 20px 8px}
+.box.msgs .mfoot{padding:0 20px 16px}.box.msgs .mfoot .msgbox{margin-top:6px}
+.box.msgs .none{color:var(--muted);font-size:.86rem;padding:4px 0 8px}
 .qr button{border:1.5px solid var(--brand);background:var(--surface);color:var(--brand);border-radius:999px;padding:6px 22px;font-weight:700}
 .qr button:hover{background:var(--brand);color:var(--brand-ink)}
 .locked{font-size:.86rem;color:var(--muted);padding:14px;border:1px dashed var(--line2);border-radius:12px}
@@ -533,7 +551,7 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
 
 <main class="shell" id="shell"></main>
 <footer class="foot">
-  <span>نموذج أولي لتحدي الابتكار الصحي المفتوح، ملتقى الابتكار والتحول في العلوم الصحية 2027.</span>
+  <span>مشاركة في ريادة ثون، ملتقى الابتكار والتحول في العلوم الصحية 2027.</span>
   <span>المرضى افتراضيون، والقواعد الدوائية أمثلة توضيحية بانتظار مراجعة صيدلي سريري. لا يُستخدم لتعديل دواء حقيقي.</span>
 </footer>
 
@@ -622,13 +640,15 @@ const PATIENTS=[
   {id:'P5',name:'سلمان',age:45,sex:'ذكر',dx:['رجفان أذيني','التهاب حلق بكتيري حالي'],meds:[['warfarin',1],['amoxicillin',3],['bisoprolol',1]],ans:{},
    cl:{mrn:'100611',appt:'2026-11-18',egfr:95,cv:'af',acute:'التهاب حلق بكتيري',labs:[['INR','2.6'],['eGFR','95']]}}
 ];
+const DOCTOR={name:'د. سعد المطيري',short:'د. سعد',role:'طبيب أسرة',clinic:'عيادة طب الأسرة',place:'مركز الرعاية الأولية (بيانات افتراضية)',phone:'0110000000',phoneTxt:'011 000 0000',hours:'الأحد إلى الخميس، 8 ص إلى 4 م'};
+const QREPLIES=['استمر على خطتك كما هي، وتقبّل الله صيامك.','إذا نسيت جرعة فلا تضاعفها، خذ الجرعة التالية في وقتها.','أفطر الآن وقِس السكر، واتصل بالعيادة إذا كان أقل من 70.','سأتصل بك اليوم لمراجعة أدويتك.','راجع الصيدلي ليشرح لك الخطة مرة ثانية.'];
 const FUQ=[{k:'miss',t:'هل تركت أي جرعة من أدويتك منذ بداية رمضان؟'},{k:'dbl',t:'هل أخذت جرعتين معاً في وقت واحد؟'},{k:'sym',t:'هل شعرت بدوخة أو رجفة أو تعرق شديد أثناء الصيام؟'}];
 
 /* ===== Configuration (shared across devices): mode, clinic, city, resilience, local protocol ===== */
 const CITIES={riyadh:['الرياض',24.71,46.68],kharj:['الخرج',24.15,47.31],jeddah:['جدة',21.49,39.19],makkah:['مكة المكرمة',21.42,39.83],madinah:['المدينة المنورة',24.47,39.61],dammam:['الدمام',26.43,50.10],abha:['أبها',18.22,42.50],tabuk:['تبوك',28.38,36.57]};
 const CLINICS={fm:{n:'طب الأسرة: كل الأدوات',k:['dm','cv','renal','epi','preg','acute','other']},endo:{n:'الغدد والسكري',k:['dm','preg']},cardio:{n:'القلب',k:['cv']},nephro:{n:'الكلى',k:['renal']},neuro:{n:'الأعصاب',k:['epi']}};
 const MODES={team:'الطبيب يعتمد والصيدلي يراجع',doctor:'طبيب وحده',pharmacy:'صيدلية مجتمع: توقيت فقط'};
-const CFG0=()=>({v:1,mode:'team',clinic:'fm',city:'riyadh',his:'up',sms:'on',ovr:{},log:[]});
+const CFG0=()=>({v:1,mode:'team',clinic:'fm',city:'riyadh',his:'up',sms:'on',ovr:{},log:[],msgEpoch:0});
 let CFG=CFG0();
 const RAMADAN_START=Date.UTC(2027,1,8); // expected 1 Ramadan 1448, subject to moon sighting
 function sunTimes(lat,lon,t){
@@ -663,7 +683,7 @@ seedDemo();
 const modeFromHash=()=>location.hash==='#patient'?'patient':(location.hash==='#pharmacist'||location.hash==='#doctor')?'pharm':'all';
 let MODE=window.SF_MODE||modeFromHash();
 window.addEventListener('hashchange',()=>{if(!window.SF_MODE){MODE=modeFromHash();if(location.hash==='#doctor')S.view='doctor';else if(location.hash==='#pharmacist')S.view='clinic';render();}});
-const S={dd:null,why:false,open:-1,pid:'P1',view:'clinic',pane:'pharm',pick:null,sync:'local',idf:false,json:false,addK:null,addF:null};let DRAG=false;if(location.hash==='#doctor'||window.SF_VIEW==='doctor')S.view='doctor';
+const S={draft:{pt:'',dr:''},dd:null,why:false,open:-1,pid:'P1',view:'clinic',pane:'pharm',pick:null,sync:'local',idf:false,json:false,addK:null,addF:null};let DRAG=false;if(location.hash==='#doctor'||window.SF_VIEW==='doctor')S.view='doctor';
 const P=()=>PATIENTS.find(p=>p.id===S.pid);
 const PP=id=>PATIENTS.find(p=>p.id===id);
 const st=(id=S.pid)=>per[id];
@@ -799,6 +819,7 @@ const I={
   iftar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 6.5v2.5M5.8 9.8l1.6 1.6M18.2 9.8l-1.6 1.6"/></svg>',
   bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19v-9M3 15h18v4M7 12.5h6a3 3 0 0 1 3 3"/></svg>',
   send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4L3 11l7 2.5L12.5 21z"/><path d="M20 4l-10 9.5"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M12 14v3M10.5 15.5h3"/></svg>',
   plug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg>'
 };
 const capStyle=d=>`--c1:${d.c[0]};--c2:${d.c[1]}`;
@@ -806,12 +827,12 @@ const capStyle=d=>`--c1:${d.c[0]};--c2:${d.c[1]}`;
 /* ===== Patient list ===== */
 function clinicMatch(id){if(CFG.clinic==='fm')return true;const k=CLINICS[CFG.clinic].k;
   return risks(id).some(r=>k.includes(r.k)&&r.cat!=='low')||per[id].items.some(i=>(i.esc||i.doctor||i.dd)&&(k.includes(i.r.dom)||i.r.dom==='any'));}
-function docList(){return PATIENTS.filter(p=>doctorCase(p.id)&&clinicMatch(p.id));}
+function docList(){return PATIENTS.filter(p=>(doctorCase(p.id)&&clinicMatch(p.id))||msgsOf(p.id).length);}
 function vQueue(){
   const doc=S.view==='doctor', list=doc?docList():PATIENTS;
   return `<aside class="queue" aria-label="قائمة المرضى"><div class="qh"><h2>${doc?'محالون إليك':S.view==='ehr'?'مواعيد العيادة':'مرضى هذا الأسبوع'}</h2><span class="qn">${list.length}</span></div><div class="qlist">${list.map(p=>{
     const s=doc?drStatus(p.id):status(p.id), o=overall(p.id);
-    const sub=S.view==='ehr'?`<span>رقم الملف ${p.cl.mrn}</span>`:`<span>${p.age} سنة، ${medsOf(p.id).length} أدوية</span><span class="st ${s.c}">${s.t}</span>`;
+    const sub=S.view==='ehr'?`<span>رقم الملف ${p.cl.mrn}</span>`:`<span>${p.age} سنة، ${medsOf(p.id).length} أدوية</span><span class="st ${s.c}">${s.t}</span>${doc&&unread(p.id,'dr')?'<span class="st s-wait">رسالة جديدة</span>':''}`;
     return `<button class="qitem" data-pid="${p.id}" aria-current="${p.id===S.pid}"><span class="qname">${p.name}</span><span class="qsub">${sub}</span></button>`;}).join('')||'<p class="none">لا يوجد مرضى لهذه العيادة.</p>'}</div>
     </aside>`;
 }
@@ -930,6 +951,7 @@ function vDoctor(){
    </div>`:''}
    ${planBox(p.id)}
    ${CFG.mode==='team'?`<div class="box drsign">${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض</span>`:s.drOk?`<span class="signed">${I.check}اعتمدت الخطة، وانتقلت للصيدلي ليراجعها ويشرحها للمريض</span>`:`<span class="cnt">${drReady(p.id)?'الخطة جاهزة لاعتمادك.':'قرّر في الأدوية المحالة'+(redQ(p.id)&&!s.clearance?' وفي الصيام':'')+' أولاً.'}</span><button class="btn" type="button" id="drSign" ${drReady(p.id)?'':'disabled'}>${I.check}اعتمد الخطة كاملة</button>`}</div>`:''}`:'<div class="box ask"><h2>لا يوجد مرضى محالون لعيادتك</h2><p class="meta">غيّر نوع العيادة من الإعدادات لترى بقية المرضى.</p></div>'}
+   ${list.length?msgBox(p):''}
   </section>`;
 }
 
@@ -1017,7 +1039,8 @@ function vSettings(){
 /* ===== Phone (patient side) ===== */
 function vPhone(){
   const p=P(), s=st(), tab=s.tab;
-  const body=tab==='intake'?phIntake(p,s):tab==='plan'?phPlan(p,s):phFollow(p,s);
+  const body=tab==='intake'?phIntake(p,s):tab==='plan'?phPlan(p,s):tab==='doctor'?phDoctor(p,s):phFollow(p,s);
+  const ur=unread(p.id,'pt');
   const badge=s.signed&&!FUQ.every(q=>s.fu[q.k]);
   return `<div class="phonecol"><div class="phone"><div class="screen">
     <div class="notch" aria-hidden="true"></div>
@@ -1025,7 +1048,7 @@ function vPhone(){
     <div class="toast" id="toast" role="status"><span class="ico">${I.plan}</span><div><b>صيامٌ آمن</b><div>وصلت خطة أدويتك لرمضان، اعتمدها ${CFG.mode==='doctor'?'طبيبك':'الصيدلي'}.</div></div></div>
     <div class="app" id="app">${MODE==='patient'?`<div class="demo"><div class="sync" data-sync data-s="${S.sync}"><i></i><span></span></div><span>حساب تجريبي</span>${dd('pt',PATIENTS.map(x=>[x.id,x.name]),S.pid,'data-pid','','mini')}</div>`:''}${body}</div>
     <nav class="ptabs" role="tablist" aria-label="تطبيق المريض">
-      ${[['intake','أسئلتي',I.list],['plan','خطتي',I.plan],['follow','المتابعة',I.chat]].map(([k,l,ic])=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${ic}<span>${l}</span>${k==='follow'&&badge?'<span class="badge"></span>':''}</button>`).join('')}
+      ${[['intake','أسئلتي',I.list],['plan','خطتي',I.plan],['follow','المتابعة',I.chat],['doctor','طبيبي',I.doc]].map(([k,l,ic])=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${ic}<span>${l}</span>${(k==='follow'&&badge)||(k==='doctor'&&ur&&tab!=='doctor')?'<span class="badge"></span>':''}</button>`).join('')}
     </nav></div></div>
     <p class="phonecap">جوال ${p.name}، يتحدّث مع كل تعديل</p></div>`;
 }
@@ -1067,6 +1090,27 @@ function phPlan(p,s){
     <div class="note sos"><h5>أفطر واتصل فوراً إذا شعرت بـ</h5><ul>${dm?'<li>رجفة أو تعرق أو تشوش، أو سكر أقل من 70</li>':''}<li>دوخة شديدة أو إغماء أو قلة البول</li>${ac?'<li>نزيف غير معتاد أو براز أسود</li>':''}${aed?'<li>نوبة تشنج</li>':''}</ul></div>
     <div class="lbfoot">اعتمدها ${esc(s.signed.by)}، ${esc(s.signed.at)}. قواعد ${RULESET}</div>
    </div>`;
+}
+function phDoctor(p,s){
+  const L=msgsOf(p.id), a=per[p.id].appt||p.cl.appt;
+  return `<div class="hello"><small>${p.name}</small><h3>طبيبي</h3></div>
+   <div class="drcard"><div class="av" aria-hidden="true">${DOCTOR.short.replace('د. ','').charAt(0)}</div><div><b>${DOCTOR.name}</b><span>${DOCTOR.role}، ${DOCTOR.clinic}</span><span>${DOCTOR.place}</span></div></div>
+   <div class="drinfo"><div><span>موعدك القادم</span><b>${a?fd(a):'لا يوجد موعد'}</b></div><div><span>أوقات الرد</span><b>${DOCTOR.hours}</b></div></div>
+   <a class="callbtn" href="tel:${DOCTOR.phone}">${I.phone}اتصال بالعيادة ${DOCTOR.phoneTxt}</a>
+   <div class="sec">الرسائل</div>
+   <div class="chat thread">
+    <div class="bub sys">اكتب لطبيبك أي سؤال عن أدويتك أو صيامك، ويرد خلال يوم عمل. في الحالات الطارئة اتصل على 997.</div>
+    ${L.map(m=>`<div class="bub ${m.from==='pt'?'out':'in'}">${esc(m.t)}<time>${msgTime(m.at)}</time></div>`).join('')}
+   </div>
+   <form class="msgbox" data-msgform="pt"><input data-msgin="pt" type="text" maxlength="600" autocomplete="off" placeholder="اكتب رسالتك لطبيبك" value="${esc(S.draft.pt||'')}" aria-label="رسالة لطبيبك"><button type="submit" aria-label="إرسال">${I.send}</button></form>`;
+}
+function msgBox(p){
+  const L=msgsOf(p.id);
+  return `<div class="box msgs"><div class="lhead"><h2>الرسائل مع ${p.name}</h2><span>${L.length}</span></div>
+   <div class="chat thread">${L.length?L.map(m=>`<div class="bub ${m.from==='dr'?'out':'in'}">${esc(m.t)}<time>${m.from==='dr'?'أنت':p.name}، ${msgTime(m.at)}</time></div>`).join(''):'<p class="none">لا توجد رسائل بعد. يرى المريض اسمك وعيادتك في تطبيقه، ويقدر يراسلك من هناك.</p>'}</div>
+   <div class="mfoot">${dd('qrep',QREPLIES.map((t,i)=>[String(i),t]),'','data-qrep','ردود جاهزة')}
+   <form class="msgbox" data-msgform="dr"><input data-msgin="dr" type="text" maxlength="600" autocomplete="off" placeholder="اكتب ردك على ${p.name}" value="${esc(S.draft.dr||'')}" aria-label="رسالة للمريض"><button type="submit" aria-label="إرسال">${I.send}</button></form></div>
+  </div>`;
 }
 function phFollow(p,s){
   if(!s.signed) return `<div class="hello"><small>المتابعة</small><h3>${p.name}</h3></div><div class="locked">تبدأ المتابعة بعد وصول خطتك. أول رسالة تصلك في اليوم الثامن من رمضان.</div>`;
@@ -1121,6 +1165,32 @@ function vDash(){
   </section>`;
 }
 
+/* ===== Messages between patient and doctor (one doc per message, so nothing is overwritten) ===== */
+let MSGS=[];const MSGIDS=new Set();let msgPrimed=false;
+const PIDS=()=>PATIENTS.map(p=>p.id);
+function cleanMsg(id,m){if(!m||typeof m!=='object')return null;if(!PIDS().includes(m.pid)||!['pt','dr'].includes(m.from)||typeof m.t!=='string'||typeof m.at!=='number')return null;
+  return {id,pid:m.pid,from:m.from,t:m.t.slice(0,600),at:m.at};}
+function msgsOf(pid){return MSGS.filter(m=>m.pid===pid&&m.at>(CFG.msgEpoch||0)).sort((a,b)=>a.at-b.at);}
+const SEENK='safefast-seen';
+function seenGet(){try{return JSON.parse(localStorage.getItem(SEENK)||'{}')||{};}catch(_){return {};}}
+function unread(pid,role){const t=seenGet()[pid+role]||0;return msgsOf(pid).filter(m=>m.from!==role&&m.at>t).length;}
+function markSeen(pid,role){const L=msgsOf(pid);if(!L.length)return;const last=L[L.length-1].at;const o=seenGet();if((o[pid+role]||0)>=last)return;o[pid+role]=last;try{localStorage.setItem(SEENK,JSON.stringify(o));}catch(_){}}
+const msgTime=t=>new Date(t).toLocaleTimeString('ar-SA-u-nu-latn',{hour:'numeric',minute:'2-digit'});
+function takeMsgs(list,silent){
+  const fresh=[];
+  list.forEach(([id,d])=>{const m=cleanMsg(id,d);if(!m)return;if(!MSGIDS.has(id)){MSGIDS.add(id);MSGS.push(m);fresh.push(m);}});
+  if(silent||!msgPrimed){msgPrimed=true;return;}
+  fresh.filter(m=>m.at>(CFG.msgEpoch||0)).forEach(m=>{const n=PP(m.pid).name;
+    if(m.from==='pt'&&MODE!=='patient') setTimeout(()=>deskToast('رسالة جديدة من '+n+': '+m.t.slice(0,60)),60);
+    if(m.from==='dr'&&MODE!=='pharm'&&m.pid===S.pid) setTimeout(()=>showToast(DOCTOR.short+': '+m.t.slice(0,70)),60);});
+}
+function sendMsg(pid,from,text){
+  text=String(text||'').trim().slice(0,600);if(!text)return;
+  const at=Date.now(),id='m_'+pid+'_'+at.toString(36)+Math.random().toString(36).slice(2,6);
+  const m={pid,from,t:text,at};MSGIDS.add(id);MSGS.push({id,...m});markSeen(pid,from);
+  if(DB){queue[id]=Promise.resolve().then(()=>DB.doc('cases/'+id).set(m)).catch(()=>{S.sync='error';paintSync();});} else localSave();
+}
+
 /* ===== Shared store: links every screen and device ===== */
 let DB=null;const queue={};
 function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk};}
@@ -1143,7 +1213,7 @@ function applyCfg(c){
   const d=CFG0();
   if(c&&typeof c==='object'){
     if(MODES[c.mode])d.mode=c.mode; if(CLINICS[c.clinic])d.clinic=c.clinic; if(CITIES[c.city])d.city=c.city;
-    if(c.his==='down')d.his='down'; if(c.sms==='off')d.sms='off';
+    if(c.his==='down')d.his='down'; if(c.sms==='off')d.sms='off'; if(typeof c.msgEpoch==='number'&&c.msgEpoch>0)d.msgEpoch=c.msgEpoch;
     if(c.ovr&&typeof c.ovr==='object')Object.keys(c.ovr).forEach(k=>{const r=Object.values(RULES).find(x=>x.id===k);if(r&&r.alt&&r.alt.some(a=>a[0]===c.ovr[k]))d.ovr[k]=c.ovr[k];});
     if(Array.isArray(c.log))d.log=c.log.filter(l=>l&&typeof l.t==='string').slice(0,30).map(l=>({t:String(l.t),who:String(l.who||''),what:String(l.what||'')}));
   }
@@ -1161,8 +1231,8 @@ function saveCfg(){
 }
 /* same-computer link for downloaded files: tabs share browser storage */
 const LKEY='safefast-demo-v2';
-function localSave(){try{const all={};PATIENTS.forEach(p=>all[p.id]=ser(p.id));localStorage.setItem(LKEY,JSON.stringify({t:Date.now(),cases:all,cfg:CFG}));}catch(_){}}
-function localLoad(raw){try{const o=JSON.parse(raw||localStorage.getItem(LKEY)||'null');if(!o||!o.cases)return false;applyCfg(o.cfg);PATIENTS.forEach(p=>applyDoc(p.id,o.cases[p.id]||null));return true;}catch(_){return false;}}
+function localSave(){try{const all={};PATIENTS.forEach(p=>all[p.id]=ser(p.id));localStorage.setItem(LKEY,JSON.stringify({t:Date.now(),cases:all,cfg:CFG,msgs:MSGS}));}catch(_){}}
+function localLoad(raw){try{const o=JSON.parse(raw||localStorage.getItem(LKEY)||'null');if(!o||!o.cases)return false;applyCfg(o.cfg);PATIENTS.forEach(p=>applyDoc(p.id,o.cases[p.id]||null));takeMsgs((Array.isArray(o.msgs)?o.msgs:[]).map(m=>[m&&m.id,m]),!raw);return true;}catch(_){return false;}}
 try{
   if(!(window.claude&&claude.use)){
     if(localLoad()) S.sync='tabs'; else {localSave();S.sync='tabs';}
@@ -1174,9 +1244,9 @@ function paintSync(){
   const t={tabs:'مربوط بنوافذ هذا الكمبيوتر',local:'غير مربوط',connecting:'جارٍ الربط',live:'مربوط مباشرة',stale:'الربط بطيء',readonly:'عرض فقط',error:'تعذّر الحفظ'}[S.sync];
   els.forEach(el=>{el.dataset.s=S.sync;el.querySelector('span').textContent=t;});
 }
-function showToast(){const t=$('#toast');if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3400);}}
+function showToast(txt){const t=$('#toast');if(t){if(txt){const d=t.querySelector('div div');if(d)d.textContent=txt;}t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3400);}}
 function deskToast(msg){const t=$('#dtoast');if(!t)return;t.querySelector('span').textContent=msg;t.classList.add('show');clearTimeout(deskToast.h);deskToast.h=setTimeout(()=>t.classList.remove('show'),5000);}
-function resetDemo(){CFG=CFG0();computeTimes();PATIENTS.forEach(initPatient);seedDemo();PATIENTS.forEach(p=>save(p.id));saveCfg();S.pick=null;render();}
+function resetDemo(){CFG=CFG0();CFG.msgEpoch=Date.now();computeTimes();PATIENTS.forEach(initPatient);seedDemo();PATIENTS.forEach(p=>save(p.id));saveCfg();S.pick=null;render();}
 /* independent hosting: Firebase Firestore, docs stored as JSON text */
 function fbAdapter(fs){
   const enc=o=>({j:JSON.stringify(o),t:Date.now()});
@@ -1198,7 +1268,7 @@ function fbAdapter(fs){
       PATIENTS.forEach(p=>{const x=per[p.id];x.items.forEach(i=>{if(!i.approved&&!i.dd&&!i.doctor&&i.r.alt&&i.f===1&&!x.signed)i.doses=planFor(i.r,i.f);});});redraw();},()=>{});
     db.collection('cases').onSnapshot(snap=>{
       if(!snap.metadata.fromCache){clearTimeout(timer);if(S.sync!=='readonly'&&S.sync!=='error')S.sync='live';}
-      const have={};snap.docs.forEach(d=>{have[d.id]=d.data();});
+      const have={},ml=[];snap.docs.forEach(d=>{if(String(d.id).startsWith('m_'))ml.push([d.id,d.data()]);else have[d.id]=d.data();});takeMsgs(ml);
       PATIENTS.forEach(p=>applyDoc(p.id,have[p.id]||null));
       redraw();
     },e=>{clearTimeout(timer);S.sync='error';paintSync();});
@@ -1207,6 +1277,12 @@ function fbAdapter(fs){
 
 /* ===== Render & events ===== */
 function render(){
+  const ae=document.activeElement, af=ae&&ae.dataset?ae.dataset.msgin:null;
+  if(S.view==='doctor'&&MODE!=='patient') markSeen(S.pid,'dr');
+  if(MODE!=='pharm'&&per[S.pid]&&per[S.pid].tab==='doctor') markSeen(S.pid,'pt');
+  try{renderInner();}finally{afterRender(af);}
+}
+function renderInner(){
   document.body.dataset.pane=S.pane;document.body.classList.toggle('m-patient',MODE==='patient');document.body.classList.toggle('m-pharm',MODE==='pharm');
   if(MODE==='patient'){$('#shell').innerHTML=vPhone();bind();paintSync();return;}
   if(CFG.mode==='pharmacy'&&(S.view==='doctor'||S.view==='ehr')) S.view='clinic';
@@ -1222,13 +1298,18 @@ function render(){
   $('#shell').innerHTML=html;
   bind();paintSync();
 }
-function rerenderKeep(){const a=$('#app');const y=a?a.scrollTop:0;const w=window.scrollY;render();const b=$('#app');if(b)b.scrollTop=y;window.scrollTo(0,w);}
+function afterRender(af){
+  document.querySelectorAll('.box.msgs .thread').forEach(e=>e.scrollTop=e.scrollHeight);
+  const a=$('#app');if(a&&$('[data-msgform="pt"]'))a.scrollTop=a.scrollHeight;
+  if(af){const e=$(`[data-msgin="${af}"]`);if(e){e.focus({preventScroll:true});const n=e.value.length;try{e.setSelectionRange(n,n);}catch(_){}}}
+}
+function rerenderKeep(){const a=$('#app');const y=a?a.scrollTop:0;const w=window.scrollY;render();const b=$('#app');if(b&&!$('[data-msgform="pt"]'))b.scrollTop=y;window.scrollTo(0,w);}
 function invalidate(ix){const s=st();if(ix!=null) s.items[ix].approved=false;s.signed=null;s.drOk=false;s.fu={};s.taken={};}
 function setSlot(ix,v){const i=st().items[ix];
   if(v==='doctor'){i.doctor=true;i.doses=[];i.dd=false;i.stop=false;i.keep=false;} else {i.doctor=false;i.doses=v.split('+');}
   invalidate(ix);}
 function bind(){
-  document.querySelectorAll('[data-pid]').forEach(b=>b.onclick=()=>{S.dd=null;S.pid=b.dataset.pid||b.dataset.v;S.pick=null;S.why=false;S.open=-1;S.idf=false;render();});
+  document.querySelectorAll('[data-pid]').forEach(b=>b.onclick=()=>{S.dd=null;S.draft={pt:'',dr:''};S.pid=b.dataset.pid||b.dataset.v;S.pick=null;S.why=false;S.open=-1;S.idf=false;render();});
   document.querySelectorAll('[data-clr]').forEach(b=>b.onclick=()=>{const s=st();S.dd=null;s.clearance=b.dataset.v||b.dataset.clr;s.signed=null;save();render();});
   document.querySelectorAll('[data-dr]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.dr],v=b.dataset.v;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
     if(v==='stop'){i.stop=true;i.doses=[];}else if(v==='keep'){i.keep=true;i.doses=[];}else{i.doses=v.split('+');i.ds=i.ds||'same';}i.approved=false;invalidate();save();render();});
@@ -1239,7 +1320,7 @@ function bind(){
   const ib=$('#idfBtn');if(ib) ib.onclick=()=>{S.idf=!S.idf;render();};
   const jb=$('#jsonBtn');if(jb) jb.onclick=()=>{S.json=!S.json;render();};
   document.querySelectorAll('[data-ddt]').forEach(b=>b.onclick=e=>{e.stopPropagation();S.dd=S.dd===b.dataset.ddt?null:b.dataset.ddt;render();const m=document.querySelector('.ddm [aria-selected="true"]')||document.querySelector('.ddm button');m&&m.focus();});
-  document.querySelectorAll('[data-pane]').forEach(b=>b.onclick=()=>{S.pane=b.dataset.pane;render();});
+  document.querySelectorAll('button[data-pane]').forEach(b=>b.onclick=()=>{S.pane=b.dataset.pane;render();});
   document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{S.dd=null;setSlot(+b.dataset.set,b.dataset.v);S.pick=null;save();render();});
   document.querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>{const i=st().items[+b.dataset.ap];i.approved=!i.approved;if(!i.approved)invalidate();save();render();});
   const ap=$('#apAll');if(ap) ap.onclick=()=>{st().items.forEach(i=>i.approved=true);save();render();};
@@ -1269,6 +1350,10 @@ function bind(){
     if(r.plan(1)[0]===v)delete CFG.ovr[id];else CFG.ovr[id]=v;logCfg('د. سعد (بروتوكول العيادة)',r.name+': '+(r.alt.find(a=>a[0]===v)||[,''])[1]);reapply(id);saveCfg();render();});
   document.querySelectorAll('[data-rst]').forEach(b=>b.onclick=()=>{const id=b.dataset.rst,r=Object.values(RULES).find(x=>x.id===id);delete CFG.ovr[id];logCfg('د. سعد (بروتوكول العيادة)',r.name+': إرجاع للإرشاد');reapply(id);saveCfg();render();});
   document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{st().tab=b.dataset.tab;render();});
+  document.querySelectorAll('[data-msgin]').forEach(e=>e.oninput=()=>{S.draft[e.dataset.msgin]=e.value;});
+  document.querySelectorAll('[data-msgform]').forEach(f=>f.onsubmit=ev=>{ev.preventDefault();const role=f.dataset.msgform,inp=f.querySelector('input');
+    const t=(inp.value||'').trim();if(!t)return;sendMsg(S.pid,role,t);S.draft[role]='';render();const e=$(`[data-msgin="${role}"]`);if(e)e.focus({preventScroll:true});});
+  document.querySelectorAll('[data-qrep]').forEach(b=>b.onclick=()=>{S.dd=null;S.draft.dr=QREPLIES[+b.dataset.v]||'';render();const e=$('[data-msgin="dr"]');if(e){e.focus({preventScroll:true});const n=e.value.length;e.setSelectionRange(n,n);}});
   document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const s=st();s.answers[b.dataset.q]=!s.answers[b.dataset.q];
     s.items.forEach(i=>i.approved=false);invalidate();save();rerenderKeep();});
   document.querySelectorAll('[data-fu]').forEach(b=>b.onclick=()=>{st().fu[b.dataset.fu]=b.dataset.v;save();rerenderKeep();});
