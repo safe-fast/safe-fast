@@ -1169,8 +1169,9 @@ function phPlan(p,s){
       <ol class="steps">${steps.map(([c,t],k)=>`<li class="${c}"><i>${c==='d'?'✓':k+1}</i><span>${t}</span></li>`).join('')}</ol>
       ${MODE==='patient'?'<button type="button" class="simbtn" id="simSign">للتجربة: اعتمد الخطة الآن</button>':''}</div>`;
   }
-  const by=z=>s.items.map((i,ix)=>({i,ix})).filter(o=>!o.i.doctor&&o.i.doses.includes(z));
-  const crit=s.items.filter(i=>i.crit&&!i.doctor&&!i.keep), doc=s.items.filter(i=>(i.doctor||i.esc)&&!i.dd), stopped=s.items.filter(i=>i.stop), keep=s.items.filter(i=>i.keep);
+  const nofast=s.clearance==='no'&&!s.items.some(i=>i.keep);
+  const by=z=>nofast?[]:s.items.map((i,ix)=>({i,ix})).filter(o=>!o.i.doctor&&o.i.doses.includes(z));
+  const crit=s.items.filter(i=>i.crit&&!i.doctor&&!i.keep), doc=s.clearance==='no'?[]:s.items.filter(i=>(i.doctor||i.esc)&&!i.dd), stopped=s.items.filter(i=>i.stop), keep=s.items.filter(i=>i.keep);
   const dm=s.items.some(i=>['su','basal','prandial','metformin','sglt2'].includes(i.d.cls));
   const ac=s.items.some(i=>['doac','warfarin'].includes(i.d.cls));
   const aed=s.items.some(i=>i.d.cls==='aed');
@@ -1180,15 +1181,15 @@ function phPlan(p,s){
     ${['suhoor','iftar','bed'].map(z=>{const L=by(z);if(!L.length) return '';return `<div class="slot ${z}"><h4>${I[z]}${z==='bed'?'قبل النوم':'مع '+SLOT[z]}<span class="tm">${TIME[z]}</span></h4>
      ${L.map(({i,ix})=>{const k=ix+z;return `<div class="pm" style="${capStyle(i.d)}"><span class="pill"></span><div><b>${i.d.ar}</b><span class="en">${i.d.en}</span>${doseSel(i)&&doseSel(i).per[z]!=null?`<span class="adj">${unitTxt(doseSel(i).per[z],i.d.un)}${doseSel(i).per[z]<i.u?'، جرعة خفّضها طبيبك':''}</span>`:i.ds==='reduce'?'<span class="adj">جرعة عدّلها طبيبك</span>':''}</div>
        <button class="chk" role="checkbox" data-take="${k}" aria-checked="${!!s.taken[k]}" aria-label="أخذت ${i.d.ar}">${I.check}</button></div>`}).join('')}</div>`;}).join('')}
-    ${s.clearance==='no'?`<div class="note red"><h5>${I.warn}طبيبك لا ينصح بالصيام ${keep.length?'حتى تنتهي من العلاج':'هذا العام'}</h5><p>استمر على مواعيد أدويتك المعتادة${keep.length?'، ويمكنك الصيام بعد انتهاء العلاج.':'، وناقش البدائل مع طبيبك.'}</p></div>`:''}
+    ${s.clearance==='no'?`<div class="note red"><h5>${I.warn}طبيبك لا ينصح بالصيام ${keep.length?'حتى تنتهي من العلاج':'هذا العام'}</h5><p>استمر على مواعيد أدويتك المعتادة${keep.length?'، ويمكنك الصيام بعد انتهاء العلاج.':'، وناقش البدائل مع طبيبك.'}</p>${nofast?`<p>${s.items.filter(i=>!i.stop).map(i=>i.d.ar).join('، ')}</p>`:''}</div>`:''}
     ${keep.length?`<div class="note doc"><h5>على مواعيدها المعتادة</h5><p>${keep.map(i=>i.d.ar).join('، ')}</p></div>`:''}
     ${stopped.length?`<div class="note doc"><h5>أوقفها طبيبك خلال رمضان</h5><p>${stopped.map(i=>i.d.ar).join('، ')}</p></div>`:''}
     ${doc.length?`<div class="note doc"><h5>راجع طبيبك قبل أن تصوم</h5><p>${doc.map(i=>i.d.ar).join('، ')}</p></div>`:''}
     ${crit.length?`<div class="note red"><h5>${I.warn}لا تترك هذه ولا تضاعفها</h5><p>${crit.map(i=>i.d.ar).join('، ')}. إن نسيت جرعة فلا تأخذ جرعتين معاً، واتصل بالصيدلي.</p></div>`:''}
-    <div class="note sos"><h5>أفطر واتصل فوراً إذا شعرت بـ</h5><ul>${dm?'<li>رجفة أو تعرق أو تشوش، أو سكر أقل من 70</li>':''}<li>دوخة شديدة أو إغماء أو قلة البول</li>${ac?'<li>نزيف غير معتاد أو براز أسود</li>':''}${aed?'<li>نوبة تشنج</li>':''}</ul></div>
+    <div class="note sos"><h5>${nofast?'اتصل فوراً':'أفطر واتصل فوراً'} إذا شعرت بـ</h5><ul>${dm?'<li>رجفة أو تعرق أو تشوش، أو سكر أقل من 70</li>':''}<li>دوخة شديدة أو إغماء أو قلة البول</li>${ac?'<li>نزيف غير معتاد أو براز أسود</li>':''}${aed?'<li>نوبة تشنج</li>':''}</ul></div>
     <div class="lbfoot">اعتمدها ${esc(s.signed.by)}، ${esc(s.signed.at)}. قواعد ${RULESET}</div>
    </div>
-   ${whatIf(p,s,dm)}`;
+   ${nofast?'':whatIf(p,s,dm)}`;
 }
 function whatIf(p,s,dm){
   const live=s.items.filter(i=>!i.stop&&!(i.doctor&&!i.dd)), sick=live.filter(SICK), chg=live.filter(i=>doseSel(i)&&i.ds==='reduce');
