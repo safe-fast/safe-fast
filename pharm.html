@@ -431,6 +431,12 @@ body.m-pharm .maincol>*{display:revert}
 .pathrow .dd{min-width:220px}
 .sug{margin-top:6px;font-size:.82rem;color:var(--brand);display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .sug>span:first-child{font-weight:700}
+.sosbar{display:flex;gap:8px;align-items:flex-start;background:#fdecea;color:#9b2c1f;border-radius:10px;padding:8px 10px;font-size:.82rem;margin-bottom:6px}.sosbar svg{width:18px;height:18px;flex:none}
+.sosnow{background:#fdecea;border:1px solid #e9a99f;border-radius:12px;padding:12px;margin:8px 0}.sosnow h5{display:flex;gap:6px;align-items:center;color:#9b2c1f;font-size:1rem;margin-bottom:4px}.sosnow h5 svg{width:20px;height:20px}.sosnow p{font-size:.86rem;margin-bottom:8px}
+.callbtn.sos{background:#c0392b}
+.ptreq{margin-top:8px}.muted.small{font-size:.74rem;margin-top:6px}
+.sug .draft{display:block;width:100%;font-size:.76rem;color:#8a5a00;background:#fff6e0;border-radius:6px;padding:3px 8px}
+.nofast{display:flex;gap:6px;align-items:flex-start;background:#fdecea;color:#9b2c1f;border-radius:8px;padding:8px 10px;margin:6px 0;font-weight:700;font-size:.88rem}.nofast svg{width:18px;height:18px;flex:none}
 /* hospital system (simulated) */
 .ehr{grid-column:2/-1}
 .ehrbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;padding:10px 16px;background:#2f3a44;color:#e9eef2;border-radius:var(--r-ctl);font-size:.82rem}
@@ -570,16 +576,17 @@ const SRC={
   LABEL:{s:'نشرة الدواء',t:'تداخلات معروفة في نشرات الأدوية المعتمدة، بانتظار مراجعة صيدلي سريري',ev:'نشرة الدواء'},
   NONE:{s:'بانتظار مصدر',t:'لم نجد إرشاداً رمضانياً منشوراً لهذه الفئة. القاعدة رأي مبدئي بانتظار مراجعة صيدلي سريري.',ev:'بانتظار المراجعة'}
 };
-const RULESET='1448.0.4';
+const RULESET='1448.1.0';
 /* ===== Drug library & rules (illustrative; every rule needs clinical pharmacist sign-off) ===== */
 const DRUGS={
   apixaban:{ar:'أبيكسابان',en:'Apixaban 5 mg',cls:'doac',c:['#e9b949','#e9b949']},
+  rivaroxaban:{ar:'ريفاروكسابان',en:'Rivaroxaban 20 mg',cls:'doac',c:['#c0392b','#c0392b']},
   warfarin:{ar:'وارفارين',en:'Warfarin 5 mg',cls:'warfarin',c:['#e48ab0','#e48ab0']},
   metformin:{ar:'ميتفورمين',en:'Metformin 1 g',cls:'metformin',c:['#ffffff','#d6dae6']},
-  gliclazide:{ar:'جليكلازايد',en:'Gliclazide MR 60 mg',cls:'su',c:['#ffffff','#ffffff']},
+  gliclazide:{ar:'جليكلازايد',en:'Gliclazide MR',cls:'su',un:'ملغ',c:['#ffffff','#ffffff']},
   empagliflozin:{ar:'إمباغليفلوزين',en:'Empagliflozin 10 mg',cls:'sglt2',c:['#f2d16b','#f2d16b']},
-  glargine:{ar:'إنسولين قاعدي',en:'Insulin glargine',cls:'basal',c:['#7c8fd6','#7c8fd6']},
-  aspart:{ar:'إنسولين الوجبات',en:'Insulin aspart',cls:'prandial',c:['#e07a5f','#e07a5f']},
+  glargine:{ar:'إنسولين قاعدي',en:'Insulin glargine',cls:'basal',un:'وحدة',c:['#7c8fd6','#7c8fd6']},
+  aspart:{ar:'إنسولين الوجبات',en:'Insulin aspart',cls:'prandial',un:'وحدة',c:['#e07a5f','#e07a5f']},
   amlodipine:{ar:'أملوديبين',en:'Amlodipine 5 mg',cls:'oncecv',c:['#ffffff','#ffffff']},
   losartan:{ar:'لوسارتان',en:'Losartan 50 mg',cls:'oncecv',c:['#cfe6ff','#cfe6ff']},
   bisoprolol:{ar:'بيسوبرولول',en:'Bisoprolol 5 mg',cls:'oncecv',c:['#f4e3b5','#f4e3b5']},
@@ -594,21 +601,27 @@ const DRUGS={
 };
 const RULES={
   doac:{id:'R-ANTICOAG-01',name:'مضادات التخثر المباشرة',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:f=>f===2?['suhoor','iftar']:['iftar'],
-    why:'جرعتان: مع السحور ومع الإفطار. لا تُغيَّر الأدوية المستقرة إلا للضرورة.',warn:'دواء حرج: لا تُترك جرعة ولا تُضاعف.'},
+    why:'أبيكسابان ودابيغاتران: جرعتان مع السحور والإفطار. ريفاروكسابان: مرة واحدة مع وجبة الإفطار لأنه يُمتص مع الأكل. لا يُحوَّل دواء الجرعتين إلى دواء مرة واحدة إلا بقرار الطبيب.',warn:'دواء حرج: لا تُترك جرعة ولا تُضاعف.'},
   warfarin:{id:'R-ANTICOAG-02',name:'وارفارين',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم']],why:'جرعة واحدة ثابتة في الوقت نفسه يومياً.',warn:'دواء حرج: متابعة INR حسب خطة الطبيب.'},
   metformin:{id:'R-DM-01',name:'ميتفورمين',dom:'dm',lvl:'amber',src:['IDFDAR'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'مع الوجبة: الإفطار، والسحور إن كانت جرعتين.',
     esc:f=>f>=3?'ثلاث جرعات لا تناسب نافذة الصيام.':'',sug:{v:'suhoor+iftar',ds:'same',n:'جرعة الصباح مع السحور، وجرعتا الظهر والمساء معاً مع الإفطار.'}},
   su:{id:'R-DM-02',name:'السلفونيل يوريا',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>['iftar'],why:'تُنقل الجرعة إلى الإفطار.',warn:'خطر هبوط السكر أثناء الصيام.',esc:()=>'السلفونيل يوريا ترفع خطر الهبوط أثناء الصيام.',
-    sug:{v:'iftar',ds:'same',n:'جرعة واحدة مع الإفطار. إن كانت جرعتين: تقليل جرعة السحور 25 إلى 50%.'}},
+    sug:{v:'iftar',ds:'same',n:'جرعة واحدة مع الإفطار. إن كانت جرعتين: تقليل جرعة السحور 25 إلى 50%.'},
+    dose:u=>[{id:'same',lbl:'نفس الجرعة: '+u+' ملغ مع الإفطار',per:{iftar:u},def:true},{id:'half',lbl:'تقليل 50%: '+Math.floor(u/2)+' ملغ مع الإفطار (إن كان السكر منضبطاً)',per:{iftar:Math.floor(u/2)}}],
+    dn:'IDF-DAR: جرعة المرة الواحدة تُنقل للإفطار، وتُقلَّل إن كان السكر منضبطاً. يُتجنَّب جليبنكلاميد.'},
   sglt2:{id:'R-DM-03',name:'مثبطات SGLT2',dom:'dm',lvl:'amber',src:['IDFDAR','HEART'],plan:()=>['iftar'],why:'مع الإفطار إذا بدأ قبل رمضان بأربعة أسابيع على الأقل، مع سوائل كافية.',warn:'خطر الجفاف، خاصة مع مدرات البول وكبار السن.'},
   basal:{id:'R-DM-04',name:'الإنسولين القاعدي',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>['iftar'],why:'الإنسولين القاعدي يُنقل إلى الإفطار.',esc:()=>'جرعة الإنسولين يحددها الطبيب قبل الصيام.',
-    sug:{v:'iftar',ds:'reduce',n:'مع الإفطار، وتقليل الجرعة 15 إلى 30%.'}},
+    sug:{v:'iftar',ds:'reduce',n:'مع الإفطار، وتقليل الجرعة 15 إلى 30%.'},
+    dose:u=>[{id:'p0',lbl:'بدون تقليل: '+unitTxt(u,'وحدة')+' مع الإفطار',per:{iftar:u}},{id:'p15',lbl:'تقليل 15%: '+unitTxt(Math.floor(u*.85),'وحدة')+' مع الإفطار',per:{iftar:Math.floor(u*.85)}},{id:'p20',lbl:'تقليل 20%: '+unitTxt(Math.floor(u*.8),'وحدة')+' مع الإفطار',per:{iftar:Math.floor(u*.8)},def:true},{id:'p30',lbl:'تقليل 30%: '+unitTxt(Math.floor(u*.7),'وحدة')+' مع الإفطار',per:{iftar:Math.floor(u*.7)}}],
+    dn:'IDF-DAR: يُعطى مع الإفطار وتُقلَّل الجرعة 15 إلى 30%، ثم تُعدَّل كل 3 أيام حسب قياسات السكر بيد الفريق.'},
   prandial:{id:'R-DM-05',name:'إنسولين الوجبات',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>null,why:'',esc:()=>'إنسولين مع الوجبات عدة مرات: الخطة للطبيب.',
-    sug:{v:'suhoor+iftar',ds:'reduce',n:'الجرعة المعتادة مع الإفطار، حذف جرعة الغداء، وتقليل جرعة السحور 25 إلى 50%.'}},
+    sug:{v:'suhoor+iftar',ds:'reduce',n:'الجرعة المعتادة مع الإفطار، حذف جرعة الغداء، وتقليل جرعة السحور 25 إلى 50%.'},
+    dose:u=>[{id:'s25',lbl:'الإفطار '+unitTxt(u,'وحدة')+'، السحور '+unitTxt(Math.floor(u*.75),'وحدة')+' (تقليل 25%)، بلا جرعة الظهر',per:{iftar:u,suhoor:Math.floor(u*.75)},def:true},{id:'s50',lbl:'الإفطار '+unitTxt(u,'وحدة')+'، السحور '+unitTxt(Math.floor(u*.5),'وحدة')+' (تقليل 50%)، بلا جرعة الظهر',per:{iftar:u,suhoor:Math.floor(u*.5)}}],
+    dn:'IDF-DAR: جرعة الإفطار كما هي، تُحذف جرعة الغداء، وتُقلَّل جرعة السحور 25 إلى 50%.'},
   oncecv:{id:'R-CV-01',name:'أدوية الضغط مرة يومياً',dom:'cv',lvl:'green',src:['HEART'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'تُنقل إلى الإفطار، مع مراجعة الضغط ووظائف الكلى قبل رمضان.'},
   diuretic:{id:'R-CV-02',name:'مدرات البول',dom:'cv',lvl:'amber',src:['HEART'],plan:()=>['iftar'],why:'بعد الإفطار حتى لا يزيد العطش نهاراً.',warn:'خطر الجفاف وإصابة الكلى واضطراب الأملاح.'},
   statin:{id:'R-LIP-01',name:'الستاتينات',dom:'cv',lvl:'green',src:['NONE'],plan:()=>['bed'],alt:[['bed','قبل النوم'],['iftar','الإفطار']],why:'مساءً قبل النوم.'},
-  thyroid:{id:'R-END-01',name:'هرمون الغدة الدرقية',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','قبل السحور'],['bed','قبل النوم']],why:'على معدة فارغة قبل السحور بنصف ساعة.'},
+  thyroid:{id:'R-END-01',name:'هرمون الغدة الدرقية',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','قبل السحور'],['bed','قبل النوم']],why:'على معدة فارغة قبل السحور بنصف ساعة. البديل المدروس: قبل الإفطار بنصف ساعة (دراسة سعودية 2022). فحص TSH بعد 6 إلى 8 أسابيع من رمضان.'},
   calcium:{id:'R-SUP-01',name:'الكالسيوم',dom:'other',lvl:'green',src:['LABEL'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'مع الإفطار، بعيداً عن هرمون الغدة 4 ساعات على الأقل.'},
   ppi:{id:'R-GI-01',name:'مثبطات مضخة البروتون',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','السحور'],['iftar','الإفطار']],why:'قبل السحور.'},
   aed:{id:'R-NEURO-01',name:'أدوية الصرع',dom:'epi',lvl:'amber',crit:true,src:['EPI'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'جرعتان: مع السحور ومع الإفطار.',warn:'دواء حرج: ترك الجرعات قد يسبب نوبات.',
@@ -629,19 +642,20 @@ const QUESTIONS=[
 /* synthetic patients, with the data a hospital system would send (FHIR prefetch) */
 const PATIENTS=[
   {id:'P1',name:'أبو خالد',age:67,sex:'ذكر',dx:['رجفان أذيني','سكري النوع 2','ارتفاع الضغط','قصور القلب'],
-   meds:[['apixaban',2],['metformin',2],['gliclazide',1],['empagliflozin',1],['furosemide',1],['bisoprolol',1],['atorvastatin',1]],ans:{},
+   meds:[['apixaban',2],['metformin',2],['gliclazide',1,60],['empagliflozin',1],['furosemide',1],['bisoprolol',1],['atorvastatin',1]],ans:{},
    cl:{mrn:'100245',appt:'2027-01-20',dm:{type:2,dur:12,a1c:8.1,smbg:'ok',hypo:0,acute:0},egfr:52,cv:'af-hf',lvef:40,labs:[['HbA1c','8.1%'],['eGFR','52'],['LVEF','40%']]}},
   {id:'P2',name:'أم سارة',age:54,sex:'أنثى',dx:['قصور الغدة الدرقية','ارتفاع الضغط','هشاشة عظام خفيفة'],meds:[['levothyroxine',1],['losartan',1],['atorvastatin',1],['calcium',1]],ans:{},
    cl:{mrn:'100318',appt:'2027-03-10',egfr:88,cv:'htn',labs:[['TSH','2.1'],['eGFR','88'],['الضغط','132/80']]}},
   {id:'P3',name:'عبدالله',age:29,sex:'ذكر',dx:['صرع','ارتجاع المريء'],meds:[['levetiracetam',2],['omeprazole',1]],ans:{night:true},
    cl:{mrn:'100402',appt:null,egfr:112,epi:'controlled',labs:[['آخر نوبة','قبل سنتين'],['eGFR','112']]}},
-  {id:'P4',name:'أم فهد',age:61,sex:'أنثى',dx:['سكري على الإنسولين','ارتفاع الضغط'],meds:[['glargine',1],['aspart',3],['metformin',2],['amlodipine',1]],ans:{hypo:true},
+  {id:'P4',name:'أم فهد',age:61,sex:'أنثى',dx:['سكري على الإنسولين','ارتفاع الضغط'],meds:[['glargine',1,20],['aspart',3,8],['metformin',2],['amlodipine',1]],ans:{hypo:true},
    cl:{mrn:'100577',appt:'2026-12-02',dm:{type:2,dur:15,a1c:9.4,smbg:'sub',hypo:1,acute:0},egfr:64,cv:'htn',labs:[['HbA1c','9.4%'],['eGFR','64'],['الضغط','138/84']]}},
   {id:'P5',name:'سلمان',age:45,sex:'ذكر',dx:['رجفان أذيني','التهاب حلق بكتيري حالي'],meds:[['warfarin',1],['amoxicillin',3],['bisoprolol',1]],ans:{},
    cl:{mrn:'100611',appt:'2026-11-18',egfr:95,cv:'af',acute:'التهاب حلق بكتيري',labs:[['INR','2.6'],['eGFR','95']]}}
 ];
 const DOCTOR={name:'د. سعد المطيري',short:'د. سعد',role:'طبيب أسرة',clinic:'عيادة طب الأسرة',place:'مركز الرعاية الأولية (بيانات افتراضية)',phone:'0110000000',phoneTxt:'011 000 0000',hours:'الأحد إلى الخميس، 8 ص إلى 4 م'};
 const QREPLIES=['استمر على خطتك كما هي، وتقبّل الله صيامك.','إذا نسيت جرعة فلا تضاعفها، خذ الجرعة التالية في وقتها.','أفطر الآن وقِس السكر، واتصل بالعيادة إذا كان أقل من 70.','سأتصل بك اليوم لمراجعة أدويتك.','راجع الصيدلي ليشرح لك الخطة مرة ثانية.'];
+const PTREQ=[['dose','عندي سؤال عن جرعة أحد أدويتي'],['miss','نسيت جرعة، ماذا أفعل؟'],['side','عندي عرض جانبي خفيف من دواء'],['appt','أحتاج موعداً قبل رمضان'],['sos','أشعر بتعب شديد الآن','doc']];
 const FUQ=[{k:'miss',t:'هل تركت أي جرعة من أدويتك منذ بداية رمضان؟'},{k:'dbl',t:'هل أخذت جرعتين معاً في وقت واحد؟'},{k:'sym',t:'هل شعرت بدوخة أو رجفة أو تعرق شديد أثناء الصيام؟'}];
 
 /* ===== Configuration (shared across devices): mode, clinic, city, resilience, local protocol ===== */
@@ -668,9 +682,15 @@ const planFor=(r,f)=>{const o=CFG.ovr[r.id];return (o&&f===1&&r.alt)?[o]:r.plan(
 /* ===== State ===== */
 const LV={red:2,amber:1,green:0};
 const per={};
-function makeItem(key,f){const d=DRUGS[key]||DRUGS.other,r=RULES[d.cls];const s=planFor(r,f);const e=r.esc?r.esc(f):'';
-  return {key,f,d,r,esc:e,crit:!!r.crit,doses:s?[...s]:[],doctor:!s,lvl:(e||!s)?'red':r.lvl,approved:false};}
-function draftFor(p,answers,extra=[]){return p.meds.concat(extra).map(([k,f])=>makeItem(k,f));}
+function makeItem(key,f,u){const d=DRUGS[key]||DRUGS.other,r=RULES[d.cls];const s=planFor(r,f);let e=r.esc?r.esc(f):'';
+  if(!e&&f>=3&&s) e='ثلاث جرعات يومياً لا تناسب نافذة الصيام: فكّر في بديل مرة أو مرتين يومياً.';
+  if(!e&&r.dose&&u) e='دواء يسبب هبوط السكر: الجرعة يحددها الطبيب قبل الصيام.';
+  return {key,f,u:u||null,du:null,d,r,esc:e,crit:!!r.crit,doses:s?[...s]:[],doctor:!s,lvl:(e||!s)?'red':r.lvl,approved:false};}
+function draftFor(p,answers,extra=[]){return p.meds.concat(extra).map(([k,f,u])=>makeItem(k,f,u));}
+const unitTxt=(n,un)=>n+' '+(un==='وحدة'?(n>=3&&n<=10?'وحدات':'وحدة'):un);
+const doseOpts=i=>i.r.dose&&i.u?i.r.dose(i.u):null;
+const doseSel=i=>{const o=doseOpts(i);return o&&i.du?o.find(x=>x.id===i.du):null;};
+function setDose(i,id){const o=doseOpts(i),x=o&&o.find(y=>y.id===id);if(!x)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;i.du=id;i.doses=['suhoor','iftar','bed'].filter(z=>z in x.per);i.ds=x.id==='same'||x.id==='p0'?'same':'reduce';i.approved=false;return true;}
 function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false};}
 PATIENTS.forEach(initPatient);
 const signer=()=>CFG.mode==='doctor'?'د. سعد، طبيب أسرة (حساب تجريبي)':CFG.mode==='team'?'د. سعد (طبيب)، وراجعتها د. ريم (صيدلانية)':'د. ريم، صيدلانية (حساب تجريبي)';
@@ -766,7 +786,7 @@ function checks(i,id=S.pid){
   if(i.d.cls==='thyroid'&&!d.includes('suhoor')) w.push('يُفضّل على معدة فارغة قبل السحور.');
   if(i.d.cls==='diuretic'&&d.includes('suhoor')) w.push('مدر البول مع السحور قد يزيد العطش والجفاف نهاراً.');
   if(i.d.cls==='sglt2'&&(p.age>=65||medsOf(id).some(([k])=>(DRUGS[k]||{}).cls==='diuretic')||p.cl.egfr<60)) w.push('مع كبر السن أو مدر البول أو ضعف الكلى: نصحت توصيات Heart 2022 بتجنبه، فناقش الإيقاف المؤقت مع الطبيب.');
-  if(i.f===2&&d.length===1&&(i.crit||i.d.cls==='metformin')) w.push('كان يُؤخذ مرتين: تأكد من تعديل الجرعة اليومية.');
+  if(i.f===2&&d.length===1) w.push(i.crit?'دواء حرج كان يُؤخذ مرتين: لا يُحوَّل لجرعة واحدة إلا بقرار الطبيب.':'كان يُؤخذ مرتين: تأكد من تعديل الجرعة اليومية.');
   return w;
 }
 /* medicine alerts for the doctor: interactions and timing conflicts created by the fasting window */
@@ -802,7 +822,7 @@ function apptCtl(id){const x=apptInfo(id);if(!x.need||x.ok&&!x.booked)return '';
   return x.free.length?dd('book',x.free.map(d=>[d,fd(d)]),per[id].appt,'data-book',x.ok?'غيّر الموعد':'قدّم إلى أقرب موعد متاح','mini'):'<span class="muted">لا توجد مواعيد متاحة قبل الحد، أضف موعداً إضافياً.</span>';}
 function daysToRamadan(){return Math.ceil((RAMADAN_START-Date.now())/864e5);}
 function slotVal(i){return i.doctor?'doctor':i.doses.join('+');}
-function applySug(i){const g=i.r.sug;if(!g)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
+function applySug(i){const o=doseOpts(i);if(o)return setDose(i,(o.find(x=>x.def)||o[0]).id);const g=i.r.sug;if(!g)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
   if(g.v==='keep'){i.keep=true;i.doses=[];}else{i.doses=g.v.split('+');i.ds=g.ds||'same';}i.approved=false;return true;}
 function stamp(){const d=new Date();return d.toLocaleDateString('ar-SA-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'long'})+'، '+d.toLocaleTimeString('ar-SA-u-nu-latn',{hour:'numeric',minute:'2-digit'});}
 function logCfg(who,what){CFG.log.unshift({t:stamp(),who,what});CFG.log=CFG.log.slice(0,30);}
@@ -858,7 +878,7 @@ function vWork(){
   const tokens=z=>s.items.map((i,ix)=>i.doctor?'':i.doses.map((d,di)=>d!==z?'':tok(i,ix,di,i.doses.length>1)).join('')).join('');
   const docs=s.items.map((i,ix)=>i.doctor?tok(i,ix,0,false):'').join('');
   const comp=z=>{const inner=tokens(z);return `<div class="comp c-${z}" data-zone="${z}"><div class="lid">${I[z]}<b>${SLOT[z]}</b><span class="tm">${TIME[z]}</span></div><div class="well">${inner||'<span class="empty">لا شيء هنا</span>'}</div></div>`;};
-  const slotOpts=i=>OPTS.filter(([v])=>v!=='iftar+iftar'&&!(v==='suhoor+iftar'&&i.f<2)).map(([v,l])=>[v,v==='doctor'&&solo?'يراجع طبيبه':l,v==='doctor'?'doc':''])
+  const slotOpts=i=>OPTS.filter(([v])=>v!=='iftar+iftar'&&!(v==='suhoor+iftar'&&i.f<2)&&!(i.crit&&i.f===2&&!['suhoor+iftar','doctor'].includes(v))).map(([v,l])=>[v,v==='doctor'&&solo?'يراجع طبيبه':l,v==='doctor'?'doc':''])
      .concat(['suhoor','iftar','bed','suhoor+iftar','doctor'].includes(slotVal(i))?[]:[[slotVal(i),i.doses.map(x=>SLOT[x]).join(' و')]]);
   const addable=Object.keys(DRUGS).map(k=>[k,DRUGS[k].ar,k==='other'?'doc':'']);
   return `<section class="work maincol" aria-label="خطة المريض">
@@ -882,7 +902,7 @@ function vWork(){
      </div>`;}).join('')}
      ${CFG.his==='down'&&!s.signed?`<div class="addrow"><span>إضافة دواء يدوياً</span>${dd('addk',addable,S.addK,'data-addk','اختر الدواء')}${dd('addf',[['1','مرة يومياً'],['2','مرتان يومياً'],['3','3 مرات يومياً']],S.addF,'data-addf','عدد الجرعات','mini')}<button class="btn quiet" type="button" id="addMed" ${S.addK&&S.addF?'':'disabled'}>أضف</button></div>`:''}
      <div class="signbar">
-       ${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض${CFG.sms==='on'?'، مع رسالة نصية احتياطية':''}</span>`:`<span class="cnt">${CFG.mode==='team'&&!s.drOk?'<b class="wdr">بانتظار اعتماد الطبيب</b>، ':''}راجعت <b>${done}</b> من ${n}</span><button class="btn quiet" type="button" id="apAll" ${done===n?'disabled':''}>تحقق من الكل</button><button class="btn" type="button" id="sign" ${done===n&&(CFG.mode!=='team'||s.drOk)?'':'disabled'}>${I.send}أرسل للمريض</button>`}
+       ${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض${CFG.sms==='on'?'، مع رسالة نصية احتياطية':''}</span>`:`<span class="cnt">${CFG.mode==='team'&&!s.drOk?'<b class="wdr">بانتظار اعتماد الطبيب</b>، ':''}راجعت <b>${done}</b> من ${n}</span><button class="btn quiet" type="button" id="apAll" ${done===n||s.items.every(i=>i.approved||doseOpts(i))?'disabled':''}>تحقق من الكل${s.items.some(doseOpts)?' عدا الجرعات':''}</button><button class="btn" type="button" id="sign" ${done===n&&(CFG.mode!=='team'||s.drOk)?'':'disabled'}>${I.send}أرسل للمريض</button>`}
      </div>
    </div>
   </section>`;
@@ -905,7 +925,7 @@ function planBox(id){
   const s=per[id];
   const where=i=>i.stop?'إيقاف في رمضان':i.keep?'مواعيده المعتادة':i.doctor?'ينتظر قرارك':i.doses.map(x=>SLOT[x]).join(' و');
   return `<div class="box plan"><div class="lhead"><h2>الخطة كاملة ولماذا</h2><span>لكل دواء توقيته وسببه</span></div>
-   ${s.items.map(i=>`<div class="prow"><b>${i.d.ar}</b><span class="pw ${i.doctor&&!i.dd?'wait':''}">${where(i)}</span><span class="py">${esc(i.dd&&i.r.sug?i.r.sug.n:(i.r.why||i.esc||''))}</span>${srcChips(i.r)}</div>`).join('')}</div>`;
+   ${s.items.map(i=>`<div class="prow"><b>${i.d.ar}</b><span class="pw ${i.doctor&&!i.dd?'wait':''}">${where(i)}</span><span class="py">${esc(doseSel(i)?doseSel(i).lbl:i.dd&&i.r.sug?i.r.sug.n:(i.r.why||i.esc||''))}</span>${srcChips(i.r)}</div>`).join('')}</div>`;
 }
 function apptBox(id){const x=apptInfo(id);
   return `<div class="box appt ${x.ok?'':'late'}"><div class="lhead"><h2>المواعيد</h2><span>التقييم قبل رمضان بـ 6 إلى 8 أسابيع حسب IDF-DAR</span></div>
@@ -929,24 +949,27 @@ function vDoctor(){
   const qs=QUESTIONS.filter(q=>q.red&&s.answers[q.k]);
   const slotOpts=i=>[['iftar','الإفطار'],['suhoor','السحور'],...(i.f>=2?[['suhoor+iftar','السحور والإفطار']]:[]),['bed','قبل النوم'],['keep','مواعيده المعتادة (لا يصوم)'],['stop','إيقاف في رمضان']];
   const cur=i=>i.stop?'stop':i.keep?'keep':i.dd?i.doses.join('+'):'';
-  const sugTxt=i=>{const g=i.r.sug;return g?`<div class="sug"><span>مقترح الإرشاد: ${esc(g.n)}</span>${srcChips(i.r)}${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`:'';};
+  const doseCtl=(i,ix)=>{const o=doseOpts(i);return `${dd('du'+ix,o.map(x=>[x.id,x.lbl+(x.def?' (المقترح)':'')]).concat([['keep','مواعيده المعتادة (لا يصوم)','doc'],['stop','إيقاف في رمضان','doc']]),i.stop?'stop':i.keep?'keep':i.du||'',`data-du="${ix}"`,'اختر الجرعة','wide')}`;};
+  const doseNote=i=>`<div class="sug draftn"><span>مقترح IDF-DAR (${esc(i.d.en)} ${unitTxt(i.u,i.d.un)} حالياً): ${esc(i.r.dn)}</span>${srcChips(i.r)}<span class="draft">مسودة: القاعدة بانتظار توقيع صيدلي سريري، وكل جرعة تعتمدها أنت بنفسك</span>${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`;
+  const sugTxt=i=>{if(doseOpts(i))return doseNote(i);const g=i.r.sug;return g?`<div class="sug"><span>مقترح الإرشاد: ${esc(g.n)}</span>${srcChips(i.r)}${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`:'';};
   return `<section class="work maincol" aria-label="قرار الطبيب">
    ${MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الطبيب</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>'}
    ${list.length?`${headBlock(p,s,t,false)}
-   ${riskBox(p.id)}
-   ${apptBox(p.id)}
-   ${alertsBox(p.id)}
    <div class="box ask">
      <h2>هل يصوم ${p.name} هذا العام؟</h2>
+     ${overall(p.id).cat==='high'?`<p class="nofast">${I.warn}حسب الإرشاد: خطورة الصيام عالية، ولا يُنصح بالصيام. ناقش المريض قبل بناء أي خطة.</p>`:''}
      <p class="meta">${qs.length?'أجاب المريض قبل رمضان:':'لا توجد إجابات عالية الخطورة من المريض.'}</p>
      ${qs.length?`<div class="because">${qs.map(q=>`<span>${q.t}</span>`).join('')}</div>`:''}
      ${dd('clr',[['yes','نعم، يصوم بالخطة','ok'],['no','لا يُنصح بالصيام','doc']],s.clearance,'data-clr','اختر القرار','wide')}
    </div>
+   ${riskBox(p.id)}
+   ${apptBox(p.id)}
+   ${alertsBox(p.id)}
    ${ref.length?`<div class="box">
      <div class="lhead"><h2>أدوية تنتظر قرارك</h2><span>${ref.length}</span></div>
      ${ref.length?ref.map(({i,ix})=>`<div class="drrow">
        <div class="nm"><b>${i.d.ar}</b><span class="en">${i.d.en}</span><p>${freq(i.f)}. ${esc(i.esc||'أحاله الصيدلي للمراجعة.')}</p>${sugTxt(i)}</div>
-       <div class="drc">${dd('dr'+ix,slotOpts(i).map(([v,l])=>[v,l,v==='stop'||v==='keep'?'doc':'']),cur(i),`data-dr="${ix}"`,'الوقت')}${dd('ds'+ix,[['same','نفس الجرعة'],['reduce','تقليل الجرعة']],i.dd&&!i.stop&&!i.keep?(i.ds||'same'):'',`data-ds="${ix}"`,'الجرعة',i.dd&&!i.stop&&!i.keep?'':'off')}</div>
+       <div class="drc">${doseOpts(i)?doseCtl(i,ix):(dd('dr'+ix,slotOpts(i).map(([v,l])=>[v,l,v==='stop'||v==='keep'?'doc':'']),cur(i),`data-dr="${ix}"`,'الوقت')+dd('ds'+ix,[['same','نفس الجرعة'],['reduce','تقليل الجرعة']],i.dd&&!i.stop&&!i.keep?(i.ds||'same'):'',`data-ds="${ix}"`,'الجرعة',i.dd&&!i.stop&&!i.keep?'':'off'))}</div>
      </div>`).join(''):''}
    </div>`:''}
    ${planBox(p.id)}
@@ -1080,7 +1103,7 @@ function phPlan(p,s){
    <div class="label">
     <div class="lbtop"><div class="ph">صيدلية صيامٌ آمن</div><h3>${p.name}</h3><div class="sub"><span>خطة الأدوية لشهر رمضان 1448</span><span>${p.age} سنة</span></div></div>
     ${['suhoor','iftar','bed'].map(z=>{const L=by(z);if(!L.length) return '';return `<div class="slot ${z}"><h4>${I[z]}${z==='bed'?'قبل النوم':'مع '+SLOT[z]}<span class="tm">${TIME[z]}</span></h4>
-     ${L.map(({i,ix})=>{const k=ix+z;return `<div class="pm" style="${capStyle(i.d)}"><span class="pill"></span><div><b>${i.d.ar}</b><span class="en">${i.d.en}</span>${i.ds==='reduce'?'<span class="adj">جرعة عدّلها طبيبك</span>':''}</div>
+     ${L.map(({i,ix})=>{const k=ix+z;return `<div class="pm" style="${capStyle(i.d)}"><span class="pill"></span><div><b>${i.d.ar}</b><span class="en">${i.d.en}</span>${doseSel(i)&&doseSel(i).per[z]!=null?`<span class="adj">${unitTxt(doseSel(i).per[z],i.d.un)}${doseSel(i).per[z]<i.u?'، جرعة خفّضها طبيبك':''}</span>`:i.ds==='reduce'?'<span class="adj">جرعة عدّلها طبيبك</span>':''}</div>
        <button class="chk" role="checkbox" data-take="${k}" aria-checked="${!!s.taken[k]}" aria-label="أخذت ${i.d.ar}">${I.check}</button></div>`}).join('')}</div>`;}).join('')}
     ${s.clearance==='no'?`<div class="note red"><h5>${I.warn}طبيبك لا ينصح بالصيام ${keep.length?'حتى تنتهي من العلاج':'هذا العام'}</h5><p>استمر على مواعيد أدويتك المعتادة${keep.length?'، ويمكنك الصيام بعد انتهاء العلاج.':'، وناقش البدائل مع طبيبك.'}</p></div>`:''}
     ${keep.length?`<div class="note doc"><h5>على مواعيدها المعتادة</h5><p>${keep.map(i=>i.d.ar).join('، ')}</p></div>`:''}
@@ -1099,10 +1122,13 @@ function phDoctor(p,s){
    <a class="callbtn" href="tel:${DOCTOR.phone}">${I.phone}اتصال بالعيادة ${DOCTOR.phoneTxt}</a>
    <div class="sec">الرسائل</div>
    <div class="chat thread">
-    <div class="bub sys">اكتب لطبيبك أي سؤال عن أدويتك أو صيامك، ويرد خلال يوم عمل. في الحالات الطارئة اتصل على 997.</div>
+    <div class="sosbar">${I.warn}<span><b>ليست للطوارئ.</b> إذا شعرت برجفة أو تعرق أو سكر أقل من 70، أو ألم صدر أو نزيف: أفطر فوراً واتصل على 997.</span></div>
+    <div class="bub sys">اختر طلبك، ويرد عليك الصيدلي أو طبيبك خلال يوم عمل.</div>
     ${L.map(m=>`<div class="bub ${m.from==='pt'?'out':'in'}">${esc(m.t)}<time>${msgTime(m.at)}</time></div>`).join('')}
    </div>
-   <form class="msgbox" data-msgform="pt"><input data-msgin="pt" type="text" maxlength="600" autocomplete="off" placeholder="اكتب رسالتك لطبيبك" value="${esc(S.draft.pt||'')}" aria-label="رسالة لطبيبك"><button type="submit" aria-label="إرسال">${I.send}</button></form>`;
+   ${S.sos?`<div class="sosnow"><h5>${I.warn}أفطر الآن</h5><p>اشرب ماءً أو عصيراً، وقِس السكر إن كان عندك جهاز. إذا كان أقل من 70 أو لم تتحسن خلال 15 دقيقة، أو عندك ألم صدر أو ضيق نفس أو نزيف: اتصل على 997.</p><a class="callbtn sos" href="tel:997">${I.phone}اتصال 997</a><button type="button" class="linkbtn" id="sosOk">تحسنت</button></div>`:''}
+   <div class="ptreq">${dd('ptreq',PTREQ.map(([v,l,c])=>[v,l,c||'']),'','data-ptreq','اختر طلبك لطبيبك','wide')}</div>
+   <p class="muted small">الرسائل المكتوبة بحرية تُفعَّل في مرحلة التجربة بعد وجود فريق يرد عليها وفرز آلي لكلمات الخطر.</p>`;
 }
 function msgBox(p){
   const L=msgsOf(p.id);
@@ -1193,7 +1219,7 @@ function sendMsg(pid,from,text){
 
 /* ===== Shared store: links every screen and device ===== */
 let DB=null;const queue={};
-function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk};}
+function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,du:i.du||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk};}
 function applyDoc(id,data){
   const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id);
   const tab=x.tab;
@@ -1202,7 +1228,7 @@ function applyDoc(id,data){
     y.answers={...(data.answers||{})};
     y.extra=Array.isArray(data.extra)?data.extra.filter(e=>Array.isArray(e)&&DRUGS[e[0]]).map(e=>[e[0],+e[1]||1]):[];
     const items=draftFor(p,y.answers,y.extra);
-    (data.items||[]).forEach((o,ix)=>{const i=items[ix];if(!i||o.k!==i.key)return;i.doses=Array.isArray(o.d)?o.d.slice(0,2):i.doses;i.doctor=!!o.x;i.approved=!!o.a;i.dd=!!o.dd;i.ds=o.ds||null;i.stop=!!o.st;i.keep=!!o.kp;});
+    (data.items||[]).forEach((o,ix)=>{const i=items[ix];if(!i||o.k!==i.key)return;i.doses=Array.isArray(o.d)?o.d.slice(0,2):i.doses;i.doctor=!!o.x;i.approved=!!o.a;i.dd=!!o.dd;i.ds=o.ds||null;i.du=(doseOpts(i)||[]).some(x=>x.id===o.du)?o.du:null;i.stop=!!o.st;i.keep=!!o.kp;});
     y.clearance=data.clearance||null;y.items=items;y.signed=data.signed||null;y.fu={...(data.fu||{})};y.taken={...(data.taken||{})};
     y.path=PATH[data.path]?data.path:null;y.appt=FREE.includes(data.appt)?data.appt:null;y.drOk=!!data.drOk;y.cds=typeof data.cds==='string'?data.cds:null;
   }
@@ -1314,6 +1340,8 @@ function bind(){
   document.querySelectorAll('[data-dr]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.dr],v=b.dataset.v;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;
     if(v==='stop'){i.stop=true;i.doses=[];}else if(v==='keep'){i.keep=true;i.doses=[];}else{i.doses=v.split('+');i.ds=i.ds||'same';}i.approved=false;invalidate();save();render();});
   document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.ds];i.ds=b.dataset.v;i.approved=false;invalidate();save();render();});
+  document.querySelectorAll('[data-du]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.du],v=b.dataset.v;
+    if(v==='stop'||v==='keep'){i.dd=true;i.doctor=false;i.du=null;i.stop=v==='stop';i.keep=v==='keep';i.doses=[];i.approved=false;}else setDose(i,v);invalidate();save();render();});
   document.querySelectorAll('[data-sug]').forEach(b=>b.onclick=()=>{applySug(st().items[+b.dataset.sug]);invalidate();save();render();});
   document.querySelectorAll('[data-path]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st(),o=overall(S.pid);s.path=b.dataset.v===o.auto?null:b.dataset.v;save();render();});
   const wb=$('#whyBtn');if(wb) wb.onclick=()=>{S.why=!S.why;render();};
@@ -1323,7 +1351,7 @@ function bind(){
   document.querySelectorAll('button[data-pane]').forEach(b=>b.onclick=()=>{S.pane=b.dataset.pane;render();});
   document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{S.dd=null;setSlot(+b.dataset.set,b.dataset.v);S.pick=null;save();render();});
   document.querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>{const i=st().items[+b.dataset.ap];i.approved=!i.approved;if(!i.approved)invalidate();save();render();});
-  const ap=$('#apAll');if(ap) ap.onclick=()=>{st().items.forEach(i=>i.approved=true);save();render();};
+  const ap=$('#apAll');if(ap) ap.onclick=()=>{st().items.forEach(i=>{if(!doseOpts(i))i.approved=true;});save();render();};
   const sim=$('#simSign');if(sim) sim.onclick=()=>{st().items.forEach(i=>i.approved=true);const s=st();s.drOk=true;s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();showToast();};
   const ds=$('#drSign');if(ds) ds.onclick=()=>{const s=st();s.drOk=true;save();deskToast('اعتمدت خطة '+P().name+'، وانتقلت للصيدلي.');render();};
   const sg=$('#sign');if(sg) sg.onclick=()=>{const s=st();s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();if(MODE!=='pharm')showToast();};
@@ -1336,7 +1364,7 @@ function bind(){
   document.querySelectorAll('[data-cds]').forEach(b=>b.onclick=()=>{const s=st(),a=b.dataset.cds;
     if(a==='open'){S.view='doctor';render();window.scrollTo(0,0);return;}
     if(a==='undo'){s.cds=null;save();render();return;}
-    if(a==='accept'){let n=0;s.items.forEach(i=>{if((i.esc||i.doctor)&&!i.dd&&applySug(i))n++;});
+    if(a==='accept'){let n=0;s.items.forEach(i=>{if((i.esc||i.doctor)&&!i.dd&&!doseOpts(i)&&applySug(i))n++;});
       const o=overall(S.pid);if(!s.clearance){if(s.items.some(i=>i.keep))s.clearance='no';else if(o.path!=='visit')s.clearance='yes';}
       s.cds='accepted';invalidate();if(drReady(S.pid))s.drOk=true;save();logCfg('د. سعد (من نظام المستشفى)','اعتمد '+n+' من مقترحات الإرشاد لـ '+P().name);saveCfg();render();}});
   document.querySelectorAll('[data-book]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st();s.appt=b.dataset.v;save();logCfg('د. سعد','حجز موعداً لـ '+P().name+' في '+fd(b.dataset.v)+' (appointment-book)');saveCfg();deskToast('حُجز موعد '+P().name+' في '+fd(b.dataset.v)+'، ووصل إشعار للمريض.');render();});
@@ -1353,6 +1381,8 @@ function bind(){
   document.querySelectorAll('[data-msgin]').forEach(e=>e.oninput=()=>{S.draft[e.dataset.msgin]=e.value;});
   document.querySelectorAll('[data-msgform]').forEach(f=>f.onsubmit=ev=>{ev.preventDefault();const role=f.dataset.msgform,inp=f.querySelector('input');
     const t=(inp.value||'').trim();if(!t)return;sendMsg(S.pid,role,t);S.draft[role]='';render();const e=$(`[data-msgin="${role}"]`);if(e)e.focus({preventScroll:true});});
+  document.querySelectorAll('[data-ptreq]').forEach(b=>b.onclick=()=>{S.dd=null;const v=b.dataset.v,x=PTREQ.find(q=>q[0]===v);if(!x)return;if(v==='sos'){S.sos=true;sendMsg(S.pid,'pt','تنبيه: المريض اختار «أشعر بتعب شديد الآن» وظهرت له شاشة الإفطار و997.');}else{sendMsg(S.pid,'pt',x[1]);showToast('وصل طلبك، ويرد عليك الفريق خلال يوم عمل.');}render();});
+  {const so=$('#sosOk');if(so)so.onclick=()=>{S.sos=false;render();};}
   document.querySelectorAll('[data-qrep]').forEach(b=>b.onclick=()=>{S.dd=null;S.draft.dr=QREPLIES[+b.dataset.v]||'';render();const e=$('[data-msgin="dr"]');if(e){e.focus({preventScroll:true});const n=e.value.length;e.setSelectionRange(n,n);}});
   document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const s=st();s.answers[b.dataset.q]=!s.answers[b.dataset.q];
     s.items.forEach(i=>i.approved=false);invalidate();save();rerenderKeep();});
