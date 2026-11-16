@@ -530,6 +530,51 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
 .drsign{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;background:var(--well)}
 .drsign .cnt{margin-inline-end:auto;font-size:.88rem;color:var(--muted)}
 .wdr{color:var(--suhoor)!important}
+.brow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px) auto;gap:8px 14px;align-items:start;padding:12px 20px;border-top:1px solid var(--line)}
+.brow .nm b{font-size:.97rem}.brow small.old{display:block;font-size:.76rem;color:var(--muted)}
+.brow.pend{background:var(--red-soft)}.brow .escn{margin:4px 0 0;font-size:.8rem;color:var(--red);font-weight:700}
+.brow .bwhy,.brow .sug{grid-column:1/-1;margin:0;font-size:.8rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.brow .bc .dd{width:100%}
+.revs.hot{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft)}
+.rvlist{list-style:none;margin:0;padding:0 20px 12px}.rvlist li{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+.rvlist li b{font-size:.9rem}.rvlist li p{margin:3px 0;font-size:.85rem}.rvlist li small{color:var(--muted);font-size:.76rem}.rvlist li.done{opacity:.75}
+.rvform{display:flex;flex-wrap:wrap;gap:8px;padding:4px 20px 14px;align-items:center}.rvform input{flex:1 1 220px;min-width:0;border:1px solid var(--line2);border-radius:var(--r-ctl);padding:9px 12px;font:inherit;background:var(--surface);color:var(--ink)}
+.tag.okt{background:var(--brand-soft);color:var(--brand)}
+.waitdr{padding:18px 20px}.waitdr h2{font-size:1rem;margin:0 0 6px}.waitdr p{margin:0;color:var(--muted);font-size:.9rem}
+.ronote{display:flex;gap:6px;align-items:center;margin:0 0 10px;font-size:.84rem;color:var(--brand);font-weight:700}.ronote svg{width:16px;height:16px}
+.tok.ro{cursor:default}
+.drow{grid-template-columns:minmax(0,1fr) auto}.drow .lot{display:flex;gap:4px;align-items:center;font-size:.78rem;color:var(--brand);margin-top:3px}.drow .lot svg{width:14px;height:14px}.drow .lot.late{color:var(--red)}
+.scanb svg{width:18px;height:18px}
+.told .qcard.flat{border:0;border-radius:0;background:none;padding:0 6px 8px}
+.tryrow{border-top:1px dashed var(--line2);padding:12px 20px;display:flex;flex-direction:column;gap:8px;font-size:.86rem}.tryrow>span{color:var(--muted)}
+.tryrow p{display:flex;gap:6px;margin:0;align-items:flex-start}.tryrow p svg{width:16px;height:16px;flex:none;margin-top:2px}.tryrow .a-red{color:var(--red)}.tryrow .a-amber{color:var(--amber)}.tryrow .a-ok{color:var(--brand)}
+.ptscan{all:unset;box-sizing:border-box;display:flex;gap:12px;align-items:center;width:100%;margin:12px 0 4px;padding:12px 14px;border-radius:14px;border:1.5px dashed var(--brand);color:var(--brand);cursor:pointer}
+.ptscan svg{width:28px;height:28px;flex:none}.ptscan span{display:flex;flex-direction:column;font-size:.8rem;color:var(--muted)}.ptscan b{color:var(--brand);font-size:.92rem}
+.scanov{position:fixed;inset:0;z-index:80;background:rgba(10,18,15,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.scanbox{background:var(--surface);color:var(--ink);border-radius:18px;width:min(440px,100%);max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 20px 60px -20px rgba(0,0,0,.5)}
+.scanh{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
+.cam{position:relative;background:#0b0f0d;aspect-ratio:4/3}.cam video{width:100%;height:100%;object-fit:cover;display:block}
+.cam .frame{position:absolute;inset:22% 30%;border:3px solid #fff;border-radius:12px;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+.camst{position:absolute;bottom:8px;inset-inline:8px;margin:0;color:#fff;font-size:.8rem;text-align:center}
+.scanres{padding:0 16px}.scanres:empty{display:none}.scanres b{display:flex;gap:6px;align-items:center;margin-top:12px}.scanres b svg{width:18px;height:18px;flex:none}
+.scanres.ok b{color:var(--brand)}.scanres.bad b{color:var(--red)}.scanres .big{font-size:1.05rem;font-weight:700;margin:6px 0}
+.scanres dl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:10px 0 0;font-size:.8rem}.scanres dt{color:var(--muted)}.scanres dd{margin:0;font-weight:700}
+.scanalt{padding:12px 16px 16px}.scanalt>p{margin:0 0 6px;font-size:.8rem;color:var(--muted)}.scanalt .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.scanalt .manual{margin-top:8px}.scanalt .manual input{flex:1;min-width:0;border:1px solid var(--line2);border-radius:var(--r-ctl);padding:9px 10px;font:inherit;background:var(--surface);color:var(--ink)}
+.scanalt .fine{font-size:.74rem;color:var(--faint);margin:10px 0 0;line-height:1.6}
+.storybtn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--brand);color:var(--brand);background:none;border-radius:999px;padding:5px 12px;font:inherit;font-size:.85rem;font-weight:700;cursor:pointer}
+.storybtn svg{width:14px;height:14px}body.storying .storybtn{background:var(--brand);color:var(--brand-ink)}
+.story{position:fixed;inset-inline:0;bottom:0;z-index:70;padding:0 16px 14px;pointer-events:none}
+.story .stin{pointer-events:auto;max-width:860px;margin:0 auto;background:var(--ink);color:var(--surface);border-radius:16px;padding:14px 18px;box-shadow:0 14px 40px -12px rgba(0,0,0,.45)}
+.story .stk{display:flex;gap:10px;align-items:baseline}.story .stn{font-size:.78rem;opacity:.7}.story .stk b{font-size:1.05rem}
+.story p{margin:6px 0 10px;font-size:.95rem;line-height:1.8}
+.story .stc{display:flex;gap:8px;align-items:center}.story .stc .btn.quiet{color:var(--surface)}.story .stc .btn.quiet:disabled{opacity:.4}.story .iconbtn{margin-inline-start:auto;color:var(--surface)}
+body.storying .shell{padding-bottom:210px}
+.spot{outline:3px solid var(--amber)!important;outline-offset:4px;border-radius:14px;transition:outline-color .3s}
+@media (max-width:720px){.brow{grid-template-columns:minmax(0,1fr) auto}.brow .bc{grid-column:1/-1;order:3}.story p{font-size:.88rem}.storybtn{padding:4px 9px}}
+.remind{margin:12px 0 4px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.remind .qrow span{display:flex;flex-direction:column;gap:2px}.remind small{font-size:.74rem;color:var(--muted)}
+.remind .linkbtn{margin:0 14px 10px}
 </style>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -552,15 +597,16 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
       <b>صيامٌ آمن</b>
     </div>
     <nav class="views" aria-label="العرض">
-      <button type="button" id="vClinic" aria-pressed="true">الصيدلي</button>
-      <button type="button" id="vDoctor" aria-pressed="false">الطبيب</button>
       <button type="button" id="vEhr" aria-pressed="false">نظام المستشفى</button>
+      <button type="button" id="vDoctor" aria-pressed="false">الطبيب</button>
+      <button type="button" id="vClinic" aria-pressed="true">الصيدلي</button>
       <button type="button" id="vDash" aria-pressed="false">لوحة المنشأة</button>
       <button type="button" id="vSet" aria-pressed="false">الإعدادات</button>
     </nav>
     <div class="spacer"></div>
     <div class="ctx"><span class="synth">بيانات افتراضية</span> قبل رمضان 1448</div>
     <div class="tools">
+      <button type="button" class="storybtn" id="storyBtn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>العرض</button>
       <div class="sync" data-sync data-s="local" role="status"><i></i><span>غير مربوط</span></div>
       <button class="iconbtn" id="reset" type="button" aria-label="إعادة التجربة من البداية" title="إعادة التجربة من البداية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v4h4"/></svg></button>
       <button class="iconbtn" id="theme" type="button" aria-label="تبديل المظهر" title="فاتح / داكن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
@@ -576,6 +622,7 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
 
 <div class="dtoast" id="dtoast" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19a2 2 0 0 0 4 0"/></svg><span></span></div>
 
+<div class="story" id="story" hidden role="region" aria-label="العرض"></div>
 <script>
 'use strict';
 /* ===== Evidence sources (each rule cites one or more) ===== */
@@ -609,12 +656,15 @@ const DRUGS={
   levetiracetam:{ar:'ليفيتيراسيتام',en:'Levetiracetam 500 mg',cls:'aed',c:['#8fb7e8','#8fb7e8']},
   amoxicillin:{ar:'أموكسيسيلين',en:'Amoxicillin 500 mg',cls:'abx',c:['#d24b4b','#f2d16b']},
   calcium:{ar:'كالسيوم وفيتامين د',en:'Calcium carbonate 600 mg + D3',cls:'calcium',c:['#f4f1ea','#f4f1ea']},
+  clarithromycin:{ar:'كلاريثرومايسين',en:'Clarithromycin 500 mg',cls:'abx',c:['#f4f1ea','#f2d16b']},
+  ibuprofen:{ar:'إيبوبروفين',en:'Ibuprofen 400 mg',cls:'nsaid',c:['#e8a33d','#e8a33d']},
+  aspirin:{ar:'أسبرين',en:'Aspirin 81 mg',cls:'antiplatelet',c:['#ffffff','#f6d0d0']},
   other:{ar:'دواء غير موجود في المكتبة',en:'Unlisted medicine',cls:'unknown',c:['#bfc6c2','#bfc6c2']}
 };
 const RULES={
   doac:{id:'R-ANTICOAG-01',name:'مضادات التخثر المباشرة',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:f=>f===2?['suhoor','iftar']:['iftar'],
     why:'أبيكسابان ودابيغاتران: جرعتان مع السحور والإفطار. ريفاروكسابان: مرة واحدة مع وجبة الإفطار لأنه يُمتص مع الأكل. لا يُحوَّل دواء الجرعتين إلى دواء مرة واحدة إلا بقرار الطبيب.',warn:'دواء حرج: لا تُترك جرعة ولا تُضاعف.'},
-  warfarin:{id:'R-ANTICOAG-02',name:'وارفارين',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم']],why:'جرعة واحدة ثابتة في الوقت نفسه يومياً.',warn:'دواء حرج: متابعة INR حسب خطة الطبيب.'},
+  warfarin:{id:'R-ANTICOAG-02',name:'وارفارين',dom:'cv',lvl:'amber',crit:true,src:['HEART','KSA'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','بعد التراويح']],why:'جرعة واحدة ثابتة في الوقت نفسه يومياً.',warn:'دواء حرج: متابعة INR حسب خطة الطبيب.'},
   metformin:{id:'R-DM-01',name:'ميتفورمين',dom:'dm',lvl:'amber',src:['IDFDAR'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'مع الوجبة: الإفطار، والسحور إن كانت جرعتين.',
     esc:f=>f>=3?'ثلاث جرعات لا تناسب نافذة الصيام.':'',sug:{v:'suhoor+iftar',ds:'same',n:'جرعة الصباح مع السحور، وجرعتا الظهر والمساء معاً مع الإفطار.'}},
   su:{id:'R-DM-02',name:'السلفونيل يوريا',dom:'dm',lvl:'red',src:['IDFDAR'],plan:()=>['iftar'],why:'تُنقل الجرعة إلى الإفطار.',warn:'خطر هبوط السكر أثناء الصيام.',esc:()=>'السلفونيل يوريا ترفع خطر الهبوط أثناء الصيام.',
@@ -630,19 +680,22 @@ const RULES={
     sug:{v:'suhoor+iftar',ds:'reduce',n:'الجرعة المعتادة مع الإفطار، حذف جرعة الغداء، وتقليل جرعة السحور 25 إلى 50%.'},
     dose:u=>[{id:'s25',lbl:'الإفطار '+unitTxt(u,'وحدة')+'، السحور '+unitTxt(Math.floor(u*.75),'وحدة')+' (تقليل 25%)، بلا جرعة الظهر',per:{iftar:u,suhoor:Math.floor(u*.75)},def:true},{id:'s50',lbl:'الإفطار '+unitTxt(u,'وحدة')+'، السحور '+unitTxt(Math.floor(u*.5),'وحدة')+' (تقليل 50%)، بلا جرعة الظهر',per:{iftar:u,suhoor:Math.floor(u*.5)}}],
     dn:'IDF-DAR: جرعة الإفطار كما هي، تُحذف جرعة الغداء، وتُقلَّل جرعة السحور 25 إلى 50%.'},
-  oncecv:{id:'R-CV-01',name:'أدوية الضغط مرة يومياً',dom:'cv',lvl:'green',src:['HEART'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'تُنقل إلى الإفطار، مع مراجعة الضغط ووظائف الكلى قبل رمضان.'},
+  oncecv:{id:'R-CV-01',name:'أدوية الضغط مرة يومياً',dom:'cv',lvl:'green',src:['HEART'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','بعد التراويح'],['suhoor','السحور']],why:'تُنقل إلى الإفطار، مع مراجعة الضغط ووظائف الكلى قبل رمضان.'},
   diuretic:{id:'R-CV-02',name:'مدرات البول',dom:'cv',lvl:'amber',src:['HEART'],plan:()=>['iftar'],why:'بعد الإفطار حتى لا يزيد العطش نهاراً.',warn:'خطر الجفاف وإصابة الكلى واضطراب الأملاح.'},
-  statin:{id:'R-LIP-01',name:'الستاتينات',dom:'cv',lvl:'green',src:['NONE'],plan:()=>['bed'],alt:[['bed','قبل النوم'],['iftar','الإفطار']],why:'مساءً قبل النوم.'},
-  thyroid:{id:'R-END-01',name:'هرمون الغدة الدرقية',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','قبل السحور'],['bed','قبل النوم']],why:'على معدة فارغة قبل السحور بنصف ساعة. البديل المدروس: قبل الإفطار بنصف ساعة (دراسة سعودية 2022). فحص TSH بعد 6 إلى 8 أسابيع من رمضان.'},
-  calcium:{id:'R-SUP-01',name:'الكالسيوم',dom:'other',lvl:'green',src:['LABEL'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','قبل النوم'],['suhoor','السحور']],why:'مع الإفطار، بعيداً عن هرمون الغدة 4 ساعات على الأقل.'},
+  statin:{id:'R-LIP-01',name:'الستاتينات',dom:'cv',lvl:'green',src:['NONE'],plan:()=>['bed'],alt:[['bed','بعد التراويح'],['iftar','الإفطار']],why:'مساءً بعد صلاة التراويح.'},
+  thyroid:{id:'R-END-01',name:'هرمون الغدة الدرقية',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','قبل السحور'],['bed','بعد التراويح']],why:'على معدة فارغة قبل السحور بنصف ساعة. البديل المدروس: قبل الإفطار بنصف ساعة (دراسة سعودية 2022). فحص TSH بعد 6 إلى 8 أسابيع من رمضان.'},
+  calcium:{id:'R-SUP-01',name:'الكالسيوم',dom:'other',lvl:'green',src:['LABEL'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','بعد التراويح'],['suhoor','السحور']],why:'مع الإفطار، بعيداً عن هرمون الغدة 4 ساعات على الأقل.'},
   ppi:{id:'R-GI-01',name:'مثبطات مضخة البروتون',dom:'other',lvl:'green',src:['NONE'],plan:()=>['suhoor'],alt:[['suhoor','السحور'],['iftar','الإفطار']],why:'قبل السحور.'},
   aed:{id:'R-NEURO-01',name:'أدوية الصرع',dom:'epi',lvl:'amber',crit:true,src:['EPI'],plan:f=>f>=3?null:(f===2?['suhoor','iftar']:['iftar']),why:'جرعتان: مع السحور ومع الإفطار.',warn:'دواء حرج: ترك الجرعات قد يسبب نوبات.',
     esc:f=>f>=3?'ثلاث جرعات من مضاد صرع.':'',sug:{v:'suhoor+iftar',ds:'same',n:'نفس الجرعة اليومية مقسومة على جرعتين: السحور والإفطار، بقرار طبيب الأعصاب.'}},
   abx:{id:'R-ID-01',name:'المضادات الحيوية',dom:'acute',lvl:'red',src:['NONE'],plan:()=>null,why:'',esc:()=>'مضاد حيوي بجرعات متعددة أثناء مرض حاد.',
     sug:{v:'keep',n:'يبقى على مواعيده المعتادة، ويؤجل الصيام حتى انتهاء العلاج.'}},
+  nsaid:{id:'R-PAIN-01',name:'مسكنات الالتهاب',dom:'other',lvl:'amber',src:['LABEL'],plan:f=>f>=3?null:(f===2?['iftar','bed']:['iftar']),why:'بعد الأكل فقط، وتُتجنَّب مع الجفاف أو ضعف الكلى. الباراسيتامول أسلم في الصيام.',
+    esc:f=>f>=3?'ثلاث جرعات من مسكن التهاب لا تناسب نافذة الصيام.':''},
+  antiplatelet:{id:'R-CV-03',name:'مضادات الصفائح',dom:'cv',lvl:'green',src:['HEART'],plan:()=>['iftar'],alt:[['iftar','الإفطار'],['bed','بعد التراويح']],why:'جرعة واحدة مع الإفطار أو بعده.'},
   unknown:{id:'R-SAFE-00',name:'دواء غير موجود في المكتبة',dom:'any',lvl:'red',src:['NONE'],plan:()=>null,why:'',esc:()=>'غير موجود في مكتبة القواعد، فيُحال للطبيب تلقائياً.'}
 };
-const SLOT={suhoor:'السحور',iftar:'الإفطار',bed:'قبل النوم'};
+const SLOT={suhoor:'السحور',iftar:'الإفطار',bed:'بعد التراويح'};
 /* what the patient does if a dose is missed (pharmacist signs these with the plan) */
 const MISS={doac:'إذا تذكرت وأنت مفطر وقبل الجرعة التالية بوقت كافٍ فخذها، وإلا فاتركها. لا تأخذ جرعتين معاً أبداً.',
   warfarin:'خذها إذا تذكرت في الليلة نفسها. إذا مر اليوم فاتركها وأخبر العيادة. لا تضاعف الجرعة.',
@@ -652,15 +705,51 @@ const MISS={doac:'إذا تذكرت وأنت مفطر وقبل الجرعة ال
   diuretic:'اتركها وخذ جرعة الغد بعد الإفطار، ولا تأخذها مع السحور.',statin:'اتركها وخذ الجرعة التالية في وقتها.',
   thyroid:'خذها في أقرب وقت على معدة فارغة، أو اتركها لليوم التالي. لا تضاعفها.',calcium:'اتركها وخذ الجرعة التالية في وقتها.',
   ppi:'اتركها وخذ الجرعة التالية في وقتها.',aed:'خذها فور تذكرك وأنت مفطر. إذا كنت صائماً وقريباً من الإفطار فخذها مع الإفطار. إذا أصابتك نوبة فأفطر واتصل بطبيبك.',
-  abx:'اسأل الصيدلي، ولا تصم حتى تنتهي من المضاد الحيوي.',unknown:'اسأل الصيدلي.'};
+  abx:'اسأل الصيدلي، ولا تصم حتى تنتهي من المضاد الحيوي.',nsaid:'اتركها، ولا تأخذها على معدة فارغة.',antiplatelet:'خذها مع الإفطار التالي، ولا تضاعفها.',unknown:'اسأل الصيدلي.'};
 /* medicines paused on a dehydrating sick day (IDF-DAR sick-day rules) */
 const SICK=i=>['sglt2','metformin','diuretic','su'].includes(i.d.cls)||i.key==='losartan';
 /* monitoring the team books with the plan */
 const MON={warfarin:'تحليل INR في الأسبوع الأول أو الثاني من رمضان، ومرة بعد العيد بأسبوع.',thyroid:'تحليل TSH بعد 6 إلى 8 أسابيع من رمضان.',
   basal:'قياس السكر يومياً قبل الإفطار وبعده بساعتين، ويعدّل الفريق جرعة الإنسولين كل 3 أيام.',prandial:'قياس السكر يومياً قبل الإفطار وبعده بساعتين، ويعدّل الفريق جرعة الإنسولين كل 3 أيام.',
   su:'قياس السكر في منتصف النهار وقبل الإفطار، خاصة في الأسبوع الأول.',sglt2:'وظائف الكلى والأملاح قبل رمضان، وشرب سوائل كافية بين الإفطار والسحور.',diuretic:'وظائف الكلى والأملاح قبل رمضان.'};
+/* why each timing option fits, shown under the option the doctor picks */
+const OPTWHY={
+ 'warfarin:iftar':'جرعة ثابتة مع الإفطار، أسهل وقت للتذكر كل يوم.',
+ 'warfarin:bed':'بعد التراويح في الوقت نفسه يومياً، لمن اعتاد جرعة المساء.',
+ 'oncecv:iftar':'مع أول وجبة، وهو أسهل وقت للتذكر.',
+ 'oncecv:bed':'بعد التراويح، لمن يدوخ بعد الإفطار أو ينسى جرعة الإفطار.',
+ 'oncecv:suhoor':'مع السحور إذا كان الضغط يرتفع نهاراً، مع الانتباه للدوخة أثناء الصيام.',
+ 'statin:bed':'مساءً بعد التراويح، وهو الأنسب للستاتينات قصيرة المفعول.',
+ 'statin:iftar':'أتورفاستاتين وروسوفاستاتين طويلة المفعول، فيصلح أخذها مع الإفطار.',
+ 'thyroid:suhoor':'على معدة فارغة قبل السحور بنصف ساعة.',
+ 'thyroid:bed':'بعد التراويح إذا مضت 3 ساعات على الأكل، لمن يصعب عليه الاستيقاظ قبل السحور بوقت كافٍ.',
+ 'calcium:iftar':'مع الأكل يتحسن امتصاصه، وبعيداً عن هرمون الغدة.',
+ 'calcium:bed':'بعد التراويح إذا كثرت الأدوية مع الإفطار.',
+ 'calcium:suhoor':'مع السحور فقط إذا لم يكن المريض على هرمون الغدة.',
+ 'ppi:suhoor':'قبل السحور بنصف ساعة، لأن الحموضة تزيد مع الصيام نهاراً.',
+ 'ppi:iftar':'قبل الإفطار بنصف ساعة إذا كانت الحموضة بعد الإفطار.',
+ 'antiplatelet:iftar':'مع الإفطار لتقليل تهيج المعدة.',
+ 'antiplatelet:bed':'بعد التراويح بعد وجبة خفيفة.',
+ keep:'يبقى على مواعيده المعتادة، ولا يصوم أثناء هذا العلاج.',
+ stop:'إيقاف مؤقت في رمضان، إذا كان خطره أثناء الصيام أكبر من فائدته.'};
+const slotLbl=v=>v.split('+').map(x=>SLOT[x]).join(' و');
+function planOpts(i){
+  const r=i.r,def=r.plan(i.f),dv=def?def.join('+'):null,sv=r.sug?r.sug.v:null,out=[],seen=new Set();
+  const add=(v,why,sug)=>{if(seen.has(v))return;if(i.crit&&i.f===2&&!v.includes('+'))return;seen.add(v);out.push([v,slotLbl(v)+(sug?' (المقترح)':''),'',why]);};
+  if(sv&&sv!=='keep'&&i.esc) add(sv,r.sug.n,true);
+  if(dv) add(dv,r.why,!i.esc);
+  (r.alt||[]).forEach(([v])=>add(v,OPTWHY[i.d.cls+':'+v]||'بديل مقبول حسب الإرشاد.'));
+  if(i.f===2) add('suhoor+iftar','الجرعة اليومية مقسومة على السحور والإفطار.');
+  if(sv&&sv!=='keep') add(sv,r.sug.n);
+  out.push(['keep','مواعيده المعتادة (لا يصوم)'+(sv==='keep'?' (المقترح)':''),'doc',sv==='keep'?r.sug.n:OPTWHY.keep]);
+  out.push(['stop','إيقاف في رمضان','doc',OPTWHY.stop]);
+  return out;}
+const curPl=i=>i.stop?'stop':i.keep?'keep':(i.doctor&&!i.dd)?'':i.doses.join('+');
+/* pharmacist: dispensing, counselling, and asking the doctor to review */
+const TOLD=[['times','المواعيد الجديدة لكل دواء'],['miss','ماذا يفعل إذا نسي جرعة'],['break','متى يقطع صيامه'],['sos','علامات الخطر والاتصال على 997']];
+const REVWHY=['تداخل دوائي','الجرعة تحتاج مراجعة','التوقيت لا يناسب المريض','المريض لا يقدر يلتزم بالخطة','دواء ناقص أو زائد في القائمة','العلبة المصروفة تختلف عن الوصفة','سبب آخر'];
 const ORR=['السكر غير منضبط','هبوط سكر سابق','تفضيل المريض بعد النقاش','رأي الطبيب المختص','سبب آخر'];
-const OPTS=[['iftar','الإفطار'],['suhoor','السحور'],['bed','قبل النوم'],['suhoor+iftar','السحور والإفطار'],['iftar+iftar','جرعتان مع الإفطار'],['doctor','إحالة للطبيب']];
+const OPTS=[['iftar','الإفطار'],['suhoor','السحور'],['bed','بعد التراويح'],['suhoor+iftar','السحور والإفطار'],['iftar+iftar','جرعتان مع الإفطار'],['doctor','إحالة للطبيب']];
 const QUESTIONS=[
   {k:'hypo',t:'أصابني هبوط سكر شديد خلال آخر 3 أشهر',red:true},
   {k:'preg',t:'حامل أو مرضع',red:true},
@@ -693,7 +782,7 @@ const hiFollow=id=>overall(id).cat==='high'||per[id].items.some(i=>['su','basal'
 /* ===== Configuration (shared across devices): mode, clinic, city, resilience, local protocol ===== */
 const CITIES={riyadh:['الرياض',24.71,46.68],kharj:['الخرج',24.15,47.31],jeddah:['جدة',21.49,39.19],makkah:['مكة المكرمة',21.42,39.83],madinah:['المدينة المنورة',24.47,39.61],dammam:['الدمام',26.43,50.10],abha:['أبها',18.22,42.50],tabuk:['تبوك',28.38,36.57]};
 const CLINICS={fm:{n:'طب الأسرة: كل الأدوات',k:['dm','cv','renal','epi','preg','acute','other']},endo:{n:'الغدد والسكري',k:['dm','preg']},cardio:{n:'القلب',k:['cv']},nephro:{n:'الكلى',k:['renal']},neuro:{n:'الأعصاب',k:['epi']}};
-const MODES={team:'الطبيب يعتمد والصيدلي يراجع',doctor:'طبيب وحده',pharmacy:'صيدلية مجتمع: توقيت فقط'};
+const MODES={team:'الطبيب يبني الخطة والصيدلي يصرف ويشرح',doctor:'طبيب وحده بلا صيدلية'};
 const CFG0=()=>({v:1,mode:'team',clinic:'fm',city:'riyadh',his:'up',sms:'on',trap:'off',ovr:{},log:[],msgEpoch:0});
 let CFG=CFG0();
 const RAMADAN_START=Date.UTC(2027,1,8); // expected 1 Ramadan 1448, subject to moon sighting
@@ -705,9 +794,9 @@ function sunTimes(lat,lon,t){
   return {maghrib:720-4*(lon-ha(90.833))-eq+180+1, fajr:720-4*(lon+ha(108.5))-eq+180}; // Umm al-Qura: Fajr at 18.5 degrees, Saudi time UTC+3
 }
 const hm=m=>{m=Math.round(m);let h=Math.floor(m/60)%24;const mi=m%60,ap=h<12?'ص':'م';h=h%12||12;return h+':'+String(mi).padStart(2,'0')+' '+ap;};
-const TIME={};let FAST=0;
+const TIME={},TIMEM={};let FAST=0;
 function computeTimes(){const c=CITIES[CFG.city]||CITIES.riyadh,t=sunTimes(c[1],c[2],RAMADAN_START);
-  TIME.iftar=hm(t.maghrib);TIME.suhoor=hm(t.fajr-15);TIME.fajr=hm(t.fajr);TIME.bed=hm(t.maghrib+270);FAST=(t.maghrib-t.fajr)/60;}
+  TIMEM.iftar=t.maghrib;TIMEM.suhoor=t.fajr-15;TIMEM.bed=t.maghrib+180;TIME.iftar=hm(t.maghrib);TIME.suhoor=hm(t.fajr-15);TIME.fajr=hm(t.fajr);TIME.bed=hm(t.maghrib+180)/* Isha is Maghrib + 120 min in Ramadan (Umm al-Qura), Taraweeh about 1 hour */;FAST=(t.maghrib-t.fajr)/60;}
 computeTimes();
 const planFor=(r,f)=>{const o=CFG.ovr[r.id];return (o&&f===1&&r.alt)?[o]:r.plan(f);};
 
@@ -724,11 +813,11 @@ const doseOpts=i=>{if(!(i.r.dose&&i.u))return null;const o=i.r.dose(i.u);if(CFG.
 const doseDef=i=>{const o=doseOpts(i);return o?(o.find(x=>x.def)||o[0]).id:null;};
 const doseSel=i=>{const o=doseOpts(i);return o&&i.du?o.find(x=>x.id===i.du):null;};
 function setDose(i,id){const o=doseOpts(i),x=o&&o.find(y=>y.id===id);if(!x)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;i.du=id;i.doses=['suhoor','iftar','bed'].filter(z=>z in x.per);i.ds=x.id==='same'||x.id==='p0'?'same':'reduce';i.approved=false;i.ack=true;if(id===doseDef(i))i.orr=null;return true;}
-function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false};}
+function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false,disp:{},told:{},rev:[]};}
 PATIENTS.forEach(initPatient);
-const signer=()=>CFG.mode==='doctor'?'د. سعد، طبيب أسرة (حساب تجريبي)':CFG.mode==='team'?'د. سعد (طبيب)، وراجعتها د. ريم (صيدلانية)':'د. ريم، صيدلانية (حساب تجريبي)';
+const signer=()=>'د. سعد، طبيب أسرة (حساب تجريبي)';
 function seedDemo(){
-  const sign=(id,fu)=>{const s=per[id];s.items.forEach(i=>{i.approved=true;i.ack=true;});s.drOk=true;s.signed={by:'د. سعد (طبيب)، وراجعتها د. ريم (صيدلانية)',at:'14 شعبان 1448'};s.tab='plan';if(fu){s.fu=fu;s.tab='follow';}};
+  const sign=(id,fu)=>{const s=per[id];s.items.forEach(i=>{i.approved=true;i.ack=true;});s.drOk=true;s.signed={by:'د. سعد، طبيب أسرة',at:'14 شعبان 1448'};s.items.forEach((i,ix)=>{if(!i.stop)s.disp[ix]={g:gtinOf(i.key),lot:'B'+(2417+ix),exp:'2027-09-30',sn:'',man:false};});TOLD.forEach(([k])=>s.told[k]=true);s.tab='plan';if(fu){s.fu=fu;s.tab='follow';}};
   sign('P2',{miss:'لا',dbl:'لا',sym:'لا'});
   sign('P5',{miss:'نعم',dbl:'لا',sym:'لا'});
 }
@@ -736,7 +825,7 @@ seedDemo();
 const modeFromHash=()=>location.hash==='#patient'?'patient':(location.hash==='#pharmacist'||location.hash==='#doctor')?'pharm':'all';
 let MODE=window.SF_MODE||modeFromHash();
 window.addEventListener('hashchange',()=>{if(!window.SF_MODE){MODE=modeFromHash();if(location.hash==='#doctor')S.view='doctor';else if(location.hash==='#pharmacist')S.view='clinic';render();}});
-const S={draft:{pt:'',dr:''},dd:null,why:false,open:-1,pid:'P1',view:'clinic',pane:'pharm',pick:null,sync:'local',idf:false,json:false,addK:null,addF:null};let DRAG=false;if(location.hash==='#doctor'||window.SF_VIEW==='doctor')S.view='doctor';
+const S={draft:{pt:'',dr:''},dd:null,why:false,open:-1,pid:'P1',view:(location.hash==='#pharmacist'||(MODE==='pharm'&&!window.SF_VIEW))?'clinic':'doctor',pane:'pharm',pick:null,sync:'local',idf:false,json:false,addK:null,addF:null,rvm:null,rvw:null,rvNote:'',tryK:null,story:null};let DRAG=false;if(location.hash==='#doctor'||window.SF_VIEW==='doctor')S.view='doctor';
 const P=()=>PATIENTS.find(p=>p.id===S.pid);
 const PP=id=>PATIENTS.find(p=>p.id===id);
 const st=(id=S.pid)=>per[id];
@@ -748,10 +837,13 @@ const srcChips=r=>r.src.map(k=>`<span class="src ${k==='NONE'?'none':''}" title=
 
 const pendingDr=id=>per[id].items.filter(i=>(i.doctor||i.esc)&&!i.dd);
 const redQ=id=>QUESTIONS.some(q=>q.red&&per[id].answers[q.k]);
-const ackLeft=id=>CFG.mode==='team'?per[id].items.filter(i=>!(i.doctor&&!i.dd)&&!i.ack).length:0;
+const ackLeft=id=>per[id].items.filter(i=>!(i.doctor&&!i.dd)&&!i.ack).length;
 const drReady=id=>pendingDr(id).length===0&&!(redQ(id)&&!per[id].clearance)&&ackLeft(id)===0;
-const needsDoctor=id=>CFG.mode!=='pharmacy'&&(!drReady(id)||(CFG.mode==='team'&&!per[id].drOk));
-const doctorCase=id=>CFG.mode==='team'||per[id].items.some(i=>i.esc||i.doctor||i.dd)||redQ(id)||!!per[id].clearance||overall(id).cat!=='low';
+const needsDoctor=id=>!per[id].signed;
+const openRev=id=>(per[id].rev||[]).filter(r=>r.st!=='done');
+const liveDisp=id=>per[id].items.map((i,ix)=>({i,ix})).filter(o=>!o.i.stop);
+const dispDone=id=>liveDisp(id).every(o=>per[id].disp[o.ix])&&TOLD.every(([k])=>per[id].told[k]);
+const doctorCase=id=>true;
 
 /* ===== Fasting-risk assessment (decision support) ===== */
 const RK={low:0,moderate:1,high:2};
@@ -790,11 +882,11 @@ function overall(id){const R=risks(id);let cat='low';R.forEach(r=>{if(RK[r.cat]>
 function triage(id){
   const p=PP(id), s=per[id], reasons=[];
   s.items.filter(i=>i.esc&&!i.dd).forEach(i=>reasons.push({lvl:'red',t:i.d.ar+': '+i.esc}));
-  s.items.filter(i=>i.doctor&&!i.esc&&!i.dd).forEach(i=>reasons.push({lvl:'red',t:i.d.ar+': أحاله الصيدلي للطبيب.'}));
+  s.items.filter(i=>i.doctor&&!i.esc&&!i.dd).forEach(i=>reasons.push({lvl:'red',t:i.d.ar+': يحتاج قرار الطبيب.'}));
   QUESTIONS.forEach(q=>{if(s.answers[q.k]&&!(q.red&&s.clearance)) reasons.push({lvl:q.red?'red':'amber',t:q.t+(q.red?'. يستوجب تقييم الطبيب قبل قرار الصيام.':'. يحتاج مواعيد مخصصة.')});});
   if(s.clearance==='no') reasons.push({lvl:'red',t:'قرار الطبيب: لا يُنصح بالصيام هذا العام.'});
   if(s.items.some(i=>i.dd)) reasons.push({lvl:'amber',t:'قرّر الطبيب في '+s.items.filter(i=>i.dd).length+' من الأدوية.'});
-  if(s.items.some(i=>i.crit)) reasons.push({lvl:'amber',t:'يتناول دواءً حرجاً: مراجعة الصيدلي إلزامية.'});
+  if(s.items.some(i=>i.crit)) reasons.push({lvl:'amber',t:'يتناول دواءً حرجاً: تحقق إضافي عند الصرف.'});
   if(medsOf(id).length>=5) reasons.push({lvl:'amber',t:'تعدد الأدوية: '+medsOf(id).length+' أدوية.'});
   let lvl='green';
   s.items.forEach(i=>{const l=i.dd?'amber':i.doctor?'red':i.lvl;if(LV[l]>LV[lvl]) lvl=l;});
@@ -802,14 +894,15 @@ function triage(id){
   reasons.sort((a,b)=>LV[b.lvl]-LV[a.lvl]);
   return {lvl,reasons};
 }
-const TRI={red:{t:'أحمر',d:'مراجعة الطبيب قبل الصيام'},amber:{t:'برتقالي',d:'يحتاج مراجعة الصيدلي'},green:{t:'أخضر',d:'تغيير توقيت بسيط'}};
+const TRI={red:{t:'أحمر',d:'مراجعة الطبيب قبل الصيام'},amber:{t:'برتقالي',d:'خطة الطبيب وتحقق عند الصرف'},green:{t:'أخضر',d:'تغيير توقيت بسيط'}};
 function flagged(id){const f=per[id].fu;return fuqOf(id).some(q=>f[q.k]==='نعم');}
 function status(id){const s=per[id];
   if(s.signed&&flagged(id)) return {c:'s-call',t:'اتصل اليوم'};
-  if(s.signed) return {c:'s-done',t:'أُرسلت الخطة'};
-  if(needsDoctor(id)) return {c:'s-doc',t:'عند الطبيب'};
-  return {c:'s-wait',t:'بانتظار مراجعتك'};}
-function drStatus(id){if(per[id].signed&&per[id].fu.low==='نعم')return {c:'s-call',t:'هبوط سكر'};if(per[id].signed)return {c:'s-done',t:'وصلت للمريض'};return needsDoctor(id)?{c:'s-wait',t:'بانتظار اعتمادك'}:{c:'s-done',t:'اعتمدتها'};}
+  if(openRev(id).length) return {c:'s-doc',t:'طلبت مراجعة'};
+  if(!s.signed) return {c:'s-doc',t:'عند الطبيب'};
+  if(dispDone(id)) return {c:'s-done',t:'صُرفت وشُرحت'};
+  return {c:'s-wait',t:'جاهزة للصرف'};}
+function drStatus(id){if(openRev(id).length)return {c:'s-call',t:'طلب من الصيدلي'};if(per[id].signed&&per[id].fu.low==='نعم')return {c:'s-call',t:'هبوط سكر'};if(per[id].signed)return {c:'s-done',t:'وصلت للمريض'};return {c:'s-wait',t:'بانتظار خطتك'};}
 
 /* clinical checks on the pharmacist's edits */
 function checks(i,id=S.pid){
@@ -823,22 +916,45 @@ function checks(i,id=S.pid){
   if(i.f===2&&d.length===1) w.push(i.crit?'دواء حرج كان يُؤخذ مرتين: لا يُحوَّل لجرعة واحدة إلا بقرار الطبيب.':'كان يُؤخذ مرتين: تأكد من تعديل الجرعة اليومية.');
   return w;
 }
-/* medicine alerts for the doctor: interactions and timing conflicts created by the fasting window */
-function alertsFor(id){const s=per[id],p=PP(id),A=[];
+/* ===== Drug interaction checker: pairs that matter more while fasting ===== */
+const CLS=i=>i.d.cls, AC=['doac','warfarin'];
+const INTER=[
+ {a:i=>AC.includes(CLS(i)),b:i=>AC.includes(CLS(i)),lvl:'red',t:(a,b)=>a.d.ar+' و'+b.d.ar+' مميعان معاً: خطر نزيف شديد.',fix:'تأكد أن أحدهما أُوقف، ولا يُصرفان معاً.',src:'LABEL'},
+ {a:i=>CLS(i)==='warfarin',b:i=>CLS(i)==='abx',lvl:'red',t:(a,b)=>'وارفارين مع '+b.d.ar+': المضاد الحيوي قد يرفع INR ويزيد خطر النزيف.',fix:'افحص INR خلال 3 إلى 5 أيام من بدء المضاد.',src:'LABEL'},
+ {a:i=>AC.includes(CLS(i)),b:i=>CLS(i)==='nsaid',lvl:'red',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': يزيد خطر نزيف المعدة.',fix:'استخدم باراسيتامول للألم بدلاً منه.',src:'LABEL'},
+ {a:i=>AC.includes(CLS(i)),b:i=>CLS(i)==='antiplatelet',lvl:'amber',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': مميع ومضاد صفائح معاً يرفعان خطر النزيف.',fix:'تأكد أن الجمع مقصود من طبيب القلب، ومدته محددة.',src:'LABEL'},
+ {a:i=>CLS(i)==='doac',b:i=>i.key==='clarithromycin',lvl:'amber',t:(a,b)=>b.d.ar+' يرفع مستوى '+a.d.ar+' في الدم.',fix:'فكّر في مضاد حيوي آخر، أو راقب علامات النزيف.',src:'LABEL'},
+ {a:i=>CLS(i)==='statin',b:i=>i.key==='clarithromycin',lvl:'red',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': خطر تكسّر العضلات.',fix:'أوقف الستاتين مؤقتاً حتى ينتهي المضاد الحيوي.',src:'LABEL'},
+ {a:i=>CLS(i)==='sglt2',b:i=>CLS(i)==='diuretic',lvl:'amber',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': يزيدان الجفاف وهبوط الضغط، والصيام يضاعف الخطر.',fix:'راجع جرعة المدر، أو أوقف مثبط SGLT2 مؤقتاً في رمضان.',src:'HEART'},
+ {a:i=>i.key==='losartan',b:i=>CLS(i)==='nsaid',lvl:'amber',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': يضعفان الكلى مع الجفاف، ويزيد الخطر إن كان معهما مدر بول.',fix:'تجنب مسكن الالتهاب أثناء الصيام.',src:'RAK'},
+ {a:i=>CLS(i)==='nsaid',b:i=>['sglt2','diuretic'].includes(CLS(i)),lvl:'amber',t:(a,b)=>a.d.ar+' مع '+b.d.ar+' أثناء الصيام: خطر إصابة الكلى مع الجفاف.',fix:'استخدم باراسيتامول، واشرب سوائل كافية بين الإفطار والسحور.',src:'RAK'},
+ {a:i=>CLS(i)==='su',b:i=>['basal','prandial'].includes(CLS(i)),lvl:'amber',t:(a,b)=>a.d.ar+' مع '+b.d.ar+': جمعهما يرفع خطر هبوط السكر أثناء الصيام.',fix:'فكّر في تقليل السلفونيل يوريا أو إيقافها في رمضان.',src:'IDFDAR'},
+ {a:i=>i.key==='bisoprolol',b:i=>['su','basal','prandial'].includes(CLS(i)),lvl:'amber',t:(a,b)=>'بيسوبرولول يخفي أعراض هبوط السكر مثل الرجفة والخفقان، والمريض على '+b.d.ar+'.',fix:'علّم المريض أن التعرق والجوع قد يكونان العلامة الوحيدة، وأن يقيس السكر عند أي شك.',src:'LABEL',one:true}
+];
+function interactions(list){const A=[],seen=new Set();
+  INTER.forEach((r,k)=>{if(r.one&&seen.has(k))return;
+    list.forEach((a,x)=>list.forEach((b,y)=>{if(x===y||(r.one&&seen.has(k)))return;if(!r.a(a)||!r.b(b))return;
+      const key=k+':'+[x,y].sort().join('-');if(seen.has(key))return;seen.add(key);if(r.one)seen.add(k);
+      A.push({lvl:r.lvl,k:'تداخل دوائي',t:r.t(a,b),fix:r.fix,src:r.src});}));});
+  const by={};list.forEach(i=>{const c=CLS(i);if(['oncecv','unknown','abx'].includes(c))return;(by[c]=by[c]||[]).push(i);});
+  Object.values(by).filter(v=>v.length>1&&!AC.includes(CLS(v[0]))).forEach(v=>A.push({lvl:'amber',k:'ازدواجية',t:v.map(i=>i.d.ar).join(' و')+' من الفئة نفسها ('+v[0].r.name+').',fix:'تأكد أن الجمع مقصود.',src:'LABEL'}));
+  return A;}
+function alertsFor(id){const s=per[id],p=PP(id);
   const live=s.items.filter(i=>!i.stop);
+  const A=interactions(live);
   const it=c=>live.find(i=>i.d.cls===c), has=c=>!!it(c);
-  if(has('warfarin')&&has('abx')) A.push({lvl:'red',k:'تداخل دوائي',t:'وارفارين مع '+it('abx').d.ar+': المضاد الحيوي قد يرفع INR ويزيد خطر النزيف.',fix:'افحص INR خلال 3 إلى 5 أيام من بدء المضاد.',src:'LABEL'});
-  if(has('sglt2')&&has('diuretic')) A.push({lvl:'amber',k:'تداخل دوائي',t:it('sglt2').d.ar+' مع '+it('diuretic').d.ar+': يزيدان الجفاف وهبوط الضغط، والصيام يضاعف الخطر.',fix:'راجع جرعة المدر، أو أوقف مثبط SGLT2 مؤقتاً في رمضان.',src:'HEART'});
-  const bb=live.find(i=>i.key==='bisoprolol'), hyp=live.filter(i=>['su','basal','prandial'].includes(i.d.cls));
-  if(bb&&hyp.length) A.push({lvl:'amber',k:'تداخل دوائي',t:'بيسوبرولول يخفي أعراض هبوط السكر مثل الرجفة والخفقان، والمريض على '+hyp.map(i=>i.d.ar).join(' و')+'.',fix:'علّم المريض أن التعرق والجوع قد يكونان العلامة الوحيدة، وأن يقيس السكر عند أي شك.',src:'LABEL'});
   const lev=it('thyroid');
   ['calcium','ppi'].forEach(c=>{const o=it(c);if(!lev||!o)return;
     if(lev.doses.some(d=>o.doses.includes(d))) A.push({lvl:'red',k:'تعارض توقيت',t:'ليفوثيروكسين و'+o.d.ar+' في الوقت نفسه: يقل امتصاص هرمون الغدة.',fix:'افصل بينهما 4 ساعات على الأقل: الهرمون قبل السحور، و'+o.d.ar+' مع الإفطار.',src:'LABEL'});
     else A.push({lvl:'ok',k:'تعارض توقيت',t:'فصلت الخطة بين ليفوثيروكسين و'+o.d.ar+' بأكثر من 4 ساعات.',src:'LABEL'});});
   if(has('metformin')&&p.cl.egfr<45) A.push({lvl:'red',k:'جرعة الكلى',t:'ميتفورمين مع eGFR '+p.cl.egfr+': الجرعة تحتاج مراجعة.',src:'LABEL'});
   ['iftar','suhoor','bed'].forEach(z=>{const n=live.filter(i=>i.doses.includes(z)).length;
-    if(n>=6) A.push({lvl:'amber',k:'عبء الجرعات',t:n+' أدوية مع '+SLOT[z]+' وحده، وهذا يرفع احتمال النسيان.',fix:'انظر هل يمكن نقل أحدها إلى قبل النوم أو إيقافه مؤقتاً.',src:'NONE'});});
+    if(n>=6) A.push({lvl:'amber',k:'عبء الجرعات',t:n+' أدوية مع '+SLOT[z]+' وحده، وهذا يرفع احتمال النسيان.',fix:'انظر هل يمكن نقل أحدها إلى بعد التراويح أو إيقافه مؤقتاً.',src:'NONE'});});
+  A.sort((a,b)=>({red:0,amber:1,ok:2})[a.lvl]-({red:0,amber:1,ok:2})[b.lvl]);
   return A;}
+/* "what if I prescribe..." check against the current list, without changing the plan */
+function tryDrug(id,k){if(!k||!DRUGS[k])return [];const live=per[id].items.filter(i=>!i.stop),n=makeItem(k,1);
+  return interactions(live.concat([n])).filter(a=>a.t.includes(n.d.ar));}
 /* appointments: when the patient must be seen, and the nearest free clinic slot */
 const FREE=['2026-11-17','2026-11-24','2026-11-26','2026-12-01','2026-12-08','2026-12-15','2026-12-22','2027-01-05'];
 const isoAdd=(t,d)=>new Date(t+d*864e5).toISOString().slice(0,10);
@@ -871,7 +987,9 @@ const I={
   chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
   suhoor:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 15a7 7 0 1 1-8-9 5.5 5.5 0 0 0 8 9z"/><path d="M19 4v3M17.5 5.5h3"/></svg>',
   iftar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 6.5v2.5M5.8 9.8l1.6 1.6M18.2 9.8l-1.6 1.6"/></svg>',
-  bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 19v-9M3 15h18v4M7 12.5h6a3 3 0 0 1 3 3"/></svg>',
+  bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18M5 20v-6.5a7 7 0 0 1 14 0V20M12 3.5v3M10 20v-3.5a2 2 0 0 1 4 0V20"/></svg>',
+  scan:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/><path d="M8 9h2v2H8zM14 9h2v2h-2zM8 14h2v1M12 13v3M15 14h1v2"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>',
   send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4L3 11l7 2.5L12.5 21z"/><path d="M20 4l-10 9.5"/></svg>',
   doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M12 14v3M10.5 15.5h3"/></svg>',
   plug:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 7V3M15 7V3M7 7h10v4a5 5 0 0 1-10 0zM12 16v5"/></svg>'
@@ -904,41 +1022,46 @@ function headBlock(p,s,t,withWhy){
 function hisBanner(){
   return CFG.his==='down'?`<div class="banner">${I.plug}<div><b>الربط مع نظام المستشفى منقطع.</b> الأدوية من آخر نسخة محفوظة، وتقدر تضيف دواء يدوياً. كل شيء آخر يعمل كالمعتاد.</div></div>`:'';
 }
-/* ===== Pharmacist ===== */
+/* ===== Pharmacist: dispenses, checks and explains. Does not approve or change the plan ===== */
+const doseTxt=(i,z)=>{const x=doseSel(i);return x&&x.per[z]!=null?' '+unitTxt(x.per[z],i.d.un):'';};
+const whenTxt=i=>i.keep?'مواعيده المعتادة':i.doses.map(z=>SLOT[z]+doseTxt(i,z)).join('، ');
+const expTxt=e=>{const m=/^(\d{4})-(\d{2})/.exec(e||'');return m?m[2]+'/'+m[1]:'';};
+const EID=isoAdd(RAMADAN_START,30);
+function revList(id,who){const R=per[id].rev||[];if(!R.length)return '';
+  return `<ul class="rvlist">${R.map((r,k)=>`<li class="${r.st}"><div><b>${r.ix>=0&&per[id].items[r.ix]?per[id].items[r.ix].d.ar:'الخطة كاملة'}: ${esc(r.why)}</b>${r.note?`<p>${esc(r.note)}</p>`:''}<small>${esc(r.at)}${r.st==='done'?'، '+esc(r.reply||''):r.st==='wip'?'، الطبيب يعدّل الخطة الآن':'، بانتظار الطبيب'}</small></div>
+    ${who==='dr'&&r.st!=='done'?dd('rv'+k,[['keep','الخطة صحيحة كما هي'],['edit','سأعدّل الخطة الآن']],r.st==='wip'?'edit':'',`data-rvd="${k}"`,'ردّك','mini'):`<span class="tag ${r.st==='done'?'okt':'wait'}">${r.st==='done'?'أُغلق':'مفتوح'}</span>`}</li>`).join('')}</ul>`;}
 function vWork(){
-  const p=P(), s=st(), t=triage(p.id), done=s.items.filter(i=>i.approved).length, n=s.items.length, solo=CFG.mode==='pharmacy';
-  const tok=(i,ix,di,two)=>`<div class="tok ${i.crit?'crit':''} ${i.approved?'ap':''} ${S.pick&&S.pick.ix===ix&&S.pick.di===di?'picked':''}" tabindex="0" role="button" data-ix="${ix}" data-di="${di}" aria-label="${i.d.ar}. اسحب لتغيير الوقت" title="${esc(i.esc||i.r.why||'')}" style="${capStyle(i.d)}">
-      <span class="cap"></span><span class="tn">${i.d.ar}</span>${two?`<span class="n2">${di+1} من 2</span>`:''}<span class="ok">${I.check}</span></div>`;
-  const tokens=z=>s.items.map((i,ix)=>i.doctor?'':i.doses.map((d,di)=>d!==z?'':tok(i,ix,di,i.doses.length>1)).join('')).join('');
-  const docs=s.items.map((i,ix)=>i.doctor?tok(i,ix,0,false):'').join('');
-  const comp=z=>{const inner=tokens(z);return `<div class="comp c-${z}" data-zone="${z}"><div class="lid">${I[z]}<b>${SLOT[z]}</b><span class="tm">${TIME[z]}</span></div><div class="well">${inner||'<span class="empty">لا شيء هنا</span>'}</div></div>`;};
-  const slotOpts=i=>OPTS.filter(([v])=>v!=='iftar+iftar'&&!(v==='suhoor+iftar'&&i.f<2)&&!(i.crit&&i.f===2&&!['suhoor+iftar','doctor'].includes(v))).map(([v,l])=>[v,v==='doctor'&&solo?'يراجع طبيبه':l,v==='doctor'?'doc':''])
-     .concat(['suhoor','iftar','bed','suhoor+iftar','doctor'].includes(slotVal(i))?[]:[[slotVal(i),i.doses.map(x=>SLOT[x]).join(' و')]]);
-  const addable=Object.keys(DRUGS).map(k=>[k,DRUGS[k].ar,k==='other'?'doc':'']);
-  return `<section class="work maincol" aria-label="خطة المريض">
-   ${MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الصيدلي</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>'}
-   ${hisBanner()}
-   ${headBlock(p,s,t,true)}
-   ${s.signed&&flagged(p.id)?`<div class="alert">${I.phone}<span>اتصل بالمريض اليوم: ${fuqOf(p.id).filter(q=>s.fu[q.k]==='نعم').map(q=>({miss:'ترك جرعة',dbl:'أخذ جرعتين معاً',sym:'أعراض أثناء الصيام',low:'هبوط سكر'})[q.k]).join('، ')}</span></div>`:''}
-   <div class="box organiser ${S.pick?'picking':''}">
-     <div class="comps">${comp('iftar')}${comp('bed')}${comp('suhoor')}<div class="fastcol" aria-hidden="true"><div><b>صيام</b>${FAST.toFixed(1)} ساعة</div></div></div>
-     <div class="tray ${docs?'':'empty'}" data-zone="doctor"><b>${docs?(solo?'يراجع طبيبه':'للطبيب'):(solo?'اسحب دواءً هنا ليراجعه طبيب المريض':'اسحب دواءً هنا لإحالته للطبيب')}</b>${docs}</div>
-     ${S.pick?'<p class="hint">اختر الخانة الجديدة للدواء</p>':''}
-   </div>
+  const p=P(), s=st(), t=triage(p.id);
+  const pane=MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الصيدلي</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>';
+  const revForm=`<div class="box revf"><div class="lhead"><h2>طلب مراجعة من الطبيب</h2><span>لا تغيّر الخطة بنفسك، أرسل السبب للطبيب</span></div>
+     <div class="rvform">${dd('rvm',[['-1','الخطة كاملة']].concat(s.items.map((i,ix)=>[String(ix),i.d.ar])),S.rvm,'data-rvm','الدواء')}${dd('rvw',REVWHY.map(x=>[x,x]),S.rvw,'data-rvw','السبب')}
+     <input id="rvNote" type="text" maxlength="300" autocomplete="off" placeholder="ملاحظة للطبيب (اختياري)" value="${esc(S.rvNote||'')}" aria-label="ملاحظة للطبيب"><button class="btn" type="button" id="rvSend" ${S.rvm!=null&&S.rvw?'':'disabled'}>${I.send}أرسل للطبيب</button></div>
+     ${revList(p.id,'ph')}</div>`;
+  if(!s.signed) return `<section class="work maincol" aria-label="الصرف">${pane}${hisBanner()}${headBlock(p,s,t,false)}
+     <div class="box waitdr"><h2>بانتظار خطة الطبيب</h2><p>الطبيب يبني خطة ${p.name} ويعتمدها، ثم تظهر هنا لتصرفها وتشرحها له. لا يحتاج الصرف اعتماداً منك.</p></div>
+     ${alertsBox(p.id,true)}${(s.rev||[]).length?revForm:''}</section>`;
+  const L=liveDisp(p.id), nd=L.filter(o=>s.disp[o.ix]).length, nt=TOLD.filter(([k])=>s.told[k]).length, stopped=s.items.filter(i=>i.stop);
+  const tok=i=>`<div class="tok ro ${i.crit?'crit':''}" title="${esc(i.r.why||'')}" style="${capStyle(i.d)}"><span class="cap"></span><span class="tn">${i.d.ar}</span></div>`;
+  const comp=z=>{const inner=s.items.filter(i=>!i.stop&&!i.keep&&i.doses.includes(z)).map(tok).join('');return `<div class="comp c-${z}"><div class="lid">${I[z]}<b>${SLOT[z]}</b><span class="tm">${TIME[z]}</span></div><div class="well">${inner||'<span class="empty">لا شيء هنا</span>'}</div></div>`;};
+  return `<section class="work maincol" aria-label="الصرف والشرح">
+   ${pane}${hisBanner()}${headBlock(p,s,t,false)}
+   ${flagged(p.id)?`<div class="alert">${I.phone}<span>اتصل بالمريض اليوم: ${fuqOf(p.id).filter(q=>s.fu[q.k]==='نعم').map(q=>({miss:'ترك جرعة',dbl:'أخذ جرعتين معاً',sym:'أعراض أثناء الصيام',low:'هبوط سكر'})[q.k]).join('، ')}</span></div>`:''}
+   <div class="box organiser"><p class="ronote">${I.check}اعتمدها ${esc(s.signed.by)}. تصرفها كما هي، وأي ملاحظة ترسلها للطبيب.</p>
+     <div class="comps">${comp('iftar')}${comp('bed')}${comp('suhoor')}<div class="fastcol" aria-hidden="true"><div><b>صيام</b>${FAST.toFixed(1)} ساعة</div></div></div></div>
    ${alertsBox(p.id,true)}
-   <div class="box ledger">
-     <div class="lhead"><h2>الأدوية</h2><span>${CFG.mode==='team'?(s.drOk?'اعتمدها الطبيب. تحقق منها ثم أرسلها، وأي تعديل يرجع للطبيب':'الطبيب يعتمد الخطة، وأي تعديل منك يصله كاقتراح'):'راجع كل دواء ثم اعتمده'}</span></div>
-     ${s.items.map((i,ix)=>{const w=checks(i);const man=ix>=p.meds.length;return `<div class="mrow">
-       <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}${(i.crit||doseOpts(i))&&!i.doctor?'<span class="tag chk2">مراجعة ثانية</span>':''}${man?'<span class="tag man">أضيف يدوياً</span>':''}${i.dd?`<span class="tag dr">الطبيب: ${i.stop?'إيقاف':i.keep?'مواعيده المعتادة':i.ds==='reduce'?'تقليل الجرعة':'نفس الجرعة'}</span>`:''}${i.doctor&&!i.dd?`<span class="tag wait">${solo?'يراجع طبيبه':'عند الطبيب'}</span>`:''}
-         <span class="fq">${freq(i.f)}</span>${w.length?`<span class="warn">${esc(w[0])}</span>`:''}</div>
-       ${i.stop?'<span class="stopped">أوقفه الطبيب في رمضان</span>':i.keep?'<span class="stopped">على مواعيده المعتادة، لا يصوم أثناء العلاج</span>':dd('s'+ix,slotOpts(i),slotVal(i),`data-set="${ix}"`,'اختر الوقت')}
-       <button class="apv" type="button" data-ap="${ix}" aria-pressed="${i.approved}" aria-label="اعتماد ${i.d.ar}" title="اعتماد">${I.check}</button>
+   <div class="box ledger disp">
+     <div class="lhead"><h2>الصرف</h2><span>امسح باركود كل علبة لتتأكد أنها الدواء نفسه في الخطة</span></div>
+     ${L.map(({i,ix})=>{const d=s.disp[ix];const late=d&&d.exp&&d.exp<EID;return `<div class="mrow drow">
+       <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}${doseOpts(i)?'<span class="tag chk2">جرعة معدّلة</span>':''}<span class="fq">${esc(whenTxt(i))}</span>
+         ${d?`<span class="lot ${late?'late':''}">${I.check}${d.man?'أُدخل يدوياً':'طابقت العلبة'}${d.lot?'، التشغيلة '+esc(d.lot):''}${d.exp?'، تنتهي '+expTxt(d.exp):''}${late?'. تنتهي قبل العيد، اصرف علبة أحدث':''}</span>`:''}</div>
+       ${d?`<button type="button" class="linkbtn" data-unscan="${ix}">إعادة المسح</button>`:`<button class="btn quiet scanb" type="button" data-scan="${ix}">${I.scan}امسح العلبة</button>`}
      </div>`;}).join('')}
-     ${CFG.his==='down'&&!s.signed?`<div class="addrow"><span>إضافة دواء يدوياً</span>${dd('addk',addable,S.addK,'data-addk','اختر الدواء')}${dd('addf',[['1','مرة يومياً'],['2','مرتان يومياً'],['3','3 مرات يومياً']],S.addF,'data-addf','عدد الجرعات','mini')}<button class="btn quiet" type="button" id="addMed" ${S.addK&&S.addF?'':'disabled'}>أضف</button></div>`:''}
-     <div class="signbar">
-       ${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض${CFG.sms==='on'?'، مع رسالة نصية احتياطية':''}</span>`:`<span class="cnt">${CFG.mode==='team'&&!s.drOk?'<b class="wdr">بانتظار اعتماد الطبيب</b>، ':''}راجعت <b>${done}</b> من ${n}</span><button class="btn quiet" type="button" id="apAll" ${done===n||s.items.every(i=>i.approved||doseOpts(i)||i.crit)?'disabled':''}>تحقق من الكل${s.items.some(i=>doseOpts(i)||i.crit)?' عدا عالية الخطورة':''}</button><button class="btn" type="button" id="sign" ${done===n&&(CFG.mode!=='team'||s.drOk)?'':'disabled'}>${I.send}أرسل للمريض</button>`}
-     </div>
+     ${stopped.length?`<p class="dnote pad">أوقفها الطبيب في رمضان فلا تُصرف: ${stopped.map(i=>i.d.ar).join('، ')}.</p>`:''}
+     <div class="signbar"><span class="cnt">تحققت من <b>${nd}</b> من ${L.length}، وشرحت <b>${nt}</b> من ${TOLD.length}</span>${nd===L.length&&nt===TOLD.length?`<span class="signed">${I.check}اكتمل الصرف والشرح</span>`:''}</div>
    </div>
+   <div class="box told"><div class="lhead"><h2>الشرح للمريض</h2><span>قبل أن يخرج من الصيدلية</span></div>
+     <div class="qcard flat">${TOLD.map(([k,l])=>`<div class="qrow"><span id="tl${k}">${l}</span><button class="sw" role="switch" data-told="${k}" aria-checked="${!!s.told[k]}" aria-labelledby="tl${k}"></button></div>`).join('')}</div></div>
+   ${revForm}
   </section>`;
 }
 
@@ -949,11 +1072,14 @@ function dd(id,opts,cur,attr,ph,cls=''){
    ${open?`<div class="ddm" role="listbox">${opts.map(([v,l,c])=>`<button type="button" role="option" class="${c||''}" aria-selected="${v===cur}" ${attr} data-v="${v}">${l}</button>`).join('')}</div>`:''}</div>`;
 }
 /* ===== Doctor ===== */
+function tryBox(id){const k=S.tryK,R=tryDrug(id,k),have=new Set(per[id].items.map(i=>i.key));
+  return `<div class="tryrow"><span>قبل أن تصف دواءً جديداً:</span>${dd('try',Object.keys(DRUGS).filter(x=>x!=='other'&&!have.has(x)).map(x=>[x,DRUGS[x].ar]),k,'data-try','اختر دواءً لفحص تداخلاته','mini')}
+    ${k?(R.length?R.map(a=>`<p class="a-${a.lvl}">${I.warn}<span>${esc(a.t)} <b>${esc(a.fix||'')}</b></span></p>`).join(''):`<p class="a-ok">${I.check}<span>لا توجد تداخلات معروفة بين ${DRUGS[k].ar} وأدوية ${PP(id).name} في المكتبة.</span></p>`):''}</div>`;}
 function alertsBox(id,compact){
   const A=alertsFor(id).filter(a=>!compact||a.lvl!=='ok');
-  if(!A.length) return compact?'':`<div class="box alerts"><div class="lhead"><h2>تنبيهات الأدوية</h2><span>تداخلات وتعارض مواعيد</span></div><p class="none">لا توجد تداخلات أو تعارضات معروفة في هذه الخطة.</p></div>`;
-  return `<div class="box alerts"><div class="lhead"><h2>تنبيهات الأدوية</h2><span>${A.filter(a=>a.lvl!=='ok').length} تحتاج انتباهك</span></div>
-   ${A.map(a=>`<div class="arow a-${a.lvl}"><span class="ak">${a.lvl==='ok'?I.check:I.warn}${a.k}</span><div><p>${esc(a.t)}</p>${a.fix?`<p class="fix">${esc(a.fix)}</p>`:''}</div><span class="src ${a.src==='NONE'?'none':''}" title="${esc(SRC[a.src].t)}">${SRC[a.src].s}</span></div>`).join('')}</div>`;
+  if(!A.length) return compact?'':`<div class="box alerts"><div class="lhead"><h2>فاحص التداخلات</h2><span>تداخلات وتعارض مواعيد</span></div><p class="none">لا توجد تداخلات أو تعارضات معروفة في هذه الخطة.</p>${tryBox(id)}</div>`;
+  return `<div class="box alerts"><div class="lhead"><h2>فاحص التداخلات</h2><span>${A.filter(a=>a.lvl!=='ok').length} تحتاج انتباهك</span></div>
+   ${A.map(a=>`<div class="arow a-${a.lvl}"><span class="ak">${a.lvl==='ok'?I.check:I.warn}${a.k}</span><div><p>${esc(a.t)}</p>${a.fix?`<p class="fix">${esc(a.fix)}</p>`:''}</div><span class="src ${a.src==='NONE'?'none':''}" title="${esc(SRC[a.src].t)}">${SRC[a.src].s}</span></div>`).join('')}${compact?'':tryBox(id)}</div>`;
 }
 const lines=n=>n===1?'سطر واحد':n===2?'سطران':n<=10?n+' أسطر':n+' سطراً';
 function verdictBox(id){
@@ -991,16 +1117,28 @@ function vDoctor(){
   const p=P(), s=st(), t=triage(p.id);
   const ref=s.items.map((i,ix)=>({i,ix})).filter(o=>o.i.esc||o.i.doctor||o.i.dd);
   const qs=QUESTIONS.filter(q=>q.red&&s.answers[q.k]);
-  const slotOpts=i=>[['iftar','الإفطار'],['suhoor','السحور'],...(i.f>=2?[['suhoor+iftar','السحور والإفطار']]:[]),['bed','قبل النوم'],['keep','مواعيده المعتادة (لا يصوم)'],['stop','إيقاف في رمضان']];
+  const slotOpts=i=>[['iftar','الإفطار'],['suhoor','السحور'],...(i.f>=2?[['suhoor+iftar','السحور والإفطار']]:[]),['bed','بعد التراويح'],['keep','مواعيده المعتادة (لا يصوم)'],['stop','إيقاف في رمضان']];
   const cur=i=>i.stop?'stop':i.keep?'keep':i.dd?i.doses.join('+'):'';
-  const offSug=i=>i.dd&&((doseOpts(i)&&(i.stop||i.keep||i.du!==doseDef(i)))||(!doseOpts(i)&&i.r.sug&&(i.stop||(i.r.sug.v==='keep')!==!!i.keep)));
+  const offSug=i=>i.dd&&((doseOpts(i)&&(i.stop||i.keep||i.du!==doseDef(i)))||(!doseOpts(i)&&i.r.sug&&curPl(i)!==i.r.sug.v));
   const orrCtl=(i,ix)=>offSug(i)?`<div class="orr">${dd('or'+ix,ORR.map(x=>[x,x]),i.orr||'',`data-orr="${ix}"`,'سبب اختلافك عن المقترح','mini')}</div>`:'';
   const doseCtl=(i,ix)=>{const o=doseOpts(i);return `${dd('du'+ix,o.map(x=>[x.id,x.lbl+(x.def?' (المقترح)':'')]).concat([['keep','مواعيده المعتادة (لا يصوم)','doc'],['stop','إيقاف في رمضان','doc']]),i.stop?'stop':i.keep?'keep':i.du||'',`data-du="${ix}"`,'اختر الجرعة','wide')}`;};
   const doseNote=i=>`<div class="sug draftn"><span>مقترح IDF-DAR (${esc(i.d.en)} ${unitTxt(i.u,i.d.un)} حالياً): ${esc(i.r.dn)}</span>${srcChips(i.r)}<span class="draft">مسودة: القاعدة بانتظار توقيع صيدلي سريري، وكل جرعة تعتمدها أنت بنفسك</span>${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`;
+  const buildBox=()=>{const M=monList(p.id),canAck=!s.signed;
+    return `<div class="box build"><div class="lhead"><h2>خطة الأدوية</h2><span>${s.signed?'أُرسلت للمريض. أي تعديل يوقفها عنده حتى تعيد إرسالها':'اختر لكل دواء وأكّده بنفسك، فلا يوجد اعتماد جماعي'}</span></div>
+     ${s.items.map((i,ix)=>{const o=doseOpts(i),pend=(i.doctor||i.esc)&&!i.dd,opts=o?null:planOpts(i),sel=opts&&opts.find(x=>x[0]===curPl(i));
+       return `<div class="brow ${pend?'pend':''}">
+        <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}<small class="old">قبل رمضان: ${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</small>${pend?`<p class="escn">${esc(i.esc||'يحتاج قرارك.')}</p>`:''}</div>
+        <div class="bc">${o?doseCtl(i,ix):dd('pl'+ix,opts.map(x=>[x[0],x[1],x[2]]),curPl(i),`data-pl="${ix}"`,'اختر التوقيت','wide')}${orrCtl(i,ix)}</div>
+        ${canAck&&!pend?`<button type="button" class="ack" data-ack="${ix}" aria-pressed="${!!i.ack}" aria-label="تأكيد ${i.d.ar}">${I.check}<span>${i.ack?'أكدته':'أكّد'}</span></button>`:'<span></span>'}
+        ${o?doseNote(i):sel?`<p class="bwhy"><span>${esc(sel[3])}</span>${srcChips(i.r)}</p>`:''}
+       </div>`;}).join('')}
+     ${CFG.his==='down'&&!s.signed?`<div class="addrow"><span>إضافة دواء يدوياً</span>${dd('addk',Object.keys(DRUGS).map(k=>[k,DRUGS[k].ar,k==='other'?'doc':'']),S.addK,'data-addk','اختر الدواء')}${dd('addf',[['1','مرة يومياً'],['2','مرتان يومياً'],['3','3 مرات يومياً']],S.addF,'data-addf','عدد الجرعات','mini')}<button class="btn quiet" type="button" id="addMed" ${S.addK&&S.addF?'':'disabled'}>أضف</button></div>`:''}
+     ${M.length?`<div class="mon"><b>الفحوصات والمتابعة</b><ul>${M.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}</div>`;};
   const sugTxt=i=>{if(doseOpts(i))return doseNote(i);const g=i.r.sug;return g?`<div class="sug"><span>مقترح الإرشاد: ${esc(g.n)}</span>${srcChips(i.r)}${i.dd?'':`<button type="button" class="linkbtn" data-sug="${s.items.indexOf(i)}">طبّق المقترح</button>`}</div>`:'';};
   return `<section class="work maincol" aria-label="قرار الطبيب">
    ${MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الطبيب</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>'}
    ${list.length?`${headBlock(p,s,t,false)}
+   ${(s.rev||[]).length?`<div class="box revs ${openRev(p.id).length?'hot':''}"><div class="lhead"><h2>طلبات مراجعة من الصيدلي</h2><span>${openRev(p.id).length?openRev(p.id).length+' مفتوحة':'أُغلقت كلها'}</span></div>${revList(p.id,'dr')}</div>`:''}
    ${verdictBox(p.id)}
    <div class="box ask">
      <h2>هل يصوم ${p.name} هذا العام؟</h2>
@@ -1012,15 +1150,8 @@ function vDoctor(){
    ${riskBox(p.id)}
    ${apptBox(p.id)}
    ${alertsBox(p.id)}
-   ${ref.length?`<div class="box">
-     <div class="lhead"><h2>أدوية تنتظر قرارك</h2><span>${ref.length}</span></div>
-     ${ref.length?ref.map(({i,ix})=>`<div class="drrow">
-       <div class="nm"><b>${i.d.ar}</b><span class="en">${i.d.en}</span><p>${freq(i.f)}. ${esc(i.esc||'أحاله الصيدلي للمراجعة.')}</p>${sugTxt(i)}</div>
-       <div class="drc">${doseOpts(i)?doseCtl(i,ix):(dd('dr'+ix,slotOpts(i).map(([v,l])=>[v,l,v==='stop'||v==='keep'?'doc':'']),cur(i),`data-dr="${ix}"`,'الوقت')+dd('ds'+ix,[['same','نفس الجرعة'],['reduce','تقليل الجرعة']],i.dd&&!i.stop&&!i.keep?(i.ds||'same'):'',`data-ds="${ix}"`,'الجرعة',i.dd&&!i.stop&&!i.keep?'':'off'))}${orrCtl(i,ix)}</div>
-     </div>`).join(''):''}
-   </div>`:''}
-   ${planBox(p.id)}
-   ${CFG.mode==='team'?`<div class="box drsign">${s.signed?`<span class="signed">${I.check}وصلت الخطة للمريض</span>`:s.drOk?`<span class="signed">${I.check}اعتمدت الخطة، وانتقلت للصيدلي ليراجعها ويشرحها للمريض</span>`:`<span class="cnt">${drReady(p.id)?'الخطة جاهزة لاعتمادك.':(pendingDr(p.id).length||(redQ(p.id)&&!s.clearance)?'قرّر في الأدوية المحالة'+(redQ(p.id)&&!s.clearance?' وفي الصيام':'')+' أولاً.':'بقي '+lines(ackLeft(p.id))+' لتؤكدها في الخطة.')}</span><button class="btn" type="button" id="drSign" ${drReady(p.id)?'':'disabled'}>${I.check}اعتمد الخطة كاملة</button>`}</div>`:''}`:'<div class="box ask"><h2>لا يوجد مرضى محالون لعيادتك</h2><p class="meta">غيّر نوع العيادة من الإعدادات لترى بقية المرضى.</p></div>'}
+   ${buildBox()}
+   <div class="box drsign">${s.signed?`<span class="signed">${I.check}أرسلت الخطة للمريض${CFG.mode==='team'?'، وظهرت عند الصيدلي للصرف والشرح':''}</span>`:`<span class="cnt">${drReady(p.id)?'الخطة جاهزة للإرسال.':(pendingDr(p.id).length||(redQ(p.id)&&!s.clearance)?'اختر للأدوية المعلّمة بالأحمر'+(redQ(p.id)&&!s.clearance?' وقرّر في الصيام':'')+' أولاً.':'بقي '+lines(ackLeft(p.id))+' لتؤكدها.')}</span><button class="btn" type="button" id="drSign" ${drReady(p.id)?'':'disabled'}>${I.send}اعتمد الخطة وأرسلها للمريض</button>`}</div>`:'<div class="box ask"><h2>لا يوجد مرضى لعيادتك</h2><p class="meta">غيّر نوع العيادة من الإعدادات لترى بقية المرضى.</p></div>'}
    ${list.length?msgBox(p):''}
   </section>`;
 }
@@ -1051,7 +1182,7 @@ function vEhr(){
   let card='';
   if(CFG.his==='down') card=`<div class="cds off"><b>بطاقة صيامٌ آمن غير متاحة الآن</b><p>انقطع الربط بين النظام وصيامٌ آمن. يستمر الفريق في المنصة مباشرة، وتعود البطاقة تلقائياً بعد عودة الربط.</p></div>`;
   else if(CFG.mode==='pharmacy') card=`<div class="cds off"><b>البطاقة متوقفة</b><p>المنصة تعمل الآن بطريقة صيدلية المجتمع وحدها، فلا تظهر داخل نظام المستشفى.</p></div>`;
-  else if(s.cds==='accepted') card=`<div class="cds done"><b>${I.check} اعتمدت مقترحات صيامٌ آمن</b><p>${s.drOk?'اعتمدت الخطة، وانتقلت للصيدلي ليراجعها ويشرحها للمريض.':'بقي قرار في الصيام أو بعض الأدوية، افتح صيامٌ آمن لإكماله.'}</p></div>`;
+  else if(s.cds==='accepted') card=`<div class="cds done"><b>${I.check} اعتمدت مقترحات صيامٌ آمن</b><p>${s.signed?'اعتمدت الخطة ووصلت للمريض.':'طُبّقت المقترحات على الأدوية المعلّمة. افتح صيامٌ آمن لتؤكد الخطة سطراً سطراً وترسلها.'}</p></div>`;
   else if(s.cds&&s.cds.startsWith('dismissed')) card=`<div class="cds done mute"><b>أُخفيت البطاقة</b><p>السبب: ${esc(s.cds.split(':')[1]||'')}. سُجّل في سجل التدقيق.</p><button type="button" class="linkbtn" data-cds="undo">إظهارها مجدداً</button></div>`;
   else card=`<div class="cds ind-${c.ind}">
      <div class="cdsh"><span class="by">صيامٌ آمن${daysToRamadan()>0?'، رمضان بعد '+daysToRamadan()+' يوماً':''}</span><span class="pathc p-${c.o.path}">${PATH[c.o.path]}</span></div>
@@ -1082,13 +1213,13 @@ function vSettings(){
   const row=(lbl,help,ctl)=>`<div class="srow"><div><b>${lbl}</b><p>${help}</p></div>${ctl}</div>`;
   const lib=Object.values(RULES).map(r=>{const ov=CFG.ovr[r.id];const def=r.plan(1);
     const timing=r.alt?dd('ov'+r.id,r.alt,ov||def[0],`data-ovr="${r.id}"`,''):`<span class="muted">${def?def.map(x=>SLOT[x]).join(' و'):'للطبيب'}</span>`;
-    return `<tr><td><b>${r.name}</b><span class="rid">${r.id}</span>${ov?'<span class="tag man">بروتوكول محلي</span>':''}</td><td>${timing}${ov?`<button type="button" class="linkbtn" data-rst="${r.id}">إرجاع للإرشاد</button>`:''}</td><td>${srcChips(r)}</td><td>${SRC[r.src[0]].ev}</td><td><span class="tag wait">مسودة</span></td></tr>`;}).join('');
+    return `<tr><td><b title="رقم القاعدة: ${r.id}">${r.name}</b>${ov?'<span class="tag man">بروتوكول محلي</span>':''}</td><td>${timing}${ov?`<button type="button" class="linkbtn" data-rst="${r.id}">إرجاع للإرشاد</button>`:''}</td><td>${srcChips(r)}</td><td>${SRC[r.src[0]].ev}</td><td><span class="tag wait">مسودة</span></td></tr>`;}).join('');
   const T=ruleTests();
   return `<section class="settings" aria-label="الإعدادات">
    <h1>الإعدادات</h1>
    <div class="sgrid">
     <div class="box sbox"><div class="lhead"><h2>شكل المنصة</h2><span>تتغير لكل عيادة</span></div>
-      ${row('طريقة التشغيل','الطبيب يعتمد الخطة دائماً في نمط الفريق، والصيدلي يراجعها ويشرحها للمريض.',dd('mode',Object.entries(MODES),CFG.mode,'data-cfg="mode"',''))}
+      ${row('طريقة التشغيل','الطبيب وحده يبني الخطة ويعتمدها. الصيدلي يصرفها بالتحقق من الباركود ويشرحها، ويرسل طلب مراجعة للطبيب إذا احتاج.',dd('mode',Object.entries(MODES),CFG.mode,'data-cfg="mode"',''))}
       ${row('نوع العيادة','يحدد أدوات الخطورة التي يراها الطبيب والمرضى المحالين له.',dd('clinic',Object.entries(CLINICS).map(([k,v])=>[k,v.n]),CFG.clinic,'data-cfg="clinic"',''))}
       ${row('المدينة','مواعيد الإفطار والسحور وساعات الصيام تُحسب حسب المدينة وتقويم أم القرى.',dd('city',Object.entries(CITIES).map(([k,v])=>[k,v[0]]),CFG.city,'data-cfg="city"',''))}
       <p class="times">أول رمضان 1448 المتوقع في ${c[0]}: الفجر ${TIME.fajr}، المغرب ${TIME.iftar}، الصيام ${FAST.toFixed(1)} ساعة.</p>
@@ -1097,7 +1228,7 @@ function vSettings(){
       ${row('الربط مع نظام المستشفى','للتجربة: اقطع الربط وشاهد كيف يستمر العمل يدوياً.',dd('his',[['up','يعمل','ok'],['down','منقطع (تجربة)','doc']],CFG.his,'data-cfg="his"',''))}
       ${row('وضع اختبار الاستخدام','يجعل جرعة الإنسولين القاعدي المقترحة خاطئة عمداً (بلا تقليل)، لنرى هل يلاحظها الطبيب أثناء الاختبار.',dd('trap',[['off','موقف'],['on','مفعّل (للاختبار فقط)','doc']],CFG.trap,'data-cfg="trap"',''))}
       ${row('رسالة نصية احتياطية','تصل الخطة برسالة نصية إذا لم يكن عند المريض التطبيق.',dd('sms',[['on','مفعّلة'],['off','موقفة']],CFG.sms,'data-cfg="sms"',''))}
-      <ul class="safe"><li>أي دواء غير موجود في المكتبة يُحال للطبيب تلقائياً.</li><li>لا تصل أي خطة للمريض قبل اعتماد بشري.</li><li>كل تعديل على القواعد يُسجَّل باسم من عدّله ووقته.</li></ul>
+      <ul class="safe"><li>أي دواء غير موجود في المكتبة يُحال للطبيب تلقائياً.</li><li>لا تصل أي خطة للمريض قبل أن يعتمدها الطبيب.</li><li>الصيدلي لا يغيّر الخطة، وأي ملاحظة منه تصل للطبيب كطلب مراجعة مع السبب.</li><li>كل تعديل على القواعد يُسجَّل باسم من عدّله ووقته.</li></ul>
     </div>
    </div>
    <div class="box"><div class="lhead"><h2>مكتبة القواعد</h2><span>نسخة ${RULESET}، قواعد منفصلة عن البرنامج تُحدَّث عند تغير الإرشادات</span></div>
@@ -1136,7 +1267,7 @@ function vPhone(){
   return `<div class="phonecol"><div class="phone"><div class="screen">
     <div class="notch" aria-hidden="true"></div>
     <div class="sbar" aria-hidden="true"><span>9:41</span><span>5G</span></div>
-    <div class="toast" id="toast" role="status"><span class="ico">${I.plan}</span><div><b>صيامٌ آمن</b><div>وصلت خطة أدويتك لرمضان، اعتمدها ${CFG.mode==='doctor'?'طبيبك':'الصيدلي'}.</div></div></div>
+    <div class="toast" id="toast" role="status"><span class="ico">${I.plan}</span><div><b>صيامٌ آمن</b><div>وصلت خطة أدويتك لرمضان، اعتمدها طبيبك.</div></div></div>
     <div class="app" id="app">${MODE==='patient'?`<div class="demo"><div class="sync" data-sync data-s="${S.sync}"><i></i><span></span></div><span>حساب تجريبي</span>${dd('pt',PATIENTS.map(x=>[x.id,x.name]),S.pid,'data-pid','','mini')}</div>`:''}${body}</div>
     <nav class="ptabs" role="tablist" aria-label="تطبيق المريض">
       ${[['intake','أسئلتي',I.list],['plan','خطتي',I.plan],['follow','المتابعة',I.chat],['doctor','طبيبي',I.doc]].map(([k,l,ic])=>`<button role="tab" data-tab="${k}" aria-selected="${tab===k}">${ic}<span>${l}</span>${(k==='follow'&&badge)||(k==='doctor'&&ur&&tab!=='doctor')?'<span class="badge"></span>':''}</button>`).join('')}
@@ -1152,7 +1283,7 @@ function phConsent(){return `<div class="hello"><small>قبل أن تبدأ</sma
    <button type="button" class="btn" id="consentOk">أوافق وأكمل</button></div>`;}
 function phIntake(p,s){
   return `<div class="hello"><small>مساء الخير</small><h3>${p.name}</h3></div>
-   <p class="lead">أجب عن هذه الأسئلة قبل رمضان، وسيجهّز ${CFG.mode==='pharmacy'?'الصيدلي':CFG.mode==='doctor'?'طبيبك':'طبيبك والصيدلي'} خطة أدويتك.</p>
+   <p class="lead">أجب عن هذه الأسئلة قبل رمضان، وسيجهّز طبيبك خطة أدويتك، ويشرحها لك الصيدلي.</p>
    <div class="qcard">${QUESTIONS.map(q=>`<div class="qrow"><span id="lq${q.k}">${q.t}</span><button class="sw" role="switch" data-q="${q.k}" aria-checked="${!!s.answers[q.k]}" aria-labelledby="lq${q.k}"></button></div>`).join('')}</div>
    <div class="sec">أدويتي في الملف</div>
    <div class="mylist">${medsOf(p.id).map(([k,f])=>`<div><span>${(DRUGS[k]||DRUGS.other).ar}</span><span class="muted">${freq(f)}</span></div>`).join('')}</div>`;
@@ -1161,10 +1292,9 @@ function phPlan(p,s){
   const who=CFG.mode==='doctor'?'الطبيب':'الصيدلي';
   if(!s.signed){
     const dr=needsDoctor(p.id), path=overall(p.id).path;
-    const steps=CFG.mode==='team'?[['d','أرسلت إجاباتك وأدويتك'],[s.drOk?'d':'c','الطبيب يعتمد خطتك'],[s.drOk?'c':'t','الصيدلي يراجعها ويشرحها لك'],['t','تصلك الخطة هنا']]
-      :[['d','أرسلت إجاباتك وأدويتك']].concat(dr?[['c','الطبيب يراجع بعض أدويتك'],['t',who+' يعتمد الخطة']]:[['c',who+' يراجع الخطة']]).concat([['t','تصلك الخطة هنا']]);
+    const steps=[['d','أرسلت إجاباتك وأدويتك'],['c','طبيبك يبني خطتك ويعتمدها'],['t','تصلك الخطة هنا'+(CFG.mode==='team'?'، ويشرحها لك الصيدلي عند صرف أدويتك':'')]];
     return `<div class="hello"><small>خطتي لرمضان</small><h3>${p.name}</h3></div>
-     <div class="wait"><h4>خطتك قيد المراجعة</h4><p>لن تصلك أي تعليمات قبل أن يعتمدها ${CFG.mode==='team'?'طبيبك':who}.</p>
+     <div class="wait"><h4>خطتك قيد المراجعة</h4><p>لن تصلك أي تعليمات قبل أن يعتمدها طبيبك.</p>
       <p class="pathnote">${path==='remote'?'لا تحتاج زيارة، تصلك الخطة هنا.':path==='phone'?'سيتصل بك فريقنا قبل رمضان'+(apptInfo(p.id).ok&&apptInfo(p.id).a?' في '+fd(apptInfo(p.id).a):'')+'.':'نحتاج نشوفك في العيادة قبل رمضان'+(apptInfo(p.id).ok&&apptInfo(p.id).a?'، موعدك '+fd(apptInfo(p.id).a):'، وسيصلك موعد')+'.'}</p>
       <ol class="steps">${steps.map(([c,t],k)=>`<li class="${c}"><i>${c==='d'?'✓':k+1}</i><span>${t}</span></li>`).join('')}</ol>
       ${MODE==='patient'?'<button type="button" class="simbtn" id="simSign">للتجربة: اعتمد الخطة الآن</button>':''}</div>`;
@@ -1178,7 +1308,7 @@ function phPlan(p,s){
   return `<div class="today"><b>اليوم 1 من رمضان</b><span>${CITIES[CFG.city][0]}</span></div>
    <div class="label">
     <div class="lbtop"><div class="ph">صيدلية صيامٌ آمن</div><h3>${p.name}</h3><div class="sub"><span>خطة الأدوية لشهر رمضان 1448</span><span>${p.age} سنة</span></div></div>
-    ${['suhoor','iftar','bed'].map(z=>{const L=by(z);if(!L.length) return '';return `<div class="slot ${z}"><h4>${I[z]}${z==='bed'?'قبل النوم':'مع '+SLOT[z]}<span class="tm">${TIME[z]}</span></h4>
+    ${['suhoor','iftar','bed'].map(z=>{const L=by(z);if(!L.length) return '';return `<div class="slot ${z}"><h4>${I[z]}${z==='bed'?'بعد التراويح':'مع '+SLOT[z]}<span class="tm">${TIME[z]}</span></h4>
      ${L.map(({i,ix})=>{const k=ix+z;return `<div class="pm" style="${capStyle(i.d)}"><span class="pill"></span><div><b>${i.d.ar}</b><span class="en">${i.d.en}</span>${doseSel(i)&&doseSel(i).per[z]!=null?`<span class="adj">${unitTxt(doseSel(i).per[z],i.d.un)}${doseSel(i).per[z]<i.u?'، جرعة خفّضها طبيبك':''}</span>`:i.ds==='reduce'?'<span class="adj">جرعة عدّلها طبيبك</span>':''}</div>
        <button class="chk" role="checkbox" data-take="${k}" aria-checked="${!!s.taken[k]}" aria-label="أخذت ${i.d.ar}">${I.check}</button></div>`}).join('')}</div>`;}).join('')}
     ${s.clearance==='no'?`<div class="note red"><h5>${I.warn}طبيبك لا ينصح بالصيام ${keep.length?'حتى تنتهي من العلاج':'هذا العام'}</h5><p>استمر على مواعيد أدويتك المعتادة${keep.length?'، ويمكنك الصيام بعد انتهاء العلاج.':'، وناقش البدائل مع طبيبك.'}</p>${nofast?`<p>${s.items.filter(i=>!i.stop).map(i=>i.d.ar).join('، ')}</p>`:''}</div>`:''}
@@ -1189,8 +1319,28 @@ function phPlan(p,s){
     <div class="note sos"><h5>${nofast?'اتصل فوراً':'أفطر واتصل فوراً'} إذا شعرت بـ</h5><ul>${dm?'<li>رجفة أو تعرق أو تشوش، أو سكر أقل من 70</li>':''}<li>دوخة شديدة أو إغماء أو قلة البول</li>${ac?'<li>نزيف غير معتاد أو براز أسود</li>':''}${aed?'<li>نوبة تشنج</li>':''}</ul></div>
     <div class="lbfoot">اعتمدها ${esc(s.signed.by)}، ${esc(s.signed.at)}. قواعد ${RULESET}</div>
    </div>
+   ${nofast?'':`<button type="button" class="ptscan" id="ptScan">${I.scan}<span><b>امسح علبة الدواء</b>وأعرف موعدها في خطتي</span></button>`}
+   ${nofast?'':remindCard(p,s)}
    ${nofast?'':whatIf(p,s,dm)}`;
 }
+/* ===== Dose reminders on the patient's phone ===== */
+const REMK='safefast-remind';
+const remindOn=()=>{try{return localStorage.getItem(REMK)==='1';}catch(_){return false;}};
+const slotMeds=(s,z)=>s.items.filter(i=>!i.stop&&!i.keep&&!(i.doctor&&!i.dd)&&i.doses.includes(z)).map(i=>i.d.ar+doseTxt(i,z));
+const SLOTMSG={suhoor:'حان وقت أدوية السحور',iftar:'حان وقت أدوية الإفطار',bed:'حان وقت أدوية ما بعد التراويح'};
+function remindCard(p,s){const on=remindOn();
+  return `<div class="remind"><div class="qrow"><span id="lrem"><b>ذكّرني بمواعيد أدويتي</b><small>${['suhoor','iftar','bed'].filter(z=>slotMeds(s,z).length).map(z=>SLOT[z]+' '+TIME[z]).join('، ')}</small></span><button class="sw" role="switch" id="remSw" aria-checked="${on}" aria-labelledby="lrem"></button></div>
+   ${on?`<button type="button" class="linkbtn" id="remTest">جرّب التذكير الآن</button>`:''}</div>`;}
+async function notify(title,body){showToast(title+': '+body);
+  try{if(!('Notification' in window)||Notification.permission!=='granted')return;
+    const reg=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();
+    const o={body,lang:'ar',dir:'rtl',tag:'safefast-dose',renotify:true,icon:'icon-192.png'};
+    if(reg)reg.showNotification(title,o);else new Notification(title,o);}catch(_){}}
+let REMT=[];
+function scheduleReminders(){REMT.forEach(clearTimeout);REMT=[];if(!remindOn())return;const s=per[S.pid];if(!s||!s.signed)return;
+  const now=new Date(),m=now.getHours()*60+now.getMinutes();
+  ['suhoor','iftar','bed'].forEach(z=>{const L=slotMeds(s,z);if(!L.length)return;let d=(Math.round(TIMEM[z])%1440)-m;if(d<=0)d+=1440;
+    REMT.push(setTimeout(()=>{notify(SLOTMSG[z],L.join('، '));scheduleReminders();},d*6e4-now.getSeconds()*1e3));});}
 function whatIf(p,s,dm){
   const live=s.items.filter(i=>!i.stop&&!(i.doctor&&!i.dd)), sick=live.filter(SICK), chg=live.filter(i=>doseSel(i)&&i.ds==='reduce');
   const mon=[...new Set(live.filter(i=>['warfarin','thyroid'].includes(i.d.cls)).map(i=>MON[i.d.cls]))];
@@ -1210,7 +1360,7 @@ function phDoctor(p,s){
    <div class="sec">الرسائل</div>
    <div class="chat thread">
     <div class="sosbar">${I.warn}<span><b>ليست للطوارئ.</b> إذا شعرت برجفة أو تعرق أو سكر أقل من 70، أو ألم صدر أو نزيف: أفطر فوراً واتصل على 997.</span></div>
-    <div class="bub sys">اختر طلبك، ويرد عليك الصيدلي أو طبيبك خلال يوم عمل.</div>
+    <div class="bub sys">اختر طلبك، ويرد عليك طبيبك أو الفريق خلال يوم عمل.</div>
     ${L.map(m=>`<div class="bub ${m.from==='pt'?'out':'in'}">${esc(m.t)}<time>${msgTime(m.at)}</time></div>`).join('')}
    </div>
    ${S.sos?`<div class="sosnow"><h5>${I.warn}أفطر الآن</h5><p>اشرب ماءً أو عصيراً، وقِس السكر إن كان عندك جهاز. إذا كان أقل من 70 أو لم تتحسن خلال 15 دقيقة، أو عندك ألم صدر أو ضيق نفس أو نزيف: اتصل على 997.</p><a class="callbtn sos" href="tel:997">${I.phone}اتصال 997</a><button type="button" class="linkbtn" id="sosOk">تحسنت</button></div>`:''}
@@ -1250,7 +1400,7 @@ function vDash(){
   const saved=rows.filter(r=>r.o.path!=='visit').length;
   const hi=PATIENTS.filter(p=>overall(p.id).cat==='high'), hiOk=hi.filter(p=>per[p.id].drOk||per[p.id].signed).length;
   const dz=PATIENTS.flatMap(p=>per[p.id].items.filter(i=>doseOpts(i)&&i.dd)), dzOk=dz.filter(i=>i.du&&i.du===doseDef(i)).length;
-  const next={red:'موعد طبيب قبل رمضان',amber:'مراجعة صيدلي',green:'اعتماد سريع وإرسال'};
+  const next={red:'موعد طبيب قبل رمضان',amber:'خطة الطبيب ثم صرف بتحقق',green:'خطة الطبيب ثم صرف'};
   const LVN={red:'أحمر',amber:'برتقالي',green:'أخضر'};
   return `<section class="dash" aria-label="لوحة المنشأة">
    <h1>لوحة المنشأة</h1>
@@ -1260,8 +1410,10 @@ function vDash(){
      <div class="stat"><div class="v">${dz.length?dzOk+' <small>من '+dz.length+'</small>':'0'}</div><div class="l">جرعات اعتمدها الطبيب كما اقترحها الإرشاد</div></div>
      <div class="stat"><div class="v" style="color:var(--amber)">${PATIENTS.filter(x=>!apptInfo(x.id).ok).length}</div><div class="l">يحتاجون تقديم موعد</div></div>
      <div class="stat"><div class="v">${sent}</div><div class="l">خطط وصلت للمرضى</div></div>
+     <div class="stat"><div class="v" style="color:var(--brand)">${PATIENTS.filter(p=>per[p.id].signed&&dispDone(p.id)).length}</div><div class="l">صُرفت بالتحقق من الباركود وشُرحت</div></div>
+     <div class="stat"><div class="v" style="color:var(--amber)">${PATIENTS.reduce((n,p)=>n+openRev(p.id).length,0)}</div><div class="l">طلبات مراجعة مفتوحة من الصيدلي</div></div>
      <div class="stat"><div class="v" style="color:var(--red)">${call}</div><div class="l">يحتاجون اتصالاً اليوم</div></div>
-     <div class="stat"><div class="v" style="color:var(--suhoor)">${PATIENTS.filter(p=>needsDoctor(p.id)).length}</div><div class="l">بانتظار قرار الطبيب</div></div>
+     <div class="stat"><div class="v" style="color:var(--suhoor)">${PATIENTS.filter(p=>needsDoctor(p.id)).length}</div><div class="l">بانتظار خطة الطبيب</div></div>
    </div>
    <div class="dgrid">
     <div><h2>قائمة العمل حسب الأولوية</h2><div class="box tw"><table><thead><tr><th>المريض</th><th>التصنيف</th><th>المسار</th><th>آخر موعد للخطة</th><th>الموعد</th><th>الحالة</th><th>الخطوة التالية</th></tr></thead><tbody>
@@ -1311,9 +1463,10 @@ function sendMsg(pid,from,text){
 
 /* ===== Shared store: links every screen and device ===== */
 let DB=null;const queue={};
-function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,du:i.du||null,ak:!!i.ack,or:i.orr||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk};}
+function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,du:i.du||null,ak:!!i.ack,or:i.orr||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk,disp:x.disp||{},told:x.told||{},rev:x.rev||[]};}
 function applyDoc(id,data){
-  const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id);
+  if(S.story!=null&&id===STORY_PID) return;
+  const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id), prevOpen=openRev(id).length, prevDone=(x.rev||[]).filter(r=>r.st==='done').length;
   const tab=x.tab;
   initPatient(p); const y=per[id]; y.tab=tab;
   if(data){
@@ -1323,9 +1476,14 @@ function applyDoc(id,data){
     (data.items||[]).forEach((o,ix)=>{const i=items[ix];if(!i||o.k!==i.key)return;i.doses=Array.isArray(o.d)?o.d.slice(0,2):i.doses;i.doctor=!!o.x;i.approved=!!o.a;i.dd=!!o.dd;i.ds=o.ds||null;i.du=(doseOpts(i)||[]).some(x=>x.id===o.du)?o.du:null;i.ack=!!o.ak;i.orr=ORR.includes(o.or)?o.or:null;i.stop=!!o.st;i.keep=!!o.kp;});
     y.clearance=data.clearance||null;y.items=items;y.signed=data.signed||null;y.fu={...(data.fu||{})};y.taken={...(data.taken||{})};
     y.path=PATH[data.path]?data.path:null;y.appt=FREE.includes(data.appt)?data.appt:null;y.drOk=!!data.drOk;y.cds=typeof data.cds==='string'?data.cds:null;
+    if(data.disp&&typeof data.disp==='object')Object.keys(data.disp).forEach(k=>{const v=data.disp[k];if(y.items[+k]&&v&&typeof v==='object')y.disp[k]={g:String(v.g||'').slice(0,14),lot:String(v.lot||'').slice(0,20),exp:String(v.exp||'').slice(0,10),sn:String(v.sn||'').slice(0,20),man:!!v.man};});
+    TOLD.forEach(([k])=>{if(data.told&&data.told[k])y.told[k]=true;});
+    y.rev=Array.isArray(data.rev)?data.rev.slice(0,20).filter(r=>r&&typeof r.why==='string').map(r=>({ix:Number.isInteger(r.ix)&&r.ix<y.items.length?r.ix:-1,why:r.why.slice(0,80),note:String(r.note||'').slice(0,300),at:String(r.at||'').slice(0,40),st:['open','wip','done'].includes(r.st)?r.st:'open',reply:String(r.reply||'').slice(0,120)})):[];
   }
   if(!prevSigned&&y.signed&&id===S.pid&&MODE!=='pharm'){y.tab='plan';setTimeout(showToast,60);}
   if(!prevFlag&&y.signed&&flagged(id)&&MODE!=='patient') setTimeout(()=>deskToast(p.name+' أجاب في المتابعة ويحتاج اتصالاً اليوم.'),60);
+  if(openRev(id).length>prevOpen&&MODE!=='patient'){const r=openRev(id).slice(-1)[0];setTimeout(()=>deskToast('طلب مراجعة من الصيدلي لخطة '+p.name+': '+r.why),60);}
+  if(y.rev.filter(r=>r.st==='done').length>prevDone&&MODE!=='patient'){const r=y.rev.filter(r=>r.st==='done').slice(-1)[0];setTimeout(()=>deskToast('ردّ الطبيب على طلبك لـ '+p.name+': '+r.reply),60);}
 }
 function applyCfg(c){
   const d=CFG0();
@@ -1393,6 +1551,114 @@ function fbAdapter(fs){
   }catch(_){}
 })();
 
+/* ===== Barcode: GS1 DataMatrix on every box sold in Saudi Arabia (SFDA, RSD track and trace) ===== */
+function gtinCheck(d13){let s=0;for(let k=0;k<d13.length;k++)s+=(+d13[d13.length-1-k])*(k%2?1:3);return (10-s%10)%10;}
+/* demo company prefix 062899990, not a real product */
+function gtinOf(k){const b='062899990'+String(Object.keys(DRUGS).indexOf(k)+1).padStart(4,'0');return b+gtinCheck(b);}
+const GTIN={};Object.keys(DRUGS).forEach(k=>{if(k!=='other')GTIN[gtinOf(k)]=k;});
+function gs1Parse(raw){
+  let t=String(raw||'').trim().replace(/^\][A-Za-z]\d/,'');const o={};
+  if(/^\(\d{2}\)/.test(t)){t.replace(/\((\d{2})\)([^(]*)/g,(_,a,v)=>{o[a]=v.trim();});}
+  else if(/^\d{8,14}$/.test(t)){o['01']=t.padStart(14,'0');}
+  else{const G='\x1d';let k=0;t=t.replace(/^\x1d/,'');
+    while(k<t.length){const ai=t.substr(k,2);k+=2;
+      if(ai==='01'){o['01']=t.substr(k,14);k+=14;}
+      else if(ai==='17'||ai==='11'){o[ai]=t.substr(k,6);k+=6;}
+      else if(ai==='10'||ai==='21'){let e=t.indexOf(G,k);if(e<0)e=t.length;o[ai]=t.slice(k,Math.min(e,k+20));k=e+1;}
+      else break;}}
+  const ex=o['17']&&/^\d{6}$/.test(o['17'])?'20'+o['17'].slice(0,2)+'-'+o['17'].slice(2,4)+'-'+(o['17'].slice(4)==='00'?'28':o['17'].slice(4)):'';
+  return {gtin:o['01']||'',exp:ex,lot:o['10']||'',sn:o['21']||''};}
+const demoCode=(k,lot)=>'\x1d01'+gtinOf(k)+'17270930'+'10'+(lot||'B2417')+'\x1d'+'21'+Math.random().toString(36).slice(2,10).toUpperCase();
+let SCAN=null;
+function closeScan(){if(!SCAN)return;try{SCAN.stop&&SCAN.stop();}catch(_){}const el=SCAN.el;SCAN=null;el&&el.remove();}
+function openScan(ctx){closeScan();
+  const s=per[ctx.pid],i=ctx.kind==='disp'?s.items[ctx.ix]:null;
+  const el=document.createElement('div');el.className='scanov';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','قراءة الباركود');
+  const wrong=i?Object.keys(DRUGS).find(k=>k!==i.key&&k!=='other'&&!s.items.some(x=>x.key===k)):null;
+  el.innerHTML=`<div class="scanbox"><div class="scanh"><b>${i?'امسح علبة '+i.d.ar:'امسح علبة دوائك'}</b><button type="button" class="iconbtn" data-x aria-label="إغلاق">✕</button></div>
+   <div class="cam"><video playsinline muted></video><div class="frame"></div><p class="camst">جارٍ تشغيل الكاميرا…</p></div>
+   <div class="scanres" role="status"></div>
+   <div class="scanalt"><p>للتجربة بدون علبة حقيقية:</p>
+     <div class="row">${i?`<button type="button" class="btn quiet" data-demo="${i.key}">علبة صحيحة</button><button type="button" class="btn quiet" data-demo="${wrong}">علبة دواء آخر</button>`:s.items.filter(x=>!x.stop).slice(0,3).map(x=>`<button type="button" class="btn quiet" data-demo="${x.key}">${x.d.ar}</button>`).join('')}</div>
+     <form class="row manual"><input inputmode="numeric" maxlength="60" placeholder="أو اكتب الرقم المطبوع تحت الباركود (GTIN)" aria-label="رقم GTIN"><button type="submit" class="btn quiet">تحقق</button></form>
+     <p class="fine">يقرأ رمز GS1 DataMatrix الذي تفرضه هيئة الغذاء والدواء على علب الأدوية: رقم المنتج والتشغيلة وتاريخ الانتهاء والرقم التسلسلي. الأرقام هنا تجريبية، وفي التشغيل الفعلي يُتحقق من الرقم التسلسلي ويُسجَّل الصرف عبر منصة رصد.</p></div></div>`;
+  document.body.appendChild(el);SCAN={el,ctx,done:false};
+  const res=el.querySelector('.scanres'),st_=el.querySelector('.camst'),video=el.querySelector('video');
+  el.querySelector('[data-x]').onclick=closeScan;el.addEventListener('keydown',e=>{if(e.key==='Escape')closeScan();});
+  el.addEventListener('click',e=>{if(e.target===el)closeScan();});
+  el.querySelectorAll('[data-demo]').forEach(b=>b.onclick=()=>onCode(demoCode(b.dataset.demo,'B'+(2400+Math.floor(Math.random()*90)))));
+  el.querySelector('.manual').onsubmit=e=>{e.preventDefault();const v=e.target.querySelector('input').value.trim();if(v)onCode(v,true);};
+  el.querySelector('[data-x]').focus();
+  function onCode(raw,man){if(!SCAN||SCAN.ctx!==ctx)return;const g=gs1Parse(raw),k=GTIN[g.gtin.padStart(14,'0')];
+    const meta=`<dl><div><dt>رقم المنتج</dt><dd class="ltr">${esc(g.gtin||'—')}</dd></div><div><dt>التشغيلة</dt><dd class="ltr">${esc(g.lot||'—')}</dd></div><div><dt>الانتهاء</dt><dd class="ltr">${esc(expTxt(g.exp)||'—')}</dd></div><div><dt>الرقم التسلسلي</dt><dd class="ltr">${esc(g.sn||'—')}</dd></div></dl>`;
+    if(!k){res.className='scanres bad';res.innerHTML=`<b>${I.warn}الرمز غير موجود في قائمة الأدوية التجريبية</b>${meta}`;return;}
+    const d=DRUGS[k];
+    if(ctx.kind==='disp'){const s2=per[ctx.pid],it=s2.items[ctx.ix];
+      if(k!==it.key){res.className='scanres bad';res.innerHTML=`<b>${I.warn}هذه العلبة ${esc(d.ar)}، وليست ${esc(it.d.ar)}. لا تصرفها.</b>${meta}`;return;}
+      const late=g.exp&&g.exp<EID;s2.disp[ctx.ix]={g:g.gtin,lot:g.lot,exp:g.exp,sn:g.sn,man:!!man};save(ctx.pid);
+      res.className='scanres '+(late?'bad':'ok');res.innerHTML=`<b>${late?I.warn+'العلبة صحيحة لكنها تنتهي قبل العيد، اصرف علبة أحدث':I.check+'العلبة مطابقة: '+esc(d.ar)}</b>${meta}`;
+      SCAN.stop&&SCAN.stop();setTimeout(()=>{if(SCAN&&SCAN.ctx===ctx&&!late)closeScan();render();},late?0:1400);return;}
+    const s2=per[ctx.pid],it=s2.items.find(x=>x.key===k);
+    if(!it){res.className='scanres bad';res.innerHTML=`<b>${I.warn}${esc(d.ar)} ليس في خطتك. اسأل الصيدلي أو طبيبك قبل أن تأخذه في رمضان.</b>`;return;}
+    res.className='scanres ok';res.innerHTML=`<b>${I.check}${esc(d.ar)}</b><p class="big">${it.stop?'أوقفه طبيبك خلال رمضان، لا تأخذه.':it.keep?'على مواعيده المعتادة.':'خذه '+esc(it.doses.map(z=>(z==='bed'?'بعد التراويح':'مع '+SLOT[z])+doseTxt(it,z)).join('، و'))+'.'}</p>${g.exp&&g.exp<EID?'<p>تنتهي هذه العلبة قبل العيد، اطلب علبة جديدة من الصيدلية.</p>':''}`;}
+  SCAN.onCode=onCode;
+  (async()=>{
+    if(!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia)){st_.textContent='الكاميرا غير متاحة هنا. استخدم أزرار التجربة أو اكتب الرقم.';return;}
+    try{
+      if('BarcodeDetector' in window){const f=await BarcodeDetector.getSupportedFormats();
+        if(f.includes('data_matrix')){const det=new BarcodeDetector({formats:['data_matrix','qr_code','ean_13']});
+          const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
+          if(!SCAN||SCAN.ctx!==ctx){stream.getTracks().forEach(t=>t.stop());return;}
+          video.srcObject=stream;await video.play();st_.textContent='وجّه الكاميرا إلى المربع الصغير على العلبة';let on=true;
+          SCAN.stop=()=>{on=false;stream.getTracks().forEach(t=>t.stop());};
+          const loop=async()=>{if(!on)return;try{const r=await det.detect(video);if(r[0]){on=false;onCode(r[0].rawValue);return;}}catch(_){}setTimeout(loop,250);};loop();return;}}
+      if(!window.ZXing){st_.textContent='جارٍ تحميل قارئ الباركود…';await new Promise((ok,no)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js';sc.onload=ok;sc.onerror=no;document.head.appendChild(sc);});}
+      if(!SCAN||SCAN.ctx!==ctx)return;
+      const hints=new Map();hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS,[ZXing.BarcodeFormat.DATA_MATRIX,ZXing.BarcodeFormat.QR_CODE,ZXing.BarcodeFormat.EAN_13]);
+      const rd=new ZXing.BrowserMultiFormatReader(hints);SCAN.stop=()=>{try{rd.reset();}catch(_){}};
+      st_.textContent='وجّه الكاميرا إلى المربع الصغير على العلبة';
+      await rd.decodeFromConstraints({video:{facingMode:'environment'}},video,(r)=>{if(r&&SCAN&&SCAN.ctx===ctx){rd.reset();onCode(r.getText());}});
+    }catch(e){st_.textContent='تعذّر تشغيل الكاميرا. اسمح للمتصفح باستخدامها، أو استخدم أزرار التجربة.';}
+  })();
+}
+
+/* ===== Story mode: the full journey, told step by step for a live presentation ===== */
+const STORY_PID='P1';
+function storySign(s){s.clearance='yes';s.items.forEach(i=>{if(doseOpts(i)||((i.doctor||i.esc)&&!i.dd))applySug(i);i.ack=true;});s.drOk=true;s.signed={by:signer(),at:'10 شعبان 1448'};}
+const STORY=[
+ {t:'أبو خالد',v:'doctor',tab:'intake',f:'.phone',say:()=>'هذا أبو خالد، عمره 67. عنده رجفان أذيني وسكري وضغط وقصور قلب، ويأخذ 7 أدوية. رمضان بعد '+Math.max(daysToRamadan(),0)+' يوماً وهو ناوي يصوم. في دراسة سعودية، أكثر من نصف مرضى المميعات عدّلوا أدويتهم بأنفسهم في رمضان. صيامٌ آمن جاء لهذه اللحظة.'},
+ {t:'يجيب من جواله',v:'doctor',tab:'intake',f:'.phone',say:()=>'قبل رمضان بشهرين تصله رسالة. يفتح التطبيق ويجيب على 5 أسئلة بنعم أو لا. أدويته تجي من ملفه في المستشفى، فما يحتاج يكتب شيئاً.'},
+ {t:'بطاقة في نظام المستشفى',v:'ehr',f:'.cds',say:()=>'لما يفتح الطبيب ملفه في أي زيارة، تطلع بطاقة صيامٌ آمن داخل نظام المستشفى نفسه عبر معيار HL7 CDS Hooks: كم دواء تغيّر وقته، وكم دواء يحتاج قراره، وهل موعده القادم يلحق قبل رمضان.'},
+ {t:'خطورة الصيام',v:'doctor',f:'.box.risk',say:()=>'درجة IDF-DAR تنحسب تلقائياً من ملفه: خطورة أبو خالد '+RKT[overall(STORY_PID).cat]+'، والمسار المقترح '+PATH[overall(STORY_PID).auto]+'. والطبيب يقدر يغيّر المسار.'},
+ {t:'فاحص التداخلات',v:'doctor',f:'.box.alerts',say:()=>'قبل أي قرار، يشوف الطبيب التداخلات المهمة في الصيام: إمباغليفلوزين مع فوروسيمايد يزيدان الجفاف، وبيسوبرولول يخفي أعراض هبوط السكر. ويقدر يفحص أي دواء جديد قبل ما يصرفه.'},
+ {t:'الطبيب يبني الخطة',v:'doctor',f:'.box.build',do:s=>{s.clearance='yes';},say:()=>'الطبيب هو اللي يبني الخطة. لكل دواء قائمة خيارات من الإرشادات، والمقترح عليه علامة، وتحت كل خيار سببه ومصدره. جرعة جليكلازايد يختارها بنفسه، ويؤكد سطراً سطراً بلا اعتماد جماعي.'},
+ {t:'يعتمد ويرسل',v:'doctor',f:'.box.drsign',do:storySign,say:()=>'بعد ما يؤكد كل سطر يضغط «اعتمد وأرسل». الخطة توصل لجوال المريض فوراً، وتظهر عند الصيدلي للصرف. ما تمر على أحد ثاني للاعتماد.'},
+ {t:'أبو خالد يستلم خطته',v:'doctor',tab:'plan',f:'.phone',say:()=>'هذي خطته: السحور الساعة '+TIME.suhoor+'، والإفطار '+TIME.iftar+'، وبعد التراويح '+TIME.bed+'، محسوبة لمدينته بتقويم أم القرى. وتحتها: وش يسوي لو نسي جرعة، ومتى يقطع صيامه، ويقدر يمسح علبة أي دواء ليعرف موعده.'},
+ {t:'الصيدلي يصرف بالباركود',v:'clinic',f:'.box.disp',do:s=>{s.items.forEach((i,ix)=>{if(!i.stop&&i.key!=='atorvastatin')s.disp[ix]={g:gtinOf(i.key),lot:'B'+(2417+ix),exp:'2027-09-30',sn:'',man:false};});},say:()=>'الصيدلي ما يعتمد ولا يغيّر الخطة. يمسح باركود كل علبة، والنظام يتأكد أنها نفس الدواء ويقرأ التشغيلة وتاريخ الانتهاء من رمز GS1 اللي تفرضه هيئة الغذاء والدواء. خلونا نمسح علبة أتورفاستاتين الحين.'},
+ {t:'يشرح ويطلب مراجعة',v:'clinic',f:'.box.revf',do:s=>{const k=s.items.findIndex(i=>i.d.cls==='sglt2'),a=s.items.findIndex(i=>i.key==='atorvastatin');s.disp[a]={g:gtinOf('atorvastatin'),lot:'B2423',exp:'2027-09-30',sn:'',man:false};TOLD.forEach(([x])=>s.told[x]=true);s.rev.push({ix:k,why:'تداخل دوائي',note:'عمره 67 ومعه فوروسيمايد. أقترح إيقاف إمباغليفلوزين مؤقتاً في رمضان.',at:'11 شعبان',st:'open',reply:''});},say:()=>'يشرح له المواعيد ومتى يقطع صيامه. ويلاحظ أن عمره 67 ومعه مدر بول مع إمباغليفلوزين. ما يغيّر شيئاً بنفسه: يرسل طلب مراجعة للطبيب مع السبب.'},
+ {t:'الطبيب يستلم الإشعار',v:'doctor',f:'.box.revs',say:()=>'يوصل الطلب للطبيب كإشعار، ويطلع أبو خالد أول قائمته. يقرأ السبب ويقرر.'},
+ {t:'يعدّل ويعيد الإرسال',v:'doctor',f:'.box.build',do:s=>{const i=s.items.find(i=>i.d.cls==='sglt2');i.dd=true;i.stop=true;i.doses=[];i.ack=true;s.rev.forEach(r=>{r.st='done';r.reply='أوقف الطبيب إمباغليفلوزين في رمضان';});s.signed={by:signer(),at:'11 شعبان 1448'};},say:()=>'يوقف إمباغليفلوزين مؤقتاً في رمضان ويعيد الإرسال. تتحدث الخطة عند المريض وعند الصيدلي، ويُغلق الطلب.'},
+ {t:'3 رمضان: المتابعة',v:'doctor',tab:'follow',f:'.phone',do:s=>{s.fu={miss:'لا',dbl:'لا',sym:'نعم',low:'نعم'};},say:()=>'في الأيام الأولى من رمضان تجيه أسئلة قصيرة. قال إن السكر نزل عن 70، فطلعت له شاشة: أفطر الآن، وزر اتصال 997.'},
+ {t:'تنبيه عند الفريق',v:'doctor',f:'.queue',say:()=>'وعند الطبيب يطلع أبو خالد أول القائمة: «هبوط سكر». يتصل به اليوم ويخفض جرعة جليكلازايد، بدل ما يكتشفها في الطوارئ.'},
+ {t:'بعد العيد',v:'doctor',tab:'plan',f:'.phone',open:'بعد العيد',say:()=>'وبعد العيد يذكّره التطبيق يرجع لمواعيده وجرعاته المعتادة.'},
+ {t:'الخلاصة',v:'dash',f:'.stats',say:()=>'طبيب يقرر، وصيدلي يصرف ويشرح، ومريض يعرف وش يسوي. ولوحة المنشأة تبين كم مريض عالي الخطورة عنده خطة، وكم زيارة وفّرنا، وكم مريض يحتاج اتصالاً اليوم.'}
+];
+function storyGo(k){k=Math.max(0,Math.min(STORY.length-1,k));S.story=k;S.dd=null;closeScan();
+  const p=PP(STORY_PID);initPatient(p);const s=per[STORY_PID];s.answers={};
+  for(let j=0;j<=k;j++)if(STORY[j].do)STORY[j].do(s);
+  const x=STORY[k];S.pid=STORY_PID;S.view=x.v;s.tab=x.tab||(s.signed?'plan':'intake');S.pane=x.f==='.phone'?'patient':'pharm';S.sos=false;
+  render();paintStory();
+  setTimeout(()=>{document.querySelectorAll('.spot').forEach(e=>e.classList.remove('spot'));const e=$(x.f);if(e){e.classList.add('spot');e.scrollIntoView({block:'center',behavior:'smooth'});}
+    if(x.open){document.querySelectorAll('details.wi').forEach(d=>{if(d.querySelector('summary').textContent===x.open){d.open=true;d.scrollIntoView({block:'center'});}});}},80);}
+function paintStory(){const b=$('#story');if(!b)return;if(S.story==null){b.hidden=true;document.body.classList.remove('storying');return;}
+  const k=S.story,x=STORY[k];b.hidden=false;document.body.classList.add('storying');
+  b.innerHTML=`<div class="stin"><div class="stk"><span class="stn">${k+1} من ${STORY.length}</span><b>${esc(x.t)}</b></div><p>${esc(x.say())}</p>
+   <div class="stc"><button type="button" class="btn quiet" id="stPrev" ${k?'':'disabled'}>السابق</button><button type="button" class="btn" id="stNext">${k===STORY.length-1?'إنهاء العرض':'التالي'}</button><button type="button" class="iconbtn" id="stX" aria-label="إغلاق العرض">✕</button></div></div>`;
+  $('#stPrev').onclick=()=>storyGo(k-1);$('#stNext').onclick=()=>k===STORY.length-1?storyEnd():storyGo(k+1);$('#stX').onclick=storyEnd;}
+function storyEnd(){S.story=null;document.querySelectorAll('.spot').forEach(e=>e.classList.remove('spot'));const p=PP(STORY_PID);initPatient(p);
+  if(DB){/* back to the shared copy */localLoad&&0;}render();paintStory();}
+document.addEventListener('keydown',e=>{if(S.story==null||e.target.closest('input,textarea'))return;if(e.key==='ArrowLeft'){e.preventDefault();$('#stNext')&&$('#stNext').click();}else if(e.key==='ArrowRight'){e.preventDefault();$('#stPrev')&&$('#stPrev').click();}});
+
 /* ===== Render & events ===== */
 function render(){
   const ae=document.activeElement, af=ae&&ae.dataset?ae.dataset.msgin:null;
@@ -1403,9 +1669,7 @@ function render(){
 function renderInner(){
   document.body.dataset.pane=S.pane;document.body.classList.toggle('m-patient',MODE==='patient');document.body.classList.toggle('m-pharm',MODE==='pharm');
   if(MODE==='patient'){$('#shell').innerHTML=vPhone();bind();paintSync();return;}
-  if(CFG.mode==='pharmacy'&&(S.view==='doctor'||S.view==='ehr')) S.view='clinic';
-  $('#vDoctor').hidden=CFG.mode==='pharmacy';$('#vEhr').hidden=CFG.mode==='pharmacy';
-  $('#vClinic').textContent=CFG.mode==='doctor'?'الخطة':'الصيدلي';
+  $('#vClinic').hidden=CFG.mode==='doctor';if(CFG.mode==='doctor'&&S.view==='clinic')S.view='doctor';
   [['vClinic','clinic'],['vDoctor','doctor'],['vEhr','ehr'],['vDash','dash'],['vSet','set']].forEach(([b,v])=>$('#'+b).setAttribute('aria-pressed',S.view===v));
   document.body.dataset.view=S.view;
   let html;
@@ -1416,7 +1680,7 @@ function renderInner(){
   $('#shell').innerHTML=html;
   bind();paintSync();
 }
-function afterRender(af){
+function afterRender(af){scheduleReminders();
   document.querySelectorAll('.box.msgs .thread').forEach(e=>e.scrollTop=e.scrollHeight);
   const a=$('#app');if(a&&$('[data-msgform="pt"]'))a.scrollTop=a.scrollHeight;
   if(af){const e=$(`[data-msgin="${af}"]`);if(e){e.focus({preventScroll:true});const n=e.value.length;try{e.setSelectionRange(n,n);}catch(_){}}}
@@ -1446,21 +1710,41 @@ function bind(){
   document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>{S.dd=null;setSlot(+b.dataset.set,b.dataset.v);S.pick=null;save();render();});
   document.querySelectorAll('[data-ap]').forEach(b=>b.onclick=()=>{const i=st().items[+b.dataset.ap];i.approved=!i.approved;if(!i.approved)invalidate();save();render();});
   const ap=$('#apAll');if(ap) ap.onclick=()=>{st().items.forEach(i=>{if(!doseOpts(i)&&!i.crit)i.approved=true;});save();render();};
-  const sim=$('#simSign');if(sim) sim.onclick=()=>{st().items.forEach(i=>i.approved=true);const s=st();s.drOk=true;s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();showToast();};
-  const ds=$('#drSign');if(ds) ds.onclick=()=>{const s=st();s.drOk=true;save();deskToast('اعتمدت خطة '+P().name+'، وانتقلت للصيدلي.');render();};
+  const sim=$('#simSign');if(sim) sim.onclick=()=>{const s=st();s.items.forEach(i=>{if((i.doctor||i.esc)&&!i.dd)applySug(i);i.ack=true;i.approved=true;});s.drOk=true;s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();showToast();};
+  const ds=$('#drSign');if(ds) ds.onclick=()=>{const s=st();s.drOk=true;s.signed={by:signer(),at:stamp()};s.tab='plan';s.fu={};s.taken={};
+    (s.rev||[]).forEach(r=>{if(r.st!=='done'){r.st='done';r.reply='عدّل الطبيب الخطة وأعاد إرسالها';}});save();
+    deskToast('وصلت خطة '+P().name+' لجواله'+(CFG.mode==='team'?'، وظهرت عند الصيدلي للصرف والشرح.':'.'));render();showToast();};
+  document.querySelectorAll('[data-pl]').forEach(b=>b.onclick=()=>{S.dd=null;const i=st().items[+b.dataset.pl],v=b.dataset.v;i.dd=true;i.doctor=false;i.stop=v==='stop';i.keep=v==='keep';
+    i.doses=(v==='stop'||v==='keep')?[]:v.split('+');i.ds=i.ds||'same';i.approved=false;i.ack=true;invalidate();save();render();});
+  document.querySelectorAll('[data-rvd]').forEach(b=>b.onclick=()=>{S.dd=null;const r=st().rev[+b.dataset.rvd];if(!r)return;
+    if(b.dataset.v==='keep'){r.st='done';r.reply='راجعها الطبيب وأبقاها كما هي';}else{r.st='wip';setTimeout(()=>{const e=$('.box.build');e&&e.scrollIntoView({block:'start'});},30);}save();render();});
+  document.querySelectorAll('[data-rvm]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvm=b.dataset.v;render();});
+  document.querySelectorAll('[data-rvw]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvw=b.dataset.v;render();});
+  {const n=$('#rvNote');if(n)n.oninput=()=>{S.rvNote=n.value;};}
+  {const rs=$('#rvSend');if(rs)rs.onclick=()=>{const s=st();s.rev=s.rev||[];s.rev.push({ix:+S.rvm,why:S.rvw,note:(S.rvNote||'').trim().slice(0,300),at:stamp(),st:'open',reply:''});
+    S.rvm=null;S.rvw=null;S.rvNote='';save();deskToast('وصل طلبك للطبيب، وستراه هنا عندما يرد.');render();};}
+  document.querySelectorAll('[data-told]').forEach(b=>b.onclick=()=>{const s=st(),k=b.dataset.told;s.told[k]=!s.told[k];save();render();});
+  document.querySelectorAll('[data-scan]').forEach(b=>b.onclick=()=>openScan({kind:'disp',pid:S.pid,ix:+b.dataset.scan}));
+  document.querySelectorAll('[data-unscan]').forEach(b=>b.onclick=()=>{delete st().disp[b.dataset.unscan];save();render();});
+  {const ps=$('#ptScan');if(ps)ps.onclick=()=>openScan({kind:'pt',pid:S.pid});}
+  {const rw=$('#remSw');if(rw)rw.onclick=async()=>{const on=!remindOn();try{localStorage.setItem(REMK,on?'1':'0');}catch(_){}
+    if(on&&'Notification' in window&&Notification.permission==='default'){try{await Notification.requestPermission();}catch(_){}}
+    scheduleReminders();rerenderKeep();if(on)showToast('سيصلك تذكير عند السحور والإفطار وبعد التراويح.');};}
+  {const rt=$('#remTest');if(rt)rt.onclick=()=>{const s=st(),z=['iftar','suhoor','bed'].find(z=>slotMeds(s,z).length);if(!z)return;rt.textContent='يصلك بعد 3 ثوانٍ…';setTimeout(()=>{notify(SLOTMSG[z],slotMeds(s,z).join('، '));rt.textContent='جرّب التذكير الآن';},3000);};}
+  document.querySelectorAll('[data-try]').forEach(b=>b.onclick=()=>{S.dd=null;S.tryK=b.dataset.v;render();});
   const sg=$('#sign');if(sg) sg.onclick=()=>{const s=st();s.signed={by:signer(),at:'اليوم'};s.tab='plan';save();render();if(MODE!=='pharm')showToast();};
   // manual medicine entry while the hospital link is down
   document.querySelectorAll('[data-addk]').forEach(b=>b.onclick=()=>{S.dd=null;S.addK=b.dataset.v;render();});
   document.querySelectorAll('[data-addf]').forEach(b=>b.onclick=()=>{S.dd=null;S.addF=b.dataset.v;render();});
   const am=$('#addMed');if(am) am.onclick=()=>{const s=st();s.extra.push([S.addK,+S.addF]);s.items.push(makeItem(S.addK,+S.addF));
-    deskToast(S.addK==='other'?'أضيف الدواء وأُحيل للطبيب تلقائياً لأنه غير موجود في المكتبة.':'أضيف '+DRUGS[S.addK].ar+' بتوقيت حسب القواعد.');S.addK=null;S.addF=null;invalidate();save();render();};
+    deskToast(S.addK==='other'?'أضيف الدواء، وهو غير موجود في المكتبة فاختر له قرارك.':'أضيف '+DRUGS[S.addK].ar+' بتوقيت حسب القواعد، أكّده في الخطة.');S.addK=null;S.addF=null;invalidate();save();render();};
   // CDS card inside the hospital system
   document.querySelectorAll('[data-cds]').forEach(b=>b.onclick=()=>{const s=st(),a=b.dataset.cds;
     if(a==='open'){S.view='doctor';render();window.scrollTo(0,0);return;}
     if(a==='undo'){s.cds=null;save();render();return;}
     if(a==='accept'){let n=0;s.items.forEach(i=>{if((i.esc||i.doctor)&&!i.dd&&!doseOpts(i)&&applySug(i))n++;});
       const o=overall(S.pid);if(!s.clearance){if(s.items.some(i=>i.keep))s.clearance='no';else if(o.path!=='visit')s.clearance='yes';}
-      s.cds='accepted';invalidate();if(drReady(S.pid))s.drOk=true;save();logCfg('د. سعد (من نظام المستشفى)','اعتمد '+n+' من مقترحات الإرشاد لـ '+P().name);saveCfg();render();}});
+      s.cds='accepted';invalidate();save();logCfg('د. سعد (من نظام المستشفى)','اعتمد '+n+' من مقترحات الإرشاد لـ '+P().name);saveCfg();render();}});
   document.querySelectorAll('[data-book]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st();s.appt=b.dataset.v;save();logCfg('د. سعد','حجز موعداً لـ '+P().name+' في '+fd(b.dataset.v)+' (appointment-book)');saveCfg();deskToast('حُجز موعد '+P().name+' في '+fd(b.dataset.v)+'، ووصل إشعار للمريض.');render();});
   document.querySelectorAll('[data-dis]').forEach(b=>b.onclick=()=>{S.dd=null;const s=st();s.cds='dismissed:'+b.dataset.v;save();logCfg('د. سعد (من نظام المستشفى)','أخفى بطاقة '+P().name+': '+b.dataset.v);saveCfg();render();});
   // settings
@@ -1490,7 +1774,7 @@ function bind(){
     else {if(i.doses[di]===zone)return;i.doses[di]=zone;}
     invalidate(ix);save();};
   const zoneAt=(x,y)=>{const el=document.elementFromPoint(x,y);return el&&el.closest('[data-zone]');};
-  document.querySelectorAll('.tok').forEach(t=>{
+  document.querySelectorAll('.tok[data-ix]').forEach(t=>{
     const ix=+t.dataset.ix, di=+t.dataset.di;
     t.addEventListener('pointerdown',e=>{
       if(e.button!==0)return; e.preventDefault();
@@ -1521,6 +1805,7 @@ $('#reset').onclick=()=>{const b=$('#reset');if(b.dataset.c){delete b.dataset.c;
 document.addEventListener('click',e=>{if(S.dd&&!e.target.closest('.dd')){S.dd=null;render();}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.dd){const id=S.dd;S.dd=null;render();const b=document.querySelector(`[data-ddt="${id}"]`);b&&b.focus();}});
 $('#vClinic').onclick=()=>{S.view='clinic';render();};
+$('#storyBtn').onclick=()=>S.story==null?storyGo(0):storyEnd();
 $('#vDoctor').onclick=()=>{S.view='doctor';render();};
 $('#vEhr').onclick=()=>{S.view='ehr';render();};
 $('#vDash').onclick=()=>{S.view='dash';render();};
@@ -1528,7 +1813,7 @@ $('#vSet').onclick=()=>{S.view='set';render();};
 (function(){const r=document.documentElement,b=$('#theme');
   const dark=()=>r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
   b.onclick=()=>{r.dataset.theme=dark()?'light':'dark';};})();
-render();
+render();scheduleReminders();
 </script>
 
 </body>
