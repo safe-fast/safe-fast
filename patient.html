@@ -1615,6 +1615,8 @@ function gtinCheck(d13){let s=0;for(let k=0;k<d13.length;k++)s+=(+d13[d13.length
 /* demo company prefix 062899990, not a real product */
 function gtinOf(k){const b='062899990'+String(Object.keys(DRUGS).indexOf(k)+1).padStart(4,'0');return b+gtinCheck(b);}
 const GTIN={};Object.keys(DRUGS).forEach(k=>{if(k!=='other')GTIN[gtinOf(k)]=k;});
+try{const L=JSON.parse(localStorage.getItem('safefast-gtin')||'{}');Object.keys(L).forEach(g=>{if(DRUGS[L[g]])GTIN[g]=L[g];});}catch(_){}
+function learnGtin(g,k){GTIN[g]=k;try{const L=JSON.parse(localStorage.getItem('safefast-gtin')||'{}');L[g]=k;localStorage.setItem('safefast-gtin',JSON.stringify(L));}catch(_){}}
 function gs1Parse(raw){
   let t=String(raw||'').trim().replace(/^\][A-Za-z]\d/,'');const o={};
   if(/^\(\d{2}\)/.test(t)){t.replace(/\((\d{2})\)([^(]*)/g,(_,a,v)=>{o[a]=v.trim();});}
@@ -1650,7 +1652,10 @@ function openScan(ctx){closeScan();
   el.querySelector('[data-x]').focus();
   function onCode(raw,man){if(!SCAN||SCAN.ctx!==ctx)return;const g=gs1Parse(raw),k=GTIN[g.gtin.padStart(14,'0')];
     const meta=`<dl><div><dt>رقم المنتج</dt><dd class="ltr">${esc(g.gtin||'—')}</dd></div><div><dt>التشغيلة</dt><dd class="ltr">${esc(g.lot||'—')}</dd></div><div><dt>الانتهاء</dt><dd class="ltr">${esc(expTxt(g.exp)||'—')}</dd></div><div><dt>الرقم التسلسلي</dt><dd class="ltr">${esc(g.sn||'—')}</dd></div></dl>`;
-    if(!k){res.className='scanres bad';res.innerHTML=`<b>${I.warn}الرمز غير موجود في قائمة الأدوية التجريبية</b>${meta}`;return;}
+    if(!k){res.className='scanres bad';
+      if(ctx.kind==='disp'&&g.gtin){const it0=per[ctx.pid].items[ctx.ix];res.innerHTML=`<b>${I.warn}علبة حقيقية رقمها غير مسجّل في ملف الأدوية بعد</b>${meta}<p>تأكد بعينك أن العلبة ${esc(it0.d.ar)}، ثم اربطها. المرة الجاية يتعرف عليها النظام مباشرة.</p><button type="button" class="btn" id="gtinLearn" style="margin-top:8px">اربط هذه العلبة بـ ${esc(it0.d.ar)}</button>`;
+        const lb=res.querySelector('#gtinLearn');if(lb)lb.onclick=()=>{learnGtin(g.gtin.padStart(14,'0'),it0.key);onCode(raw,man);};return;}
+      res.innerHTML=`<b>${I.warn}الرمز غير موجود في قائمة الأدوية التجريبية</b>${meta}`;return;}
     const d=DRUGS[k];
     if(ctx.kind==='disp'){const s2=per[ctx.pid],it=s2.items[ctx.ix];
       if(k!==it.key){res.className='scanres bad';res.innerHTML=`<b>${I.warn}هذه العلبة ${esc(d.ar)}، وليست ${esc(it.d.ar)}. لا تصرفها.</b>${meta}`;return;}
