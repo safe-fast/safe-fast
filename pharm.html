@@ -841,6 +841,9 @@ const CLINICS={fm:{n:'طب الأسرة: كل الأدوات',k:['dm','cv','rena
 const MODES={team:'الطبيب يبني الخطة والصيدلي يصرف ويشرح',doctor:'طبيب وحده بلا صيدلية'};
 const CFG0=()=>({v:1,mode:'team',clinic:'fm',city:'riyadh',his:'up',sms:'on',trap:'off',ovr:{},log:[],msgEpoch:0});
 let CFG=CFG0();
+/* usability-test mode (?test=1): fresh demo data, no sync, nothing saved; &trap=1 turns on the deliberate insulin-dose error */
+const TESTQ=(()=>{try{return new URLSearchParams(location.search);}catch(_){return new URLSearchParams('');}})(),TEST=TESTQ.has('test');
+if(TEST&&TESTQ.get('trap')==='1')CFG.trap='on';
 const RAMADAN_START=Date.UTC(2027,1,8); // expected 1 Ramadan 1448, subject to moon sighting
 function sunTimes(lat,lon,t){
   const d=new Date(t),doy=Math.round((t-Date.UTC(d.getUTCFullYear(),0,0))/864e5),g=2*Math.PI/365*(doy-1),R=Math.PI/180;
@@ -880,7 +883,8 @@ function seedDemo(){
   sign('P2',{miss:'لا',dbl:'لا',sym:'لا'});
   sign('P5',{miss:'نعم',dbl:'لا',sym:'لا'});
 }
-seedDemo();
+if(!TEST)seedDemo();
+else PATIENTS.forEach(p=>{QUESTIONS.filter(q=>(!q.dm||p.cl.dm)&&(!q.fem||p.sex==='أنثى')).forEach(q=>{if(per[p.id].answers[q.k]===undefined)per[p.id].answers[q.k]=!!q.good;});resug(p.id);});
 const modeFromHash=()=>location.hash==='#patient'?'patient':(location.hash==='#pharmacist'||location.hash==='#doctor')?'pharm':'all';
 let MODE=window.SF_MODE||modeFromHash();
 window.addEventListener('hashchange',()=>{if(!window.SF_MODE){MODE=modeFromHash();if(location.hash==='#doctor')S.view='doctor';else if(location.hash==='#pharmacist')S.view='clinic';render();}});
@@ -1607,10 +1611,10 @@ function saveCfg(){
 }
 /* same-computer link for downloaded files: tabs share browser storage */
 const LKEY='safefast-demo-v2';
-function localSave(){try{const all={};PATIENTS.forEach(p=>all[p.id]=ser(p.id));localStorage.setItem(LKEY,JSON.stringify({t:Date.now(),cases:all,cfg:CFG,msgs:MSGS}));}catch(_){}}
+function localSave(){if(TEST)return;try{const all={};PATIENTS.forEach(p=>all[p.id]=ser(p.id));localStorage.setItem(LKEY,JSON.stringify({t:Date.now(),cases:all,cfg:CFG,msgs:MSGS}));}catch(_){}}
 function localLoad(raw){try{const o=JSON.parse(raw||localStorage.getItem(LKEY)||'null');if(!o||!o.cases)return false;applyCfg(o.cfg);PATIENTS.forEach(p=>applyDoc(p.id,o.cases[p.id]||null));takeMsgs((Array.isArray(o.msgs)?o.msgs:[]).map(m=>[m&&m.id,m]),!raw);return true;}catch(_){return false;}}
 try{
-  if(!(window.claude&&claude.use)){
+  if(!(window.claude&&claude.use)&&!TEST){
     if(localLoad()) S.sync='tabs'; else {localSave();S.sync='tabs';}
     window.addEventListener('storage',e=>{if(e.key!==LKEY||DB)return;localLoad(e.newValue);if(DRAG)render.pending=true;else rerenderKeep();});
   }
@@ -1632,7 +1636,7 @@ function fbAdapter(fs){
 }
 (async()=>{
   try{ let db=null;
-    if(window.SF_FIREBASE&&window.firebase&&firebase.firestore){
+    if(!TEST&&window.SF_FIREBASE&&window.firebase&&firebase.firestore){
       if(!firebase.apps.length) firebase.initializeApp(window.SF_FIREBASE);
       db=fbAdapter(firebase.firestore());
     } else if(window.claude&&claude.use){ db=await claude.use('db'); }
@@ -1783,7 +1787,7 @@ function renderInner(){
   else if(S.view==='set') html=vSettings();
   else if(S.view==='ehr') html=vQueue()+vEhr();
   else if(S.view==='cons') html=vConsQueue()+vCons();
-  else {const main=S.view==='doctor'?vDoctor():vWork();html=vQueue()+main+(MODE==='pharm'?'':vPhone());}
+  else {const main=S.view==='doctor'?vDoctor():vWork();html=vQueue()+main+(MODE==='pharm'||TEST?'':vPhone());}
   $('#shell').innerHTML=html;
   bind();paintSync();
 }

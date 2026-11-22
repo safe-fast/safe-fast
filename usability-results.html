@@ -1,0 +1,40 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>صيامٌ آمن · نتائج اختبار الاستخدام</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#f5f6f4;--card:#fff;--ink:#1d2622;--mut:#5d6964;--line:#dfe4e1;--brand:#0b5d3b;--brand2:#e6f1eb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Almarai,system-ui,sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:24px 16px 60px}h1{margin:0 0 4px;font-size:1.5rem}.mut{color:var(--mut)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}
+.k{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}.k b{display:block;font-size:1.7rem;color:var(--brand)}.k span{font-size:.85rem;color:var(--mut)}
+.tw{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.85rem}th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th{background:var(--brand2)}
+td.w{white-space:normal;min-width:180px}
+button{font:inherit;background:var(--brand);color:#fff;border:0;border-radius:9px;padding:8px 16px;cursor:pointer}
+</style></head><body><div class="wrap"><h1>نتائج اختبار الاستخدام</h1><p class="mut" id="st">جارٍ التحميل…</p><div class="kpis" id="k"></div><p><button id="csv">تنزيل CSV</button></p><div class="tw"><table id="t"></table></div></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const T=['t1','t2','t3','t4'],TN={t1:'نورة',t2:'محمد (تداخل)',t3:'منيرة (إنسولين)',t4:'استشارة'};
+const med=a=>{a=a.filter(x=>x!=null).sort((x,y)=>x-y);if(!a.length)return null;const m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2;};
+const mmss=s=>s==null?'—':Math.floor(s/60)+':'+String(Math.round(s%60)).padStart(2,'0');
+const grade=s=>s>=80.3?'ممتاز (A)':s>=68?'جيد، فوق المتوسط':s>=51?'مقبول، أقل من المتوسط':'ضعيف';
+let rows=[];
+function paint(){const D=rows.filter(r=>r.done);
+ document.getElementById('st').textContent=`${D.length} مشارك أكملوا الاختبار${rows.length>D.length?'، و'+(rows.length-D.length)+' لم يكملوا':''}. يتحدث تلقائياً.`;
+ const sus=D.map(r=>r.susScore),mean=sus.length?sus.reduce((a,b)=>a+b,0)/sus.length:null;
+ const trapT=D.filter(r=>r.tasks.t3&&r.tasks.t3.extra&&r.tasks.t3.extra!=='p0'&&r.tasks.t3.extra!=='default').length;
+ const trapS=D.filter(r=>r.trapSeen==='نعم').length;
+ document.getElementById('k').innerHTML=[[mean==null?'—':mean.toFixed(1),'متوسط SUS من 100'+(mean==null?'':' · '+grade(mean))],
+  ...T.map(t=>{const a=D.map(r=>r.tasks[t]).filter(Boolean);return [a.length?Math.round(100*a.filter(x=>x.done).length/a.length)+'%':'—','نجاح مهمة '+TN[t]+' · الوقت الوسيط '+mmss(med(a.map(x=>x.sec)))];}),
+  [D.length?trapT+' من '+D.length:'—','غيّروا جرعة الإنسولين الخاطئة عمداً (وقالوا إنهم لاحظوها: '+trapS+')']].map(([b,s])=>`<div class="k"><b>${b}</b><span>${s}</span></div>`).join('');
+ document.getElementById('t').innerHTML=`<tr><th>#</th><th>التخصص</th><th>الخبرة</th>${T.map(t=>`<th>${TN[t]}</th>`).join('')}<th>قرار إمباغليفلوزين</th><th>جرعة الإنسولين</th><th>لاحظ الخطأ؟</th><th>SUS</th><th>يستخدمها؟</th><th>أعجبه</th><th>أربكه</th></tr>`+
+  rows.map((r,i)=>`<tr><td>${i+1}${r.done?'':' (لم يكمل)'}</td><td>${esc(r.role)}</td><td>${esc(r.exp)}</td>${T.map(t=>{const x=r.tasks[t];return `<td>${x?(x.done?'✓ ':'✗ ')+mmss(x.sec):'—'}</td>`;}).join('')}
+  <td>${esc(r.tasks.t2&&r.tasks.t2.extra)}</td><td>${esc(r.tasks.t3&&r.tasks.t3.extra)}</td><td class="w">${esc(r.trapSeen)} ${esc(r.trapNote)}</td><td>${r.susScore??'—'}</td><td>${esc(r.useful)}</td><td class="w">${esc(r.liked)}</td><td class="w">${esc(r.confused)}</td></tr>`).join('');}
+document.getElementById('csv').onclick=()=>{const H=['id','start','role','exp','done',...T.flatMap(t=>[t+'_sec',t+'_done']),'sglt2_decision','basal_dose','trapSeen','trapNote','susScore',...[...Array(10)].map((_,k)=>'sus'+(k+1)),'useful','liked','confused'];
+ const L=[H.join(',')].concat(rows.map(r=>[r.id,r.start,r.role,r.exp,r.done,...T.flatMap(t=>[r.tasks[t]?.sec??'',r.tasks[t]?.done??'']),r.tasks.t2?.extra??'',r.tasks.t3?.extra??'',r.trapSeen,r.trapNote,r.susScore??'',...[...Array(10)].map((_,k)=>r.sus[k]??''),r.useful,r.liked,r.confused].map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')));
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+L.join('\n')],{type:'text/csv'}));a.download='safefast_usability.csv';a.click();};
+try{firebase.initializeApp(window.SF_FIREBASE);firebase.firestore().collection('config').onSnapshot(s=>{rows=s.docs.filter(d=>d.id.startsWith('ut_')).map(d=>{try{return JSON.parse(d.data().j);}catch(_){return null;}}).filter(Boolean).sort((a,b)=>a.start<b.start?-1:1);paint();},e=>{document.getElementById('st').textContent='تعذّر التحميل: '+e.message;});}catch(e){document.getElementById('st').textContent='تعذّر التحميل.';}
+</script></body></html>

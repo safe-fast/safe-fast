@@ -1,0 +1,90 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>صيامٌ آمن · اختبار الاستخدام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap">
+<style>
+:root{--bg:#f5f6f4;--card:#fff;--ink:#1d2622;--mut:#5d6964;--line:#dfe4e1;--brand:#0b5d3b;--brand2:#e6f1eb;--amber:#9a5b00;--amberbg:#fff4e0;--r:12px}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 Almarai,system-ui,sans-serif}
+button,input,select,textarea{font:inherit}
+.wrap{max-width:760px;margin:auto;padding:28px 16px 60px}
+h1{font-size:1.6rem;margin:0 0 6px}h2{font-size:1.15rem;margin:22px 0 8px}.mut{color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:14px 0}
+label.f{display:block;font-weight:700;margin:14px 0 6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}.opts button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:8px 14px;cursor:pointer}
+.opts button[aria-pressed=true]{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:11px 22px;font-weight:700;cursor:pointer}.btn:disabled{opacity:.45;cursor:default}
+.btn.q{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:8px;padding:8px 10px;resize:vertical}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-top:12px}
+/* task layout */
+.task{display:grid;grid-template-columns:340px 1fr;height:100vh}
+.side{background:#fff;border-left:1px solid var(--line);padding:18px;overflow:auto;display:flex;flex-direction:column;gap:12px}
+.side .n{font-size:.85rem;color:var(--mut)}.side h2{margin:0;font-size:1.2rem}.side .do{background:var(--brand2);border-radius:10px;padding:12px 14px;font-size:1rem}
+.side .tip{font-size:.85rem;color:var(--mut)}.timer{font-variant-numeric:tabular-nums;font-size:1.6rem;font-weight:800;color:var(--brand)}
+.dots{display:flex;gap:6px}.dots i{width:28px;height:6px;border-radius:4px;background:var(--line)}.dots i.on{background:var(--brand)}
+iframe{width:100%;height:100%;border:0;background:#fff}
+.sus{display:grid;grid-template-columns:1fr;gap:10px}.sus .it{border-top:1px solid var(--line);padding-top:10px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px}.scale button{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:8px 2px;cursor:pointer;font-size:.8rem}
+.scale button[aria-pressed=true]{background:var(--brand);border-color:var(--brand);color:#fff}
+.ends{display:flex;justify-content:space-between;font-size:.75rem;color:var(--mut);margin-top:3px}
+.warn{background:var(--amberbg);color:var(--amber);border-radius:10px;padding:10px 14px;font-size:.9rem}
+.narrow{display:none}
+@media(max-width:900px){.task{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:auto}.side{border-left:0;border-bottom:1px solid var(--line)}iframe{height:85vh}.narrow{display:block}}
+</style></head><body><div id="root"></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="config.js"></script>
+<script>
+'use strict';
+const TASKS=[
+ {k:'t1',t:'خطة مريضة بسيطة',do:'افتح ملف «نورة سعد الشهري» من القائمة، وابنِ خطة أدويتها لرمضان، ثم أرسلها للمريضة.',tip:'لا يوجد جواب واحد صحيح. اختر ما تراه مناسباً كما تفعل في عيادتك.',ok:w=>!!w.eval('per.P2.signed')},
+ {k:'t2',t:'مريض بتداخل دوائي',do:'افتح ملف «محمد عبدالله القحطاني». عنده تداخل بين إمباغليفلوزين وفوروسيمايد. قرر ماذا تفعل بإمباغليفلوزين، ثم أكمل خطته وأرسلها.',tip:'اقرأ فاحص التداخلات قبل أن تقرر.',ok:w=>!!w.eval('per.P1.signed'),extra:w=>w.eval('(()=>{const i=per.P1.items.find(x=>x.d.cls==="sglt2");return i?(i.stop?"stop":i.keep?"keep":i.doses.join("+")):""})()')},
+ {k:'t3',t:'مريضة على الإنسولين',do:'افتح ملف «منيرة صالح الدوسري»، وابنِ خطتها لرمضان كاملة وأرسلها.',tip:'خذ وقتك في مراجعة الجرعات.',ok:w=>!!w.eval('per.P4.signed'),extra:w=>w.eval('(()=>{const i=per.P4.items.find(x=>x.d.cls==="basal");return i?(i.du||"default"):""})()')},
+ {k:'t4',t:'استشارة مختص',do:'اسأل استشاري الغدد الصماء والسكري عن جرعة إنسولين «منيرة صالح الدوسري» من خلال الاستشارة الداخلية في ملفها.',tip:'السؤال يكفي، لا تحتاج تنتظر الرد.',ok:w=>w.eval('(per.P4.cons||[]).some(c=>c.sp==="endo")')}
+];
+const SUS=['أعتقد أنني سأرغب في استخدام هذه الأداة بشكل متكرر.','وجدت الأداة معقدة دون داعٍ.','وجدت الأداة سهلة الاستخدام.','أعتقد أنني سأحتاج مساعدة شخص تقني لأتمكن من استخدام هذه الأداة.','وجدت أن وظائف الأداة المختلفة مترابطة بشكل جيد.','وجدت في الأداة تناقضات كثيرة.','أتوقع أن معظم الأطباء سيتعلمون استخدام هذه الأداة بسرعة.','وجدت الأداة مرهقة في الاستخدام.','شعرت بالثقة وأنا أستخدم الأداة.','احتجت أن أتعلم أشياء كثيرة قبل أن أتمكن من استخدام الأداة.'];
+const ROLES=['طبيب أسرة','طبيب عام','طبيب مقيم','طبيب امتياز','صيدلي','أخرى'];
+const EXP=['أقل من سنة','1 إلى 3 سنوات','4 إلى 10 سنوات','أكثر من 10 سنوات'];
+const id='ut_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const R={id,start:new Date().toISOString(),role:'',exp:'',consent:false,tasks:{},sus:{},trapSeen:'',trapNote:'',useful:'',liked:'',confused:'',done:false,ua:navigator.userAgent.slice(0,120),w:innerWidth};
+let step='intro',ti=0,t0=0,tick=null;const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let db=null;try{if(window.SF_FIREBASE&&window.firebase){firebase.initializeApp(window.SF_FIREBASE);db=firebase.firestore();}}catch(_){}
+function save(){try{localStorage.setItem('safefast-ut-last',JSON.stringify(R));}catch(_){}if(db)db.collection('config').doc(id).set({j:JSON.stringify(R),t:Date.now()}).catch(()=>{});}
+const opts=(key,list)=>`<div class="opts">${list.map(x=>`<button type="button" data-o="${key}" data-v="${esc(x)}" aria-pressed="${R[key]===x}">${esc(x)}</button>`).join('')}</div>`;
+function render(){const r=$('#root');clearInterval(tick);
+ if(step==='intro'){r.innerHTML=`<div class="wrap"><h1>اختبار استخدام «صيامٌ آمن»</h1><p class="mut">نموذج أولي لأداة تساعد الطبيب على بناء خطة أدوية المريض المزمن قبل رمضان. شكراً لوقتك، يأخذ الاختبار تقريباً 20 دقيقة.</p>
+  <div class="card"><b>كيف يمشي الاختبار:</b><ol><li>أربع مهام قصيرة داخل الأداة، ونحسب الوقت تلقائياً.</li><li>استبيان من 10 عبارات عن سهولة الاستخدام، وسؤالين في الآخر.</li></ol>
+  <p class="mut">نختبر الأداة وليس أنت. لو تعثرت في مهمة فهذا يعني أن التصميم يحتاج تحسيناً، وهذا بالضبط ما نبحث عنه. كل المرضى افتراضيون، ولا نسجل اسمك أو أي بيانات تعرّف بك.</p>
+  <div class="warn narrow">الأفضل تستخدم كمبيوتر أو لابتوب، لأن الشاشة تحتاج مساحة.</div>
+  <label class="f">تخصصك</label>${opts('role',ROLES)}<label class="f">سنوات الخبرة بعد التخرج</label>${opts('exp',EXP)}
+  <label class="chk"><input type="checkbox" id="cons" ${R.consent?'checked':''}> <span>أوافق على المشاركة طوعاً، وأعرف أن إجاباتي مجهولة الهوية وتُستخدم لتحسين الأداة وفي ملف المسابقة.</span></label>
+  <p style="margin-top:18px"><button class="btn" id="go" ${R.role&&R.exp&&R.consent?'':'disabled'}>ابدأ المهمة الأولى</button></p></div></div>`;}
+ else if(step==='task'){const T=TASKS[ti];
+  if(!$('#app')){r.innerHTML=`<div class="task"><aside class="side" id="side"></aside><iframe id="app" title="الأداة" src="index.html?test=1&trap=1"></iframe></div>`;}
+  $('#side').innerHTML=`<div class="dots">${TASKS.map((_,k)=>`<i class="${k<=ti?'on':''}"></i>`).join('')}</div><div class="n">المهمة ${ti+1} من ${TASKS.length}</div><h2>${T.t}</h2><div class="do">${T.do}</div><div class="tip">${T.tip}</div>
+   <div class="timer" id="tm">0:00</div><button class="btn" id="fin">انتهيت من المهمة</button><button class="btn q" id="skip">ما قدرت أكملها</button>
+   <p class="tip">اضغط «انتهيت» بعد ما ترسل الخطة أو السؤال. لو علّقت، اضغط «ما قدرت أكملها» وننتقل للتالية.</p>`;
+  t0=Date.now();tick=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);$('#tm').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');},500);}
+ else if(step==='sus'){const lab=['لا أوافق بشدة','لا أوافق','محايد','أوافق','أوافق بشدة'];
+  r.innerHTML=`<div class="wrap"><h1>رأيك في الأداة</h1><p class="mut">لكل عبارة اختر من 1 (لا أوافق بشدة) إلى 5 (أوافق بشدة). أجب بسرعة بأول انطباع.</p>
+  <div class="card sus">${SUS.map((q,k)=>`<div class="it"><b>${k+1}. ${q}</b><div class="scale">${[1,2,3,4,5].map(v=>`<button type="button" data-s="${k}" data-v="${v}" aria-pressed="${R.sus[k]===v}">${v}</button>`).join('')}</div><div class="ends"><span>لا أوافق بشدة</span><span>أوافق بشدة</span></div></div>`).join('')}</div>
+  <div class="card"><label class="f" style="margin-top:0">في المهمة الثالثة (منيرة)، هل لاحظت شيئاً غير صحيح في جرعة الإنسولين المقترحة؟</label>${opts('trapSeen',['نعم','لا','لست متأكداً'])}
+   <textarea id="trapNote" placeholder="إذا نعم: ماذا لاحظت؟">${esc(R.trapNote)}</textarea>
+   <label class="f">هل تستخدم أداة مثل هذه في عيادتك قبل رمضان؟</label>${opts('useful',['أكيد','غالباً','ربما','غالباً لا','لا'])}
+   <label class="f">أكثر شيء أعجبك</label><textarea id="liked">${esc(R.liked)}</textarea>
+   <label class="f">أكثر شيء أربكك أو تتمنى يتغير</label><textarea id="confused">${esc(R.confused)}</textarea></div>
+  <p><button class="btn" id="send" ${Object.keys(R.sus).length===10&&R.trapSeen?'':'disabled'}>إرسال</button> <span class="mut" id="need">${Object.keys(R.sus).length<10?'باقي '+(10-Object.keys(R.sus).length)+' عبارات':''}</span></p></div>`;}
+ else{r.innerHTML=`<div class="wrap"><h1>شكراً لك</h1><div class="card"><p>وصلت إجاباتك. لاحظ أن منيرة كانت جرعة الإنسولين المقترحة لها خاطئة عمداً (بلا تقليل للصيام، والصحيح تقليلها 15 إلى 30%)، لنرى هل تلفت انتباه الطبيب. هذا جزء من الاختبار.</p><p class="mut">رمز مشاركتك: ${id.slice(3)}</p></div></div>`;}
+}
+function endTask(ok){const T=TASKS[ti],w=$('#app').contentWindow;let done=false,extra='';try{done=!!T.ok(w);}catch(_){}try{extra=T.extra?String(T.extra(w)):'';}catch(_){}
+ R.tasks[T.k]={sec:Math.round((Date.now()-t0)/1000),done,gaveUp:!ok,extra};save();
+ if(ti<TASKS.length-1){ti++;render();}else{step='sus';render();scrollTo(0,0);}}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.o){R[b.dataset.o]=b.dataset.v;render();return;}
+ if(b.dataset.s!=null){R.sus[+b.dataset.s]=+b.dataset.v;const y=scrollY;render();scrollTo(0,y);return;}
+ if(b.id==='go'){step='task';ti=0;save();render();}
+ if(b.id==='fin')endTask(true);if(b.id==='skip')endTask(false);
+ if(b.id==='send'){R.done=true;R.end=new Date().toISOString();let s=0;for(let k=0;k<10;k++)s+=k%2===0?R.sus[k]-1:5-R.sus[k];R.susScore=s*2.5;save();step='end';render();scrollTo(0,0);}});
+document.addEventListener('change',e=>{if(e.target.id==='cons'){R.consent=e.target.checked;render();}});
+document.addEventListener('input',e=>{if(['trapNote','liked','confused'].includes(e.target.id))R[e.target.id]=e.target.value;});
+render();
+</script></body></html>
