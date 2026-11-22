@@ -538,6 +538,12 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
 .revs.hot{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft)}
 .rvlist{list-style:none;margin:0;padding:0 20px 12px}.rvlist li{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
 .rvlist li b{font-size:.9rem}.rvlist li p{margin:3px 0;font-size:.85rem}.rvlist li small{color:var(--muted);font-size:.76rem}.rvlist li.done{opacity:.75}
+.cslist{list-style:none;margin:0;padding:0 20px 8px}.cslist li{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.cslist .csq b,.cslist .csr b{font-size:.9rem}.cslist p{margin:3px 0;font-size:.88rem}.cslist small{color:var(--muted);font-size:.76rem}
+.cslist .csr{background:var(--surface2,#f4f6f5);border-radius:var(--r-ctl);padding:8px 12px}.cslist .csr.form{background:none;padding:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.cslist textarea{width:100%;min-height:70px;border:1px solid var(--line2);border-radius:var(--r-ctl);padding:8px 10px;font:inherit;background:var(--surface);color:var(--ink);resize:vertical}
+.cslist li.open>.tag{justify-self:start;align-self:start}.qsp{padding:0 12px 10px}.box.cons.hot{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft)}
+@media(max-width:720px){.cslist li{grid-template-columns:1fr}}
 .rvform{display:flex;flex-wrap:wrap;gap:8px;padding:4px 20px 14px;align-items:center}.rvform input{flex:1 1 220px;min-width:0;border:1px solid var(--line2);border-radius:var(--r-ctl);padding:9px 12px;font:inherit;background:var(--surface);color:var(--ink)}
 .tag.okt{background:var(--brand-soft);color:var(--brand)}
 .waitdr{padding:18px 20px}.waitdr h2{font-size:1rem;margin:0 0 6px}.waitdr p{margin:0;color:var(--muted);font-size:.9rem}
@@ -608,6 +614,7 @@ body.storying .shell{padding-bottom:210px}
     <nav class="views" aria-label="العرض">
       <button type="button" id="vEhr" aria-pressed="false">نظام المستشفى</button>
       <button type="button" id="vDoctor" aria-pressed="false">الطبيب</button>
+      <button type="button" id="vCons" aria-pressed="false">الاستشاري</button>
       <button type="button" id="vClinic" aria-pressed="true">الصيدلي</button>
       <button type="button" id="vDash" aria-pressed="false">لوحة المنشأة</button>
       <button type="button" id="vSet" aria-pressed="false">الإعدادات</button>
@@ -865,7 +872,7 @@ const doseOpts=i=>{if(!(i.r.dose&&i.u))return null;const o=i.r.dose(i.u);const a
 const doseDef=i=>{const o=doseOpts(i);return o?(o.find(x=>x.def)||o[0]).id:null;};
 const doseSel=i=>{const o=doseOpts(i);return o&&i.du?o.find(x=>x.id===i.du):null;};
 function setDose(i,id){const o=doseOpts(i),x=o&&o.find(y=>y.id===id);if(!x)return false;i.dd=true;i.doctor=false;i.stop=false;i.keep=false;i.du=id;i.doses=['suhoor','iftar','bed'].filter(z=>z in x.per);i.ds=x.id==='same'||x.id==='p0'?'same':'reduce';i.approved=false;i.ack=true;if(id===doseDef(i))i.orr=null;return true;}
-function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false,disp:{},told:{},rev:[]};resug(p.id);}
+function initPatient(p){per[p.id]={clearance:null,answers:{...p.ans},extra:[],items:draftFor(p,p.ans),signed:null,fu:{},taken:{},tab:'intake',path:null,cds:null,appt:null,drOk:false,disp:{},told:{},rev:[],cons:[]};resug(p.id);}
 PATIENTS.forEach(initPatient);
 const signer=()=>'د. سعد، طبيب أسرة (حساب تجريبي)';
 function seedDemo(){
@@ -893,6 +900,11 @@ const ackLeft=id=>per[id].items.filter(i=>!(i.doctor&&!i.dd)&&!i.ack).length;
 const drReady=id=>pendingDr(id).length===0&&!(redQ(id)&&!per[id].clearance)&&ackLeft(id)===0;
 const needsDoctor=id=>!per[id].signed;
 const openRev=id=>(per[id].rev||[]).filter(r=>r.st!=='done');
+/* internal consultation: the doctor asks a specialist inside the system, without referring the patient */
+const CONSP=[['cardio','أمراض القلب'],['endo','الغدد الصماء والسكري'],['renal','أمراض الكلى'],['neuro','الأعصاب'],['clinpharm','الصيدلة السريرية']];
+const spName=k=>(CONSP.find(c=>c[0]===k)||['',''])[1];
+const openCons=id=>(per[id].cons||[]).filter(r=>r.st!=='done');
+const consFor=id=>(per[id].cons||[]).map((r,k)=>[r,k]).filter(([r])=>!S.mysp||S.mysp==='all'||r.sp===S.mysp);
 const liveDisp=id=>per[id].items.map((i,ix)=>({i,ix})).filter(o=>!o.i.stop);
 const dispDone=id=>liveDisp(id).every(o=>per[id].disp[o.ix])&&TOLD.every(([k])=>per[id].told[k]);
 const doctorCase=id=>true;
@@ -1083,6 +1095,30 @@ const EID=isoAdd(RAMADAN_START,30);
 function revList(id,who){const R=per[id].rev||[];if(!R.length)return '';
   return `<ul class="rvlist">${R.map((r,k)=>`<li class="${r.st}"><div><b>${r.ix>=0&&per[id].items[r.ix]?per[id].items[r.ix].d.ar:'الخطة كاملة'}: ${esc(r.why)}</b>${r.note?`<p>${esc(r.note)}</p>`:''}<small>${esc(r.at)}${r.st==='done'?'، '+esc(r.reply||''):r.st==='wip'?'، الطبيب يعدّل الخطة الآن':'، بانتظار الطبيب'}</small></div>
     ${who==='dr'&&r.st!=='done'?dd('rv'+k,[['keep','الخطة صحيحة كما هي'],['edit','سأعدّل الخطة الآن']],r.st==='wip'?'edit':'',`data-rvd="${k}"`,'ردّك','mini'):`<span class="tag ${r.st==='done'?'okt':'wait'}">${r.st==='done'?'أُغلق':'مفتوح'}</span>`}</li>`).join('')}</ul>`;}
+function consList(id,who){const s=per[id],R=s.cons||[];if(!R.length)return '';
+  return `<ul class="cslist">${R.map((r,k)=>`<li class="${r.st}"><div class="csq"><b>${esc(spName(r.sp))}${r.ix>=0&&s.items[r.ix]?' · '+esc(s.items[r.ix].d.ar):''}</b><p>${esc(r.q)}</p><small>${esc(r.at)}${r.st==='done'?'':'، بانتظار رد المختص'}</small></div>
+    ${r.st==='done'?`<div class="csr"><b>${esc(r.by||'رد الاستشاري')}</b><p>${esc(r.reply)}</p><small>${esc(r.rat||'')}</small></div>`:who==='cons'?`<div class="csr form"><textarea data-crep="${k}" maxlength="600" placeholder="ردّك على الطبيب" aria-label="ردّك">${esc((S.crep||{})[id+k]||'')}</textarea><button class="btn" type="button" data-crs="${k}">${I.send}أرسل الرد</button></div>`:`<span class="tag wait">مفتوح</span>`}</li>`).join('')}</ul>`;}
+function consBox(id){const s=per[id];
+  return `<div class="box cons ${openCons(id).length?'':''}"><div class="lhead"><h2>استشارة داخلية</h2><span>${(s.cons||[]).length?openCons(id).length?openCons(id).length+' بانتظار الرد':'وصلتك كل الردود':'اسأل مختصاً قبل أن تقرر. يصله سؤالك مع الخطة والتداخلات عبر نظام الاستشارات في المنشأة'}</span></div>
+    ${consList(id,'dr')}
+    <div class="rvform">${dd('csp',CONSP,S.csp,'data-csp','التخصص')}${dd('cix',[['-1','الخطة كاملة']].concat(s.items.map((i,ix)=>[String(ix),i.d.ar])),S.cix,'data-cix','الدواء')}
+    <input id="csQ" type="text" maxlength="400" autocomplete="off" placeholder="سؤالك للمختص" value="${esc(S.csQ||'')}" aria-label="سؤالك للمختص"><button class="btn" type="button" id="csSend" ${S.csp&&S.cix!=null&&(S.csQ||'').trim()?'':'disabled'}>${I.send}أرسل</button></div></div>`;}
+function vConsQueue(){const list=PATIENTS.filter(p=>consFor(p.id).length);
+  return `<aside class="queue" aria-label="طلبات الاستشارة"><div class="qh"><h2>طلبات الاستشارة</h2><span class="qn">${list.length}</span></div>
+  <div class="qsp">${dd('mysp',[['all','كل التخصصات']].concat(CONSP),S.mysp||'all','data-mysp','تخصصك','wide')}</div>
+  <div class="qlist">${list.map(p=>{const o=consFor(p.id).filter(([r])=>r.st!=='done').length;
+    return `<button class="qitem" data-pid="${p.id}" aria-current="${p.id===S.pid}"><span class="qname">${p.name}</span><span class="qsub"><span>${p.age} سنة، ${medsOf(p.id).length} أدوية</span><span class="st ${o?'s-wait':'s-ok'}">${o?o+' بانتظار ردك':'تم الرد'}</span></span></button>`;}).join('')||'<p class="none">لا توجد طلبات استشارة لهذا التخصص.</p>'}</div></aside>`;}
+function vCons(){const list=PATIENTS.filter(p=>consFor(p.id).length);
+  if(!list.length)return `<section class="work maincol"><div class="box"><div class="lhead"><h2>لا توجد طلبات</h2></div><p class="meta" style="padding:0 20px 16px">عندما يرسل طبيب سؤالاً لتخصصك يظهر هنا مع ملف المريض وخطته.</p></div></section>`;
+  const p=list.find(x=>x.id===S.pid)||list[0];if(p.id!==S.pid)S.pid=p.id;const s=per[p.id],o=overall(p.id);
+  const pl=i=>i.stop?'إيقاف في رمضان':i.keep?'مواعيده المعتادة':i.doses.length?slotLbl(i.doses.join('+')):'لم يقرر الطبيب بعد';
+  return `<section class="work maincol" aria-label="الاستشاري">
+   <div class="phead"><h1>${p.name}</h1><p class="meta">${p.sex}، ${p.age} سنة. ${p.dx.join('، ')}</p></div>
+   <div class="box cons hot"><div class="lhead"><h2>سؤال الطبيب</h2><span>من ${esc(signer())}</span></div>${consList(p.id,'cons')}</div>
+   <div class="box"><div class="lhead"><h2>الأدوية والخطة الحالية</h2><span>خطورة الصيام ${RKT[o.cat]}</span></div><div class="tw"><table><thead><tr><th>الدواء</th><th>قبل رمضان</th><th>في رمضان</th></tr></thead><tbody>
+   ${s.items.map(i=>`<tr><td><b>${i.d.ar}</b><br><small class="ltr">${i.d.en}</small></td><td>${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</td><td>${pl(i)}${i.du&&doseSel(i)?'<br><small>'+esc(doseSel(i).lbl)+'</small>':''}</td></tr>`).join('')}</tbody></table></div></div>
+   ${alertsBox(p.id,true)}
+  </section>`;}
 function vWork(){
   const p=P(), s=st(), t=triage(p.id);
   const pane=MODE==='pharm'?'':'<div class="paneswitch" role="group" aria-label="العرض"><button type="button" data-pane="pharm" aria-pressed="'+(S.pane==='pharm')+'">شاشة الصيدلي</button><button type="button" data-pane="patient" aria-pressed="'+(S.pane==='patient')+'">جوال المريض</button></div>';
@@ -1209,6 +1245,7 @@ function vDoctor(){
    ${apptBox(p.id)}
    ${alertsBox(p.id)}
    ${buildBox()}
+   ${consBox(p.id)}
    <div class="box drsign">${s.signed?`<span class="signed">${I.check}أرسلت الخطة للمريض${CFG.mode==='team'?'، وظهرت عند الصيدلي للصرف والشرح':''}</span>`:`<span class="cnt">${drReady(p.id)?'الخطة جاهزة للإرسال.':(pendingDr(p.id).length||(redQ(p.id)&&!s.clearance)?'اختر للأدوية المعلّمة بالأحمر'+(redQ(p.id)&&!s.clearance?' وقرّر في الصيام':'')+' أولاً.':'بقي '+lines(ackLeft(p.id))+' لتؤكدها.')}</span><button class="btn" type="button" id="drSign" ${drReady(p.id)?'':'disabled'}>${I.send}اعتمد الخطة وأرسلها للمريض</button>`}</div>`:'<div class="box ask"><h2>لا يوجد مرضى لعيادتك</h2><p class="meta">غيّر نوع العيادة من الإعدادات لترى بقية المرضى.</p></div>'}
    ${list.length?msgBox(p):''}
   </section>`;
@@ -1522,10 +1559,10 @@ function sendMsg(pid,from,text){
 
 /* ===== Shared store: links every screen and device ===== */
 let DB=null;const queue={};
-function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,du:i.du||null,ak:!!i.ack,or:i.orr||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk,disp:x.disp||{},told:x.told||{},rev:x.rev||[]};}
+function ser(id){const x=per[id];return {v:1,answers:x.answers,extra:x.extra||[],items:x.items.map(i=>({k:i.key,d:i.doses,x:i.doctor,a:i.approved,dd:!!i.dd,ds:i.ds||null,du:i.du||null,ak:!!i.ack,or:i.orr||null,st:!!i.stop,kp:!!i.keep})),clearance:x.clearance||null,signed:x.signed,fu:x.fu,taken:x.taken,path:x.path||null,cds:x.cds||null,appt:x.appt||null,drOk:!!x.drOk,disp:x.disp||{},told:x.told||{},rev:x.rev||[],cons:x.cons||[]};}
 function applyDoc(id,data){
   if(S.story!=null&&id===STORY_PID) return;
-  const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id), prevOpen=openRev(id).length, prevDone=(x.rev||[]).filter(r=>r.st==='done').length;
+  const p=PP(id), x=per[id], prevSigned=!!x.signed, prevFlag=x.signed&&flagged(id), prevOpen=openRev(id).length, prevDone=(x.rev||[]).filter(r=>r.st==='done').length, prevCO=(x.cons||[]).filter(r=>r.st!=='done').length, prevCD=(x.cons||[]).filter(r=>r.st==='done').length;
   const tab=x.tab;
   initPatient(p); const y=per[id]; y.tab=tab;
   if(data){
@@ -1537,11 +1574,15 @@ function applyDoc(id,data){
     y.path=PATH[data.path]?data.path:null;y.appt=FREE.includes(data.appt)?data.appt:null;y.drOk=!!data.drOk;y.cds=typeof data.cds==='string'?data.cds:null;
     if(data.disp&&typeof data.disp==='object')Object.keys(data.disp).forEach(k=>{const v=data.disp[k];if(y.items[+k]&&v&&typeof v==='object')y.disp[k]={g:String(v.g||'').slice(0,14),lot:String(v.lot||'').slice(0,20),exp:String(v.exp||'').slice(0,10),sn:String(v.sn||'').slice(0,20),man:!!v.man};});
     TOLD.forEach(([k])=>{if(data.told&&data.told[k])y.told[k]=true;});
+    y.cons=Array.isArray(data.cons)?data.cons.slice(0,20).filter(r=>r&&CONSP.some(c=>c[0]===r.sp)&&typeof r.q==='string').map(r=>({sp:r.sp,ix:Number.isInteger(r.ix)&&r.ix<y.items.length?r.ix:-1,q:r.q.slice(0,400),at:String(r.at||'').slice(0,40),st:r.st==='done'?'done':'open',reply:String(r.reply||'').slice(0,600),by:String(r.by||'').slice(0,80),rat:String(r.rat||'').slice(0,40)})):[];
     y.rev=Array.isArray(data.rev)?data.rev.slice(0,20).filter(r=>r&&typeof r.why==='string').map(r=>({ix:Number.isInteger(r.ix)&&r.ix<y.items.length?r.ix:-1,why:r.why.slice(0,80),note:String(r.note||'').slice(0,300),at:String(r.at||'').slice(0,40),st:['open','wip','done'].includes(r.st)?r.st:'open',reply:String(r.reply||'').slice(0,120)})):[];
   }
   if(!prevSigned&&y.signed&&id===S.pid&&MODE!=='pharm'){y.tab='plan';setTimeout(showToast,60);}
   if(!prevFlag&&y.signed&&flagged(id)&&MODE!=='patient') setTimeout(()=>deskToast(p.name+' أجاب في المتابعة ويحتاج اتصالاً اليوم.'),60);
   if(openRev(id).length>prevOpen&&MODE!=='patient'){const r=openRev(id).slice(-1)[0];setTimeout(()=>deskToast('طلب مراجعة من الصيدلي لخطة '+p.name+': '+r.why),60);}
+  if(MODE!=='patient'&&MODE!=='pharm'){const co=(y.cons||[]).filter(r=>r.st!=='done'),cd=(y.cons||[]).filter(r=>r.st==='done');
+    if(co.length>prevCO&&S.view==='cons')setTimeout(()=>deskToast('طلب استشارة جديد ('+spName(co.slice(-1)[0].sp)+') عن '+p.name),60);
+    if(cd.length>prevCD&&S.view!=='cons')setTimeout(()=>deskToast('ردّ استشاري '+spName(cd.slice(-1)[0].sp)+' على سؤالك عن '+p.name),60);}
   if(y.rev.filter(r=>r.st==='done').length>prevDone&&MODE!=='patient'){const r=y.rev.filter(r=>r.st==='done').slice(-1)[0];setTimeout(()=>deskToast('ردّ الطبيب على طلبك لـ '+p.name+': '+r.reply),60);}
 }
 function applyCfg(c){
@@ -1735,12 +1776,13 @@ function renderInner(){
   document.body.dataset.pane=S.pane;document.body.classList.toggle('m-patient',MODE==='patient');document.body.classList.toggle('m-pharm',MODE==='pharm');
   if(MODE==='patient'){$('#shell').innerHTML=vPhone();bind();paintSync();return;}
   $('#vClinic').hidden=CFG.mode==='doctor';if(CFG.mode==='doctor'&&S.view==='clinic')S.view='doctor';
-  [['vClinic','clinic'],['vDoctor','doctor'],['vEhr','ehr'],['vDash','dash'],['vSet','set']].forEach(([b,v])=>$('#'+b).setAttribute('aria-pressed',S.view===v));
+  [['vClinic','clinic'],['vDoctor','doctor'],['vCons','cons'],['vEhr','ehr'],['vDash','dash'],['vSet','set']].forEach(([b,v])=>$('#'+b).setAttribute('aria-pressed',S.view===v));
   document.body.dataset.view=S.view;
   let html;
   if(S.view==='dash') html=vDash();
   else if(S.view==='set') html=vSettings();
   else if(S.view==='ehr') html=vQueue()+vEhr();
+  else if(S.view==='cons') html=vConsQueue()+vCons();
   else {const main=S.view==='doctor'?vDoctor():vWork();html=vQueue()+main+(MODE==='pharm'?'':vPhone());}
   $('#shell').innerHTML=html;
   bind();paintSync();
@@ -1783,6 +1825,15 @@ function bind(){
     i.doses=(v==='stop'||v==='keep')?[]:v.split('+');i.ds=i.ds||'same';i.approved=false;i.ack=true;invalidate();save();render();});
   document.querySelectorAll('[data-rvd]').forEach(b=>b.onclick=()=>{S.dd=null;const r=st().rev[+b.dataset.rvd];if(!r)return;
     if(b.dataset.v==='keep'){r.st='done';r.reply='راجعها الطبيب وأبقاها كما هي';}else{r.st='wip';setTimeout(()=>{const e=$('.box.build');e&&e.scrollIntoView({block:'start'});},30);}save();render();});
+  document.querySelectorAll('[data-csp]').forEach(b=>b.onclick=()=>{S.dd=null;S.csp=b.dataset.v;render();});
+  document.querySelectorAll('[data-cix]').forEach(b=>b.onclick=()=>{S.dd=null;S.cix=b.dataset.v;render();});
+  document.querySelectorAll('[data-mysp]').forEach(b=>b.onclick=()=>{S.dd=null;S.mysp=b.dataset.v;render();});
+  {const q=$('#csQ');if(q)q.oninput=()=>{S.csQ=q.value;const b=$('#csSend');if(b)b.disabled=!(S.csp&&S.cix!=null&&q.value.trim());};}
+  {const b=$('#csSend');if(b)b.onclick=()=>{const s=st();s.cons=s.cons||[];s.cons.push({sp:S.csp,ix:+S.cix,q:(S.csQ||'').trim().slice(0,400),at:stamp(),st:'open',reply:'',by:'',rat:''});
+    const sp=spName(S.csp);S.csp=null;S.cix=null;S.csQ='';save();deskToast('وصل سؤالك لاستشاري '+sp+'، وسيظهر رده هنا.');render();};}
+  document.querySelectorAll('[data-crep]').forEach(t=>t.oninput=()=>{S.crep=S.crep||{};S.crep[S.pid+t.dataset.crep]=t.value;});
+  document.querySelectorAll('[data-crs]').forEach(b=>b.onclick=()=>{const k=+b.dataset.crs,s=st(),r=s.cons[k],txt=((S.crep||{})[S.pid+k]||'').trim();if(!r||!txt)return;
+    r.reply=txt.slice(0,600);r.st='done';r.rat=stamp();r.by='د. هند، استشاري '+spName(r.sp);delete S.crep[S.pid+k];save();deskToast('وصل ردك للطبيب.');render();});
   document.querySelectorAll('[data-rvm]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvm=b.dataset.v;render();});
   document.querySelectorAll('[data-rvw]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvw=b.dataset.v;render();});
   {const n=$('#rvNote');if(n)n.oninput=()=>{S.rvNote=n.value;};}
@@ -1872,6 +1923,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.dd){const id=S.dd
 $('#vClinic').onclick=()=>{S.view='clinic';render();};
 $('#storyBtn').onclick=()=>S.story==null?storyGo(0):storyEnd();
 $('#vDoctor').onclick=()=>{S.view='doctor';render();};
+$('#vCons').onclick=()=>{S.view='cons';render();window.scrollTo(0,0);};
 $('#vEhr').onclick=()=>{S.view='ehr';render();};
 $('#vDash').onclick=()=>{S.view='dash';render();};
 $('#vSet').onclick=()=>{S.view='set';render();};
