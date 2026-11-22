@@ -538,6 +538,7 @@ body[data-view="ehr"] .shell{grid-template-columns:230px minmax(0,1fr)}
 .revs.hot{border-color:var(--amber);box-shadow:0 0 0 3px var(--amber-soft)}
 .rvlist{list-style:none;margin:0;padding:0 20px 12px}.rvlist li{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
 .rvlist li b{font-size:.9rem}.rvlist li p{margin:3px 0;font-size:.85rem}.rvlist li small{color:var(--muted);font-size:.76rem}.rvlist li.done{opacity:.75}
+.nm .presc{display:block}.nm .presc .linkbtn{font-size:.76rem;margin-inline-start:6px}
 .cslist{list-style:none;margin:0;padding:0 20px 8px}.cslist li{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
 .cslist .csq b,.cslist .csr b{font-size:.9rem}.cslist p{margin:3px 0;font-size:.88rem}.cslist small{color:var(--muted);font-size:.76rem}
 .cslist .csr{background:var(--surface2,#f4f6f5);border-radius:var(--r-ctl);padding:8px 12px}.cslist .csr.form{background:none;padding:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
@@ -905,6 +906,12 @@ const needsDoctor=id=>!per[id].signed;
 const openRev=id=>(per[id].rev||[]).filter(r=>r.st!=='done');
 /* internal consultation: the doctor asks a specialist inside the system, without referring the patient */
 const CONSP=[['cardio','أمراض القلب'],['endo','الغدد الصماء والسكري'],['renal','أمراض الكلى'],['neuro','الأعصاب'],['clinpharm','الصيدلة السريرية']];
+/* who prescribed each medicine (FHIR MedicationRequest.requester), so the family doctor can reach them */
+const DOCS={cardio:{n:'د. ماجد العنزي',sp:'أمراض القلب',x:'4123'},endo:{n:'د. هند الزهراني',sp:'الغدد الصماء والسكري',x:'4231'},renal:{n:'د. خالد المطيري',sp:'أمراض الكلى',x:'4310'},neuro:{n:'د. فيصل الشمري',sp:'الأعصاب',x:'4418'},clinpharm:{n:'د. نوف العتيبي',sp:'الصيدلة السريرية',x:'4502'},fm:{n:'د. سعد',sp:'طب الأسرة',x:'4100'}};
+const PRESCLS={doac:'cardio',warfarin:'cardio',oncecv:'cardio',diuretic:'cardio',statin:'cardio',antiplatelet:'cardio',metformin:'endo',su:'endo',sglt2:'endo',basal:'endo',prandial:'endo',thyroid:'endo',aed:'neuro'};
+const PRESCX={P1:{empagliflozin:'cardio'}};
+const prescOf=(pid,i)=>{const k=(PRESCX[pid]||{})[i.key]||PRESCLS[i.d.cls]||'fm';return Object.assign({k},DOCS[k]);};
+const prescTxt=(pid,i)=>{const d=prescOf(pid,i);return 'وصفه: '+d.n+'، '+d.sp+' · تحويلة '+d.x;};
 const spName=k=>(CONSP.find(c=>c[0]===k)||['',''])[1];
 const openCons=id=>(per[id].cons||[]).filter(r=>r.st!=='done');
 const consFor=id=>(per[id].cons||[]).map((r,k)=>[r,k]).filter(([r])=>!S.mysp||S.mysp==='all'||r.sp===S.mysp);
@@ -1119,7 +1126,7 @@ function vCons(){const list=PATIENTS.filter(p=>consFor(p.id).length);
    <div class="phead"><h1>${p.name}</h1><p class="meta">${p.sex}، ${p.age} سنة. ${p.dx.join('، ')}</p></div>
    <div class="box cons hot"><div class="lhead"><h2>سؤال الطبيب</h2><span>من ${esc(signer())}</span></div>${consList(p.id,'cons')}</div>
    <div class="box"><div class="lhead"><h2>الأدوية والخطة الحالية</h2><span>خطورة الصيام ${RKT[o.cat]}</span></div><div class="tw"><table><thead><tr><th>الدواء</th><th>قبل رمضان</th><th>في رمضان</th></tr></thead><tbody>
-   ${s.items.map(i=>`<tr><td><b>${i.d.ar}</b><br><small class="ltr">${i.d.en}</small></td><td>${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</td><td>${pl(i)}${i.du&&doseSel(i)?'<br><small>'+esc(doseSel(i).lbl)+'</small>':''}</td></tr>`).join('')}</tbody></table></div></div>
+   ${s.items.map(i=>`<tr><td><b>${i.d.ar}</b><br><small class="ltr">${i.d.en}</small><br><small>${esc(prescOf(p.id,i).n)}</small></td><td>${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</td><td>${pl(i)}${i.du&&doseSel(i)?'<br><small>'+esc(doseSel(i).lbl)+'</small>':''}</td></tr>`).join('')}</tbody></table></div></div>
    ${alertsBox(p.id,true)}
   </section>`;}
 function vWork(){
@@ -1223,7 +1230,7 @@ function vDoctor(){
     return `<div class="box build"><div class="lhead"><h2>خطة الأدوية</h2><span>${s.signed?'أُرسلت للمريض. أي تعديل يوقفها عنده حتى تعيد إرسالها':'اختر لكل دواء وأكّده بنفسك، فلا يوجد اعتماد جماعي'}</span></div>
      ${s.items.map((i,ix)=>{const o=doseOpts(i),pend=(i.doctor||i.esc)&&!i.dd,opts=o?null:planOpts(i),sel=opts&&opts.find(x=>x[0]===curPl(i));
        return `<div class="brow ${pend?'pend':''}">
-        <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}<small class="old">قبل رمضان: ${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</small>${sugWhy(i)||((s.answers.hypo||s.answers.hypowk)&&doseOpts(i)&&['basal','su','prandial'].includes(i.d.cls))?'<span class="tag ans">تغيّر بإجابة المريض</span>':''}${pend?`<p class="escn">${esc(i.esc||'يحتاج قرارك.')}</p>`:''}</div>
+        <div class="nm"><b>${i.d.ar}</b>${i.crit?'<span class="tag crit">حرج</span>':''}<small class="old">قبل رمضان: ${freq(i.f)}${i.u?'، '+unitTxt(i.u,i.d.un):''}</small><small class="old presc">${esc(prescTxt(p.id,i))}${prescOf(p.id,i).k!=='fm'?` <button type="button" class="linkbtn" data-askp="${ix}">اسأله</button>`:''}</small>${sugWhy(i)||((s.answers.hypo||s.answers.hypowk)&&doseOpts(i)&&['basal','su','prandial'].includes(i.d.cls))?'<span class="tag ans">تغيّر بإجابة المريض</span>':''}${pend?`<p class="escn">${esc(i.esc||'يحتاج قرارك.')}</p>`:''}</div>
         <div class="bc">${o?doseCtl(i,ix):dd('pl'+ix,opts.map(x=>[x[0],x[1],x[2]]),curPl(i),`data-pl="${ix}"`,'اختر التوقيت','wide')}${orrCtl(i,ix)}</div>
         ${canAck&&!pend?`<button type="button" class="ack" data-ack="${ix}" aria-pressed="${!!i.ack}" aria-label="تأكيد ${i.d.ar}">${I.check}<span>${i.ack?'أكدته':'أكّد'}</span></button>`:'<span></span>'}
         ${o?doseNote(i):sel?`<p class="bwhy"><span>${esc(sel[3])}</span>${srcChips(i.r)}</p>`:''}
@@ -1276,7 +1283,7 @@ function cdsJSON(id){
 }
 function vEhr(){
   const p=P(), s=st(), c=cdsCard(p.id), j=cdsJSON(p.id);
-  const med=medsOf(p.id).map(([k,f],ix)=>`<tr><td><b>${(DRUGS[k]||DRUGS.other).en}</b></td><td>${freq(f)}</td><td>${ix>=p.meds.length?'أضيف يدوياً':'نشط'}</td></tr>`).join('');
+  const med=medsOf(p.id).map(([k,f],ix)=>`<tr><td><b>${(DRUGS[k]||DRUGS.other).en}</b></td><td>${freq(f)}</td><td>${(()=>{const it=per[p.id].items.find(x=>x.key===k);return it?esc(prescOf(p.id,it).n+'، '+prescOf(p.id,it).sp):'—';})()}</td><td>${ix>=p.meds.length?'أضيف يدوياً':'نشط'}</td></tr>`).join('');
   let card='';
   if(CFG.his==='down') card=`<div class="cds off"><b>بطاقة صيامٌ آمن غير متاحة الآن</b><p>انقطع الربط بين النظام وصيامٌ آمن. يستمر الفريق في المنصة مباشرة، وتعود البطاقة تلقائياً بعد عودة الربط.</p></div>`;
   else if(CFG.mode==='pharmacy') card=`<div class="cds off"><b>البطاقة متوقفة</b><p>المنصة تعمل الآن بطريقة صيدلية المجتمع وحدها، فلا تظهر داخل نظام المستشفى.</p></div>`;
@@ -1298,7 +1305,7 @@ function vEhr(){
    <div class="ehrgrid">
      <div class="box"><div class="lhead"><h2>التشخيصات</h2></div><ul class="plain">${p.dx.map(d=>`<li>${d}</li>`).join('')}</ul></div>
      <div class="box"><div class="lhead"><h2>آخر التحاليل</h2></div><ul class="plain">${p.cl.labs.map(([a,b])=>`<li><span>${a}</span><b class="ltr">${b}</b></li>`).join('')}</ul></div>
-     <div class="box wide"><div class="lhead"><h2>الأدوية النشطة</h2><span>MedicationRequest</span></div><div class="tw"><table><thead><tr><th>الدواء</th><th>الجرعات</th><th>الحالة</th></tr></thead><tbody>${med}</tbody></table></div></div>
+     <div class="box wide"><div class="lhead"><h2>الأدوية النشطة</h2><span>MedicationRequest</span></div><div class="tw"><table><thead><tr><th>الدواء</th><th>الجرعات</th><th>الواصف (requester)</th><th>الحالة</th></tr></thead><tbody>${med}</tbody></table></div></div>
    </div>
    <div class="box jsonbox"><button type="button" class="linkbtn" id="jsonBtn" aria-expanded="${S.json}">${S.json?'إخفاء':'عرض'} الرسالة التقنية بين النظام وصيامٌ آمن</button>
      ${S.json?`<div class="jgrid"><div><b>يرسلها النظام عند فتح الملف</b><pre dir="ltr">${esc(JSON.stringify(j.req,null,2))}</pre></div><div><b>يرد بها صيامٌ آمن</b><pre dir="ltr">${esc(JSON.stringify(j.res,null,2))}</pre></div></div>`:''}</div>
@@ -1828,6 +1835,8 @@ function bind(){
     i.doses=(v==='stop'||v==='keep')?[]:v.split('+');i.ds=i.ds||'same';i.approved=false;i.ack=true;invalidate();save();render();});
   document.querySelectorAll('[data-rvd]').forEach(b=>b.onclick=()=>{S.dd=null;const r=st().rev[+b.dataset.rvd];if(!r)return;
     if(b.dataset.v==='keep'){r.st='done';r.reply='راجعها الطبيب وأبقاها كما هي';}else{r.st='wip';setTimeout(()=>{const e=$('.box.build');e&&e.scrollIntoView({block:'start'});},30);}save();render();});
+  document.querySelectorAll('[data-askp]').forEach(b=>b.onclick=()=>{const ix=+b.dataset.askp,i=st().items[ix];if(!i)return;S.csp=prescOf(S.pid,i).k;S.cix=String(ix);render();
+    setTimeout(()=>{const q=$('#csQ');const bx=$('.box.cons');bx&&bx.scrollIntoView({block:'center',behavior:'smooth'});q&&q.focus({preventScroll:true});},40);});
   document.querySelectorAll('[data-csp]').forEach(b=>b.onclick=()=>{S.dd=null;S.csp=b.dataset.v;render();});
   document.querySelectorAll('[data-cix]').forEach(b=>b.onclick=()=>{S.dd=null;S.cix=b.dataset.v;render();});
   document.querySelectorAll('[data-mysp]').forEach(b=>b.onclick=()=>{S.dd=null;S.mysp=b.dataset.v;render();});
@@ -1836,7 +1845,7 @@ function bind(){
     const sp=spName(S.csp);S.csp=null;S.cix=null;S.csQ='';save();deskToast('وصل سؤالك لاستشاري '+sp+'، وسيظهر رده هنا.');render();};}
   document.querySelectorAll('[data-crep]').forEach(t=>t.oninput=()=>{S.crep=S.crep||{};S.crep[S.pid+t.dataset.crep]=t.value;});
   document.querySelectorAll('[data-crs]').forEach(b=>b.onclick=()=>{const k=+b.dataset.crs,s=st(),r=s.cons[k],txt=((S.crep||{})[S.pid+k]||'').trim();if(!r||!txt)return;
-    r.reply=txt.slice(0,600);r.st='done';r.rat=stamp();r.by='د. هند، استشاري '+spName(r.sp);delete S.crep[S.pid+k];save();deskToast('وصل ردك للطبيب.');render();});
+    r.reply=txt.slice(0,600);r.st='done';r.rat=stamp();r.by=DOCS[r.sp].n+'، '+(r.sp==='clinpharm'?'صيدلانية سريرية':'استشاري '+spName(r.sp));delete S.crep[S.pid+k];save();deskToast('وصل ردك للطبيب.');render();});
   document.querySelectorAll('[data-rvm]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvm=b.dataset.v;render();});
   document.querySelectorAll('[data-rvw]').forEach(b=>b.onclick=()=>{S.dd=null;S.rvw=b.dataset.v;render();});
   {const n=$('#rvNote');if(n)n.oninput=()=>{S.rvNote=n.value;};}
